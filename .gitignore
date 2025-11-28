@@ -44,7 +44,6 @@ build/
 
 # Carpetas de compilación
 /build
-/dist/
 /output/
 /target/
 
