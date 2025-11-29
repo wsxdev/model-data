@@ -12,13 +12,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
 
-        <javafx.version>21.0.6</javafx.version>
-        <!-- Plataforma por defecto para dependencias JavaFX (ajustar para Windows) -->
-        <javafx.platform>linux</javafx.platform>
+        <!-- JavaFX compatible con Java 25 -->
+        <javafx.version>23.0.1</javafx.version>
+        <javafx.platform>win</javafx.platform>
 
         <junit.version>5.12.1</junit.version>
     </properties>
@@ -30,7 +29,6 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
-            <!-- Para apps NO modulares la versión con classifier por plataforma -->
             <classifier>${javafx.platform}</classifier>
         </dependency>
 
@@ -107,13 +105,6 @@
                 <configuration>
                     <mainClass>com.app.modeldata.ModelDataApp</mainClass>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>
