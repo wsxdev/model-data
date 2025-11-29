@@ -2,6 +2,7 @@ package com.app.modeldata;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -10,10 +11,20 @@ import java.io.IOException;
 public class ModelDataApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ModelDataApp.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
+        // PARA CARGAR EL LOGIN ANTES DE LA MAIN VIEW
+        FXMLLoader loginLoader = new FXMLLoader(ModelDataApp.class.getResource("/com/app/modeldata/fxml/login/login-vista.fxml"));
+
+        Parent root = loginLoader.load();
+        Scene sceneLogin = new Scene(root);
+        stage.setScene(sceneLogin);
+        stage.setTitle("MODELDATA - LOGIN");
+        stage.setResizable(false);
         stage.show();
+
+//        FXMLLoader fxmlLoader = new FXMLLoader(ModelDataApp.class.getResource("hello-view.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+//        stage.setTitle("Hello!");
+//        stage.setScene(scene);
+//        stage.show();
     }
 }

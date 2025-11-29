@@ -12,5 +12,6 @@ module com.app.modeldata {
 
     opens com.app.modeldata to javafx.fxml;
     opens com.app.controllers.modeldata to javafx.fxml;
+    opens com.app.controllers.login to javafx.fxml;
     exports com.app.modeldata;
 }
