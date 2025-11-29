@@ -11,5 +11,6 @@ module com.app.modeldata {
     requires eu.hansolo.tilesfx;
 
     opens com.app.modeldata to javafx.fxml;
+    opens com.app.controllers.modeldata to javafx.fxml;
     exports com.app.modeldata;
 }

@@ -1,9 +1,9 @@
-package com.app.modeldata;
+package com.app.controllers.modeldata;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class ModelDataAppController {
     @FXML
     private Label welcomeText;
 
