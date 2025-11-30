@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.GraficosController">
+   <children>
+      <VBox prefHeight="599.0" prefWidth="1116.0">
+         <children>
+            <Pane prefHeight="599.0" prefWidth="1116.0">
+               <children>
+                  <Text fill="#1d6b8c" layoutX="80.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modelado de Natalidad">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="80.0" layoutY="119.0" prefHeight="319.0" prefWidth="615.0" style="-fx-background-color: #D9D9D9;" />
+                  <Text fill="#1d6b8c" layoutX="80.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resumen del comportamiento">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="89.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="322.13671875" />
+                  <Label layoutX="80.0" layoutY="490.0" prefHeight="94.0" prefWidth="565.0" textFill="#d9d9d9" />
+                  <Pane layoutX="786.0" layoutY="103.0" prefHeight="272.0" prefWidth="273.0" style="-fx-background-color: #D9D9D9;">
+                     <children>
+                        <Text fill="#1d6b8c" layoutX="14.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Provincia">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#1d6b8c" layoutX="12.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Información del modelado">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#1d6b8c" layoutX="13.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instrucción">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#1d6b8c" layoutX="15.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Año inicial">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#1d6b8c" layoutX="15.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Año final">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#1d6b8c" layoutX="15.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tasa de cambio">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#1d6b8c" layoutX="15.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Población">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#1d6b8c" layoutX="17.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constante k">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="786.0" layoutY="410.0" prefHeight="136.0" prefWidth="273.0" style="-fx-background-color: #D9D9D9;">
+                     <children>
+                        <Text fill="#1d6b8c" layoutX="72.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intervalos">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

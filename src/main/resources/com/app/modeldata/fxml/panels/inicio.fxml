@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.InicioController">
+   <children>
+      <VBox prefHeight="599.0" prefWidth="1116.0">
+         <children>
+            <Pane prefHeight="598.0" prefWidth="1116.0" style="-fx-background-color: #F2F2F2F2;">
+               <children>
+                  <Text fill="#1d6b8c" layoutX="234.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDOS A MODELDATA">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="13.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <TextFlow layoutX="229.0" layoutY="394.0" lineSpacing="4.0" prefHeight="164.0" prefWidth="678.0">
+                     <children>
+                        <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="ModelData es una aplicación moderna y potente diseñada para facilitar la gestión y el modelado de bases de datos de manera práctica, intuitiva y segura. Su propósito es ofrecerte un entorno eficiente donde puedas almacenar, organizar, analizar y visualizar información con total control y precisión." textAlignment="CENTER" wrappingWidth="670.6614379882812">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <ImageView fitHeight="205.0" fitWidth="245.0" layoutX="444.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/logos/ModelDataLogo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

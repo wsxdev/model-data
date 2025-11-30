@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.DatosController">
+   <children>
+      <VBox prefHeight="599.0" prefWidth="1116.0">
+         <children>
+            <Pane prefHeight="599.0" prefWidth="1116.0">
+               <children>
+                  <Pane layoutX="72.0" layoutY="53.0" prefHeight="48.0" prefWidth="230.0" style="-fx-background-color: #1D6B8C;">
+                     <children>
+                        <Text fill="WHITE" layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sincronizar datos">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="20.0" fitWidth="27.0" layoutX="192.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons/synchronization-icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <TableView layoutY="173.0" prefHeight="426.0" prefWidth="1116.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="A" />
+                      <TableColumn prefWidth="75.0" text="B" />
+                        <TableColumn prefWidth="75.0" text="C" />
+                        <TableColumn prefWidth="75.0" text="D" />
+                        <TableColumn prefWidth="75.0" text="E" />
+                        <TableColumn prefWidth="75.0" text="F" />
+                        <TableColumn prefWidth="75.0" text="G" />
+                        <TableColumn prefWidth="75.0" text="H" />
+                        <TableColumn prefWidth="75.0" text="I" />
+                        <TableColumn prefWidth="75.0" text="J" />
+                        <TableColumn prefWidth="75.0" text="K" />
+                        <TableColumn prefWidth="75.0" text="L" />
+                        <TableColumn prefWidth="75.0" text="M" />
+                        <TableColumn prefWidth="75.0" text="N" />
+                        <TableColumn prefWidth="75.0" text="O" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
