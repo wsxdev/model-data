@@ -1,0 +1,24 @@
+/* ESTILO PARA BOTONES  DEL MENÚ LATERAL */
+/* COLOR TRANSPARENT: #197CA180 */
+.menu-toggle-button-lateral {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 15 10 15;
+    -fx-font-size: 20px;
+}
+
+/* HOVER */
+.menu-toggle-button-lateral:hover {
+    -fx-background-color: #197ca1;
+}
+
+/* CLICK / PRESSED */
+.menu-toggle-button-lateral:pressed {
+    -fx-background-color: #197ca1;
+}
+
+/* BOTÓN SELECCIONADO */
+.menu-toggle-button-lateral:selected {
+    -fx-background-color: #1f536b;
+}

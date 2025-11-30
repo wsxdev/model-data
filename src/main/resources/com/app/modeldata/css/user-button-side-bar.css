@@ -1,0 +1,36 @@
+/* ESTILO BASE DE LOS MENUBUTTON */
+.button-user-side-bar {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0;
+    -fx-font-size: 13px;
+}
+
+/* HOVER */
+.button-user-side-bar:hover {
+    -fx-background-color: #197ca1;
+}
+
+/* CLICK / PRESIONADO */
+.button-user-side-bar:pressed {
+    -fx-background-color: #197ca1;
+}
+
+/* BOTÓN SELECCIONADO */
+.button-user-side-bar:selected {
+    -fx-background-color: #ffffff;
+}
+
+/* OCULTAR FLECHA NATIVA */
+.button-user-side-bar .arrow-button,
+.button-user-side-bar .arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-min-width: 0;
+    -fx-max-width: 0;
+    -fx-border-width: 0;
+    -fx-background-image: none;
+}
