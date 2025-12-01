@@ -17,19 +17,28 @@ public class LoginController {
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
 
-            // SE CIERA LA VENTANA ACTUAL (LOGIN)
-            Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            loginStage.close();
+            // REUTILIZAR EL MISMO STAGE DEL LOGIN PARA LA VENTANA PRINCIPAL
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // ABRIR VENTANA PRINCIPAL
-            Stage newStageVistaPrincipal = new Stage();
-            newStageVistaPrincipal.setScene(vistaPrincipalScene);
-            newStageVistaPrincipal.setTitle("ModelData");
-            // MOSTRAR LA VENTANA MAXIMIZADA
-            newStageVistaPrincipal.setMaximized(true);
-            // PARA QUE NO SE PUEDA REDIMENSIONAR LA VENTANA
-            newStageVistaPrincipal.setResizable(false);
-            newStageVistaPrincipal.show();
+            // SE ESTABLECE LA NUEVA SCENE DE LA VENTANA PRINCIPAL
+            stage.setScene(vistaPrincipalScene);
+            stage.setTitle("ModelData");
+
+            // PARA MAXIMIZAR LA VENTANA PRINCIPAL AL INICIAR
+            stage.setMaximized(true);
+            stage.setResizable(false);
+
+            // AÑADIR ICONO A LA VENTANA SI NO TIENE ICONO ASIGNADO
+            if (stage.getIcons().isEmpty()) {
+                try {
+                    stage.getIcons().add(new javafx.scene.image.Image(
+                            getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png")
+                    ));
+                } catch (Exception ignored) {
+                    // SI HAY UN ERROR AL CARGAR EL ICONO, SIMPLEMENTE NO SE AÑADE
+                }
+            }
+            stage.show();
 
         } catch (Exception e) {
             throw new RuntimeException(e);
