@@ -24,11 +24,16 @@ public class LoginController {
             // ABRIR VENTANA PRINCIPAL
             Stage newStageVistaPrincipal = new Stage();
             newStageVistaPrincipal.setScene(vistaPrincipalScene);
-            newStageVistaPrincipal.setTitle("ModelData — Panel Principal");
+            newStageVistaPrincipal.setTitle("ModelData");
+            // MOSTRAR LA VENTANA MAXIMIZADA
+            newStageVistaPrincipal.setMaximized(true);
+            // PARA QUE NO SE PUEDA REDIMENSIONAR LA VENTANA
+            newStageVistaPrincipal.setResizable(false);
             newStageVistaPrincipal.show();
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+}
+
 }
