@@ -17,28 +17,31 @@ public class LoginController {
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
 
-            // REUTILIZAR EL MISMO STAGE DEL LOGIN PARA LA VENTANA PRINCIPAL
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // CREAR UN NUEVO STAGE Y CERRAR EL STAGE DE LOGIN
+            Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // SE ESTABLECE LA NUEVA SCENE DE LA VENTANA PRINCIPAL
-            stage.setScene(vistaPrincipalScene);
-            stage.setTitle("ModelData");
+            Stage vistaPrincipalStage = new Stage();
+            vistaPrincipalStage.setScene(vistaPrincipalScene);
+            vistaPrincipalStage.setTitle("ModelData");
 
-            // PARA MAXIMIZAR LA VENTANA PRINCIPAL AL INICIAR
-            stage.setMaximized(true);
-            stage.setResizable(false);
+            // CONFIGURAR LA VENTANA PRINCIPAL
+            vistaPrincipalStage.setFullScreen(false);
+            vistaPrincipalStage.setMaximized(true);
+
+            vistaPrincipalStage.setResizable(false);
 
             // AÑADIR ICONO A LA VENTANA SI NO TIENE ICONO ASIGNADO
-            if (stage.getIcons().isEmpty()) {
-                try {
-                    stage.getIcons().add(new javafx.scene.image.Image(
-                            getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png")
-                    ));
-                } catch (Exception ignored) {
-                    // SI HAY UN ERROR AL CARGAR EL ICONO, SIMPLEMENTE NO SE AÑADE
-                }
+            try {
+                vistaPrincipalStage.getIcons().add(new javafx.scene.image.Image(
+                        getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png")
+                ));
+            } catch (Exception ignored) {
+                // SI NO SE PUEDE CARGAR EL ICONO, SE IGNORA EL ERROR
             }
-            stage.show();
+
+            // MOSTRAR LA VENTANA PRINCIPAL Y CERRAR LA DE LOGIN
+            vistaPrincipalStage.show();
+            loginStage.close();
 
         } catch (Exception e) {
             throw new RuntimeException(e);
