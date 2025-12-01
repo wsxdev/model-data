@@ -10,8 +10,10 @@ module com.app.modeldata {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
+    // PERMITIR EL ACCESO A LOS PAQUETES QUE CONTIENEN LOS CONTROLADORES FXML
     opens com.app.modeldata to javafx.fxml;
     opens com.app.controllers.modeldata to javafx.fxml;
+    opens com.app.controllers.panels to javafx.fxml;
     opens com.app.controllers.login to javafx.fxml;
     exports com.app.modeldata;
 }
