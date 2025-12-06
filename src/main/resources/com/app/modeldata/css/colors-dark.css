@@ -1,0 +1,55 @@
+.root {
+
+    /* ========= COLORES PRIMARIOS ========= */
+    -fx-primary-50:  #eefbfd;
+    -fx-primary-100: #d4f3f9;
+    -fx-primary-200: #aee6f3;
+    -fx-primary-300: #76d3ea;
+    -fx-primary-400: #37b7d9;
+    -fx-primary-500: #1b9abf;
+    -fx-primary-600: #197ca1;
+    -fx-primary-700: #1d6b8c;
+    -fx-primary-800: #1f536b;
+    -fx-primary-900: #1e455b;
+    -fx-primary-950: #0e2c3e;
+
+    /* ========= UI ROLES ========= */
+    -fx-bg-color:        #121A21;
+    -fx-surface-color:   #1B252E;
+    -fx-border-color:    #2E3A44;
+    border-color:        #2E3A44;
+
+    -fx-text-primary:    #F2F6FA;
+    -fx-text-secondary:  #9AA6B2;
+    -fx-text-disabled:   #6C7A86;
+
+    /* ========= ESTADOS ========= */
+    -fx-primary:         -fx-primary-800;
+    -fx-primary-hover:   -fx-primary-600;
+    -fx-primary-pressed: -fx-primary-500;
+
+    /* ÉXITO */
+    -fx-success-light:   #1E512E;
+    -fx-success:         #27AE60;
+    -fx-success-dark:    #1E874B;
+
+    /* ADVERTENCIA */
+    -fx-warning-light:   #5A4B1B;
+    -fx-warning:         #F2C037;
+    -fx-warning-dark:    #B68E22;
+
+    /* ERROR */
+    -fx-error-light:     #5A1F1F;
+    -fx-error:           #E74C3C;
+    -fx-error-dark:      #C0392B;
+
+    /* INFORMACIÓN */
+    -fx-info-light:      #1C3A52;
+    -fx-info:            #3498DB;
+    -fx-info-dark:       #2C81BA;
+
+    /* SCROLL */
+    -fx-scroll-track:    #161D24;
+    -fx-scroll-thumb:    #2E3A44;
+    -fx-scroll-hover:    #3F4C57;
+}
