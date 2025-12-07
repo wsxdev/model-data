@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -21,157 +20,125 @@
 
 <BorderPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.modeldata.ModelDataAppController">
     <!-- ESTILO PARA EL SIDEBAR -->
-    <stylesheets>
+    <!-- <stylesheets>
         <URL value="@../../css/menu.css" />
+        <URL value="@../../css/main.css"/>
         <URL value="@../../css/user-button-toolbar.css" />
         <URL value="@../../css/user-button-side-bar.css" />
         <URL value="@../../css/app-menu-bar.css" />
-
-    </stylesheets>
+    </stylesheets> -->
 
     <!-- SIDEBAR IZQUIERDO-->
     <left>
-        <VBox fx:id="sideBar" alignment="TOP_LEFT" maxWidth="260" prefWidth="260" style="-fx-background-color: #1D6B8C; -fx-background-radius: 0 0 15 0;">
-         <AnchorPane>
-            <children>
-                  <!-- PANEL DEL HEADER -->
-                  <Pane prefHeight="121.0" prefWidth="260.0">
-                      <children>
-                          <!-- HEADER - LOGO MODELDATA  -->
-                          <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                  <Image url="@../../images/logos/ModelDataLogoBordeSaliente.png" />
-                              </image>
-                          </ImageView>
-                          <!-- TITLE - MODELDATA -->
-                          <Text fill="white" layoutX="82.0" layoutY="36.0" text="MODEL">
-                              <font>
-                                  <Font name="System Bold" size="24" />
-                              </font>
-                          </Text>
-                          <Text fill="white" layoutX="82.0" layoutY="58.0" text="DATA">
-                              <font>
-                                  <Font name="System Bold" size="24" />
-                              </font>
-                          </Text>
-                          <Separator layoutY="69.0" opacity="0.5" prefHeight="10.0" prefWidth="260.0" />
-                      </children>
-                  </Pane>
-            </children>
-         </AnchorPane>
-         <AnchorPane>
-            <children>
-      
-                  <!-- VBOX PARA BOTONES DEL SIDEBAR -->
-                  <VBox alignment="CENTER_LEFT" prefHeight="270.0" prefWidth="260.0" style="-fx-padding:20 0 0 0;">
-                      <!-- BOTÓN INICIO -->
-                      <ToggleButton fx:id="btnInicio" maxWidth="Infinity" styleClass="menu-toggle-button-lateral" text="INICIO" textFill="#ff3434">
-                          <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@../../images/icons/home-icon.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                          <font>
-                              <Font size="20.0" />
-                          </font>
-                      </ToggleButton>
-                      <!-- BOTÓN DATOS -->
-                      <ToggleButton fx:id="btnDatos" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="DATOS" textFill="WHITE">
-                          <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@../../images/icons/data-icon.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                          <font>
-                              <Font size="20.0" />
-                          </font>
-                      </ToggleButton>
-                      <!-- BOTÓN MODELADO -->
-                      <ToggleButton fx:id="btnModelado" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="MODELADO" textFill="WHITE">
-                          <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@../../images/icons/model-icon.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                          <font>
-                              <Font size="20.0" />
-                          </font>
-                      </ToggleButton>
-                      <!-- BOTÓN GRÁFICOS -->
-                      <ToggleButton fx:id="btnGraficos" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="GRÁFICOS" textFill="WHITE">
-                          <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@../../images/icons/graphics-bar-icon.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                          <font>
-                              <Font size="20.0" />
-                          </font>
-                      </ToggleButton>
-                      <!-- BOTÓN CONFIGURACIÓN -->
-                      <ToggleButton fx:id="btnConfiguracion" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="CONFIGURACIÓN" textFill="WHITE">
-                          <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@../../images/icons/setting-icon.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                          <font>
-                              <Font size="20.0" />
-                          </font>
-                      </ToggleButton>
-                  </VBox>
-            </children>
-         </AnchorPane>
-         <AnchorPane minHeight="90.0" VBox.vgrow="ALWAYS">
-            <children>
-      
-                  <Pane minHeight="90.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                  <children>
-                     <Text fill="WHITE" layoutX="50.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO" wrappingWidth="102.072265625">
+        <VBox fx:id="sideBar" maxWidth="260" prefHeight="600.0" prefWidth="237.0" style="-fx-background-color: #1D6B8C; -fx-background-radius: 0 0 15 0;">
+            <AnchorPane>
+                <!-- PANEL DEL HEADER -->
+                <Pane prefHeight="121.0" prefWidth="260.0">
+                    <!-- HEADER - LOGO MODELDATA  -->
+                    <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../images/logos/ModelDataLogoBordeSaliente.png" />
+                    </ImageView>
+                    <!-- TITLE - MODELDATA -->
+                    <Text fill="white" layoutX="82.0" layoutY="36.0" text="MODEL">
                         <font>
-                           <Font size="20.0" />
+                            <Font name="System Bold" size="24" />
                         </font>
-                     </Text>
-                      <MenuButton layoutX="160.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="50.0" style="-fx-background-radius: 20;" styleClass="button-user-side-bar" textFill="WHITE">
-                          <items>
-                              <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
-                          </items>
+                    </Text>
+                    <Text fill="white" layoutX="82.0" layoutY="58.0" text="DATA">
                         <font>
-                           <Font size="10.0" />
+                            <Font name="System Bold" size="24" />
+                        </font>
+                    </Text>
+                    <Separator layoutY="69.0" opacity="0.5" prefHeight="10.0" prefWidth="260.0" />
+                </Pane>
+            </AnchorPane>
+            <AnchorPane>
+                <!-- VBOX PARA BOTONES DEL SIDEBAR -->
+                <VBox alignment="CENTER_LEFT" prefHeight="270.0" prefWidth="260.0" style="-fx-padding:20 0 0 0;">
+                    <!-- BOTÓN INICIO -->
+                    <ToggleButton fx:id="btnInicio" maxWidth="Infinity" text="INICIO" textFill="#ff3434">
+                        <graphic>
+                            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../images/icons/home-icon.png" />
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </ToggleButton>
+                    <!-- BOTÓN DATOS -->
+                    <ToggleButton fx:id="btnDatos" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="DATOS" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../images/icons/data-icon.png" />
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </ToggleButton>
+                    <!-- BOTÓN MODELADO -->
+                    <ToggleButton fx:id="btnModelado" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="MODELADO" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../images/icons/model-icon.png" />
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </ToggleButton>
+                    <!-- BOTÓN GRÁFICOS -->
+                    <ToggleButton fx:id="btnGraficos" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="GRÁFICOS" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../images/icons/graphics-bar-icon.png" />
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </ToggleButton>
+                    <!-- BOTÓN CONFIGURACIÓN -->
+                    <ToggleButton fx:id="btnConfiguracion" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="CONFIGURACIÓN" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../images/icons/setting-icon.png" />
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </ToggleButton>
+                </VBox>
+            </AnchorPane>
+            <AnchorPane minHeight="90.0" VBox.vgrow="ALWAYS">
+                <Pane minHeight="90.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <Text fill="WHITE" layoutX="50.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO" wrappingWidth="102.072265625">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </Text>
+                    <MenuButton layoutX="160.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="50.0" style="-fx-background-radius: 20;" styleClass="button-user-side-bar" textFill="WHITE">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
+                        </items>
+                        <font>
+                            <Font size="10.0" />
                         </font>
                         <graphic>
-                           <HBox prefHeight="24.0" prefWidth="51.0" style="-fx-alignment: CENTER;">
-                              <children>
-                                 <ImageView fitHeight="24" fitWidth="24">
-                                    <image>
-                                       <Image url="@../../images/icons/user-icon.png" />
-                                    </image>
-                                 </ImageView>
-                                 <ImageView fitHeight="6.0" fitWidth="12.0">
-                                    <image>
-                                       <Image url="@../../images/icons/arrow-icon.png" />
-                                    </image>
-                                 </ImageView>
-                              </children>
-                           </HBox>
+                            <HBox prefHeight="24.0" prefWidth="51.0" style="-fx-alignment: CENTER;">
+                                <ImageView fitHeight="24" fitWidth="24">
+                                    <Image url="@../../images/icons/user-icon.png" />
+                                </ImageView>
+                                <ImageView fitHeight="6.0" fitWidth="12.0">
+                                    <Image url="@../../images/icons/arrow-icon.png" />
+                                </ImageView>
+                            </HBox>
                         </graphic>
-                      </MenuButton>
-      
-                  </children>
-               </Pane>
-            </children>
-         </AnchorPane>
-
+                    </MenuButton>
+                </Pane>
+            </AnchorPane>
         </VBox>
     </left>
 
@@ -186,12 +153,10 @@
                     <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="50" spacing="15" style="-fx-background-color: #F2F2F2;">
                         <!-- BOTÓN BURGER -->
                         <ImageView fx:id="menuButton" fitHeight="25" fitWidth="25" onMouseClicked="#toggleMenu" preserveRatio="true">
-                            <image>
-                                <Image url="@../../images/icons/burger-button-colo-blue-icon.png" />
-                            </image>
                             <HBox.margin>
                                 <Insets left="15.0" />
                             </HBox.margin>
+                            <Image url="@../../images/icons/burger-button-colo-blue-icon.png" />
                         </ImageView>
                         <!-- TÍTULO DE LA TOOLBAR -->
                         <Text fill="#197CA1" text="INICIO">
@@ -203,88 +168,67 @@
                         <Pane minWidth="-Infinity" prefHeight="50.0" prefWidth="150.0" HBox.hgrow="ALWAYS" />
                         <!-- PANEL PARA LA BARRA DE BÚSQUEDA -->
                         <Pane prefHeight="50.0" prefWidth="314.0">
-                            <children>
-                                <HBox alignment="CENTER_LEFT" layoutX="7.0" layoutY="9.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="300.0" spacing="5" style="-fx-background-color: #D9D9D9; -fx-padding: 5; -fx-background-radius: 50;">
-                                    <ImageView fitHeight="18" fitWidth="18">
-                                        <image>
-                                            <Image url="@../../images/icons/search-icon.png" />
-                                        </image>
-                                    </ImageView>
+                            <HBox alignment="CENTER_LEFT" layoutX="7.0" layoutY="9.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="300.0" spacing="5" style="-fx-background-color: #D9D9D9; -fx-padding: 5; -fx-background-radius: 50;">
+                                <ImageView fitHeight="18" fitWidth="18">
+                                    <Image url="@../../images/icons/search-icon.png" />
+                                </ImageView>
 
-                                    <TextField fx:id="searchField" promptText="Buscar..." style="-fx-background-color:transparent; -fx-border-color:transparent;" HBox.hgrow="ALWAYS" />
-                                </HBox>
-                            </children>
+                                <TextField fx:id="searchField" promptText="Buscar..." style="-fx-background-color:transparent; -fx-border-color:transparent;" HBox.hgrow="ALWAYS" />
+                            </HBox>
                         </Pane>
-                        <!-- PANEL PARA EL ICONO Y BOTON DE USUARIO -->
+                        <!-- PANEL PARA EL ÍCONO Y BOTÓN DE USUARIO -->
                         <Pane prefHeight="50.0" prefWidth="89.0" style="-fx-background-color: transparent;">
-                            <children>
-                                <MenuButton layoutY="9.0" mnemonicParsing="false" style="-fx-background-radius: 23;" styleClass="button-user-toolbar">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
-                                    </items>
+                            <MenuButton layoutY="9.0" mnemonicParsing="false" style="-fx-background-radius: 23;" styleClass="button-user-toolbar">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
+                                </items>
 
-                                    <graphic>
-                                        <HBox prefHeight="24.0" prefWidth="51.0" style="-fx-alignment: CENTER;">
-                                            <children>
-                                                <ImageView fitHeight="24" fitWidth="24">
-                                                    <image>
-                                                        <Image url="@../../images/icons/user-color-blue-icon.png" />
-                                                    </image>
-                                                </ImageView>
-                                                <ImageView fitHeight="24.0" fitWidth="24.0">
-                                                    <image>
-                                                        <Image url="@../../images/icons/arrow-color-blue-icon.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </children>
-                                        </HBox>
-                                    </graphic>
-                                </MenuButton>
-                            </children>
+                                <graphic>
+                                    <HBox prefHeight="24.0" prefWidth="51.0" style="-fx-alignment: CENTER;">
+                                        <ImageView fitHeight="24" fitWidth="24">
+                                            <Image url="@../../images/icons/user-color-blue-icon.png" />
+                                        </ImageView>
+                                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                                            <Image url="@../../images/icons/arrow-color-blue-icon.png" />
+                                        </ImageView>
+                                    </HBox>
+                                </graphic>
+                            </MenuButton>
                         </Pane>
                     </HBox>
                     <!-- BREADCRUMB -->
-                    <HBox fx:id="breadCrumbBar" prefHeight="25" style="-fx-background-color: #197CA1; -fx-background-radius: 12 12 12 12;">
-                  <children>
-                     <MenuBar>
-                       <menus>
-                         <Menu mnemonicParsing="false" style="-fx-text-fill: #ffffff;" text="Archivo">
-                           <items>
-                                 <MenuItem mnemonicParsing="false" text="Importar" />
-                             <MenuItem mnemonicParsing="false" text="Exportar" />
-                                 <MenuItem mnemonicParsing="false" text="Guardar" />
-                                 <MenuItem mnemonicParsing="false" text="Guardar como" />
-                                 <MenuItem mnemonicParsing="false" text="Salir" />
-                           </items>
-                         </Menu>
-                         <Menu mnemonicParsing="false" text="Editar">
-                           <items>
-                             <MenuItem mnemonicParsing="false" text="Deshacer" />
-                                 <MenuItem mnemonicParsing="false" text="Rehacer" />
-                                 <MenuItem mnemonicParsing="false" text="Borrar" />
-                           </items>
-                         </Menu>
-                           <Menu mnemonicParsing="false" text="Ver">
-                              <items>
-                                 <MenuItem mnemonicParsing="false" text="Delete" />
-                              </items>
-                           </Menu>
-                           <Menu mnemonicParsing="false" text="Analizar">
-                              <items>
-                                 <MenuItem mnemonicParsing="false" text="Delete" />
-                              </items>
-                           </Menu>
-                         <Menu mnemonicParsing="false" text="Ayuda">
-                           <items>
-                             <MenuItem mnemonicParsing="false" text="Manual de usuario" />
-                                 <MenuItem mnemonicParsing="false" text="Acerca de" />
-                           </items>
-                         </Menu>
-                       </menus>
-                     </MenuBar>
-                  </children>
+                    <HBox prefWidth="940.0" style="-fx-background-color: #197CA1; -fx-background-radius: 15;">
+                        <padding>
+                            <Insets right="20.0" />
+                        </padding>
+                        <MenuBar fx:id="menuBar" prefHeight="28.0" style="-fx-background-color: #197CA1; -fx-background-radius: 15;">
+                            <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="Archivo">
+                                <MenuItem mnemonicParsing="false" text="Importar" />
+                                <MenuItem mnemonicParsing="false" text="Exportar" />
+                                <MenuItem mnemonicParsing="false" text="Guardar" />
+                                <MenuItem mnemonicParsing="false" text="Guardar como" />
+                                <MenuItem mnemonicParsing="false" text="Salir" />
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Editar">
+                                <MenuItem mnemonicParsing="false" text="Deshacer" />
+                                <MenuItem mnemonicParsing="false" text="Rehacer" />
+                                <MenuItem mnemonicParsing="false" text="Borrar" />
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Ver">
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Analizar">
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Ayuda">
+                                <MenuItem mnemonicParsing="false" text="Manual de usuario" />
+                                <MenuItem mnemonicParsing="false" text="Acerca de" />
+                            </Menu>
+                        </MenuBar>
                     </HBox>
-
+               <padding>
+                  <Insets right="12.0" />
+               </padding>
                 </VBox>
             </top>
 
@@ -292,7 +236,6 @@
             <center>
                 <AnchorPane fx:id="contentPane" />
             </center>
-
         </BorderPane>
     </center>
 </BorderPane>

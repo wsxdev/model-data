@@ -2,17 +2,24 @@ package com.app.controllers.modeldata;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.util.Objects;
 
 public class ModelDataAppController {
-    @FXML
-    private Label welcomeText;
+    @FXML public VBox sideBar;
+    @FXML public BorderPane mainLayout;
+    @FXML public HBox topBar;
+    @FXML public ImageView menuButton;
+    @FXML public TextField searchField;
+    @FXML public MenuBar menuBar;
+    @FXML private Label welcomeText;
 
     // VARIABLES DE LOS BOTONES DEL SIDEBAR
     @FXML private ToggleButton btnInicio;
@@ -21,8 +28,6 @@ public class ModelDataAppController {
     @FXML private ToggleButton btnGraficos;
     @FXML private ToggleButton btnConfiguracion;
 
-    // GRUPO DE BOTONES DEL SIDEBAR
-    private ToggleGroup menuButtonGroupSideBar;
     // PANEL DONDE SE CARGAN LAS VISTAS DE CADA PESTAÑA
     @FXML private AnchorPane contentPane;
 
@@ -30,7 +35,8 @@ public class ModelDataAppController {
     @FXML
     public void initialize() {
         // INICIALIZAR EL GRUPO DE BOTONES DEL SIDEBAR
-        menuButtonGroupSideBar = new ToggleGroup();
+        // GRUPO DE BOTONES DEL SIDEBAR
+        ToggleGroup menuButtonGroupSideBar = new ToggleGroup();
         // AÑADIR BOTONES AL GRUPO
         btnInicio.setToggleGroup(menuButtonGroupSideBar);
         btnDatos.setToggleGroup(menuButtonGroupSideBar);

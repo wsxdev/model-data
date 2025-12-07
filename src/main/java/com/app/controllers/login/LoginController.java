@@ -7,15 +7,20 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class LoginController {
 
-    // METODO PARA ABRIR LA VENTANA PRINCIPAL DESPUÉS DE UN LOGIN VÁLIDO
+    // MÉTODO PARA ABRIR LA VENTANA PRINCIPAL DESPUÉS DE UN LOGIN VÁLIDO
     @FXML
     private void goToMainWindow(ActionEvent event) {
         try {
             // PARA CARGAR LA VENTANA PRINCIPAL E INICIAR DESPUÉS DEL LOGIN VÁLIDO
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
+
+            vistaPrincipalScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/app/modeldata/css/colors-dark.css")).toExternalForm());
+            vistaPrincipalScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/app/modeldata/css/main.css")).toExternalForm());
 
             // CREAR UN NUEVO STAGE Y CERRAR EL STAGE DE LOGIN
             Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -25,15 +30,16 @@ public class LoginController {
             vistaPrincipalStage.setTitle("ModelData");
 
             // CONFIGURAR LA VENTANA PRINCIPAL
-            vistaPrincipalStage.setFullScreen(false);
+            // svistaPrincipalStage.setFullScreen(true);
             vistaPrincipalStage.setMaximized(true);
 
-            vistaPrincipalStage.setResizable(false);
+            // LA LÍNEA DE ABAJO TIENE ALGO QUE FIUEBFUBAUIASBF - ACTIVAR CON PRECAUCIÓN :)
+            // vistaPrincipalStage.setResizable(false);
 
             // AÑADIR ICONO A LA VENTANA SI NO TIENE ICONO ASIGNADO
             try {
                 vistaPrincipalStage.getIcons().add(new javafx.scene.image.Image(
-                        getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png")
+                        Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png"))
                 ));
             } catch (Exception ignored) {
                 // SI NO SE PUEDE CARGAR EL ICONO, SE IGNORA EL ERROR
