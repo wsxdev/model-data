@@ -17,6 +17,8 @@
     -fx-surface-color:   #1B252E;
     -fx-border-color:    #2E3A44;
     border-color:        #2E3A44;
+    -fx-text-hover:      #F5F7FA;
+    -fx-text-button:     #F2F6FA;
     -fx-text-primary:    #F2F6FA;
     -fx-text-secondary:  #9AA6B2;
     -fx-text-disabled:   #6C7A86;
