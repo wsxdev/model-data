@@ -7,7 +7,7 @@
     -fx-primary-400: #37b7d9;
     -fx-primary-500: #1b9abf;
     -fx-primary-600: #197ca1;
-    -fx-primary-700: #1d6b8c; /* COLOR PRINCIPAL :) */
+    -fx-primary-700: #1d6b8c; /* COLOR PRINCIPAL */
     -fx-primary-800: #1f536b;
     -fx-primary-900: #1e455b;
     -fx-primary-950: #0e2c3e;
@@ -17,7 +17,6 @@
     -fx-surface-color:   #FFFFFF;
     -fx-border-color:    #DADFE4;
     border-color:        #DADFE4;
-
     -fx-text-primary:    #1F2A32;
     -fx-text-secondary:  #4B5A67;
     -fx-text-disabled:   #8F9CA8;
