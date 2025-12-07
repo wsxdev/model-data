@@ -1,0 +1,84 @@
+@import url("colors.css");
+
+/* ==================== ESTILO GENERAL DE LA APLICACIÓN ==================== */
+.root {
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 14px;
+    font-size: 14px;
+}
+
+/* ========== CONTROLES (BUTTON, COMBO BOX, TABLA) ========== */
+
+/* BUTTON */
+.button { 
+    -fx-background-color: var(-fx-primary);
+    background-color: var(-fx-primary);
+    -fx-text-fill: var(-fx-text-primary);
+    -fx-background-radius: 20px;
+    -fx-font-size: 16px;
+    font-size: 16px;
+}
+
+/* CUANDO SE PASA EL PUNTERO */
+.button:hover {
+    -fx-background-color: -fx-primary-hover;
+    background-color: -fx-primary-hover;
+    -fx-text-fill: white;
+}
+
+/* COMBO BOX DEL FRAME  */
+.combo-box {
+    -fx-background-color: #1b9abf;
+    background-color: #1b9abf;
+    -fx-background-radius: 12px;
+    -fx-font-size: 12px;
+    font-size: 12px;
+}
+
+
+/* PARA EL TEXTO SELECCIONADO DENTRO DEL COMBO BOX */
+.combo-box .list-cell:selected {
+    -fx-background-color: #1b9abf;
+    background-color: #1b9abf;
+    -fx-text-fill: white;
+}
+/* PARA LOS ITEMS DEL COMBO BOX */
+.combo-box .list-cell {
+    -fx-background-radius: 12px;
+    -fx-font-size: 12px;
+    font-size: 12px;
+    -fx-text-fill: #000000;
+}
+/* PARA EL POPUP DEL COMBO BOX */
+.combo-box .combo-box-popup .list-view {
+    -fx-background-radius: 12px;
+}
+/* PARA LA FLECHA DEL COMBO BOX */
+.combo-box .arrow {
+    -fx-background-color: white;
+    background-color: white;
+}
+
+/* PARA LOS ITEMS DEL COMBO BOX CUANDO SE PASA EL PUNTERO SOBRE ELLOS */
+.combo-box .list-cell:hover {
+    -fx-background-color: #1e455b;
+    background-color: #1e455b;
+    -fx-text-fill: white;
+}   
+
+
+/* TABLA DEL FRAME */
+.table-view {
+    -fx-background-radius: 12px;
+}
+
+/* PARA LOS HEADERS DE LA TABLA */
+.table-view .column-header {
+    -fx-background-radius: 12px;
+}
+
+/* PARA EL FONDO DE LAS COLUMNAS DEL HEADER DE LA TABLA */
+.table-view .column-header-background {
+    -fx-background-radius: 12px 12px 0px 0px;
+}
