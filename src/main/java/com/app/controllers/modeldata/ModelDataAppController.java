@@ -1,5 +1,6 @@
 package com.app.controllers.modeldata;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -10,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import javax.swing.*;
 import java.util.Objects;
 
 public class ModelDataAppController {
@@ -28,6 +30,9 @@ public class ModelDataAppController {
     @FXML private ToggleButton btnGraficos;
     @FXML private ToggleButton btnConfiguracion;
 
+    // VARIABLES DE LOS ITEMS DEL MENUBAR
+    @FXML private Button btnMenuItemAcercaDe;
+
     // PANEL DONDE SE CARGAN LAS VISTAS DE CADA PESTAÑA
     @FXML private AnchorPane contentPane;
 
@@ -44,6 +49,7 @@ public class ModelDataAppController {
         btnGraficos.setToggleGroup(menuButtonGroupSideBar);
         btnConfiguracion.setToggleGroup(menuButtonGroupSideBar);
 
+
         // GESTIONAR EL CAMBIO DE VISTA SEGÚN EL BOTÓN SELECCIONADO
         menuButtonGroupSideBar.selectedToggleProperty().addListener((obs, oldT, newT) -> {
             if (newT != null) {
@@ -58,6 +64,7 @@ public class ModelDataAppController {
                     case "GRÁFICOS" -> loadViewPanels("/com/app/modeldata/fxml/panels/graficos.fxml");
                     case "CONFIGURACIÓN" -> loadViewPanels("/com/app/modeldata/fxml/panels/configuracion.fxml");
                 }
+
             }
         });
 
@@ -89,5 +96,10 @@ public class ModelDataAppController {
 
     // MÉTODO PARA TOGGLEAR EL MENÚ (SIDEBAR) - POR IMPLEMENTAR
     public void toggleMenu(MouseEvent mouseEvent) {
+    }
+
+    @FXML
+    public void itemOpenAbout(ActionEvent actionEvent) {
+        loadViewPanels("com/app/modeldata/fxml/panels/acerca-de.fxml");
     }
 }

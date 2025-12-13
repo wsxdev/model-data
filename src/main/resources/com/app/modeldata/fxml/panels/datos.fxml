@@ -16,43 +16,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.DatosController">
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.DatosController">
     <stylesheets>
-        <URL value="@../../css/main.css"/>
+        <URL value="@../../css/main.css" />
     </stylesheets>
     <VBox prefHeight="599.0" prefWidth="1116.0" spacing="20.0">
         <padding>
-            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
         </padding>
         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
             <Label text="DATOS A ANALIZAR" textFill="#1d6b8c">
                 <font>
-                    <Font name="System Bold" size="18.0"/>
+                    <Font name="System Bold" size="18.0" />
                 </font>
             </Label>
-            <ComboBox fx:id="datosAnalizarComboBox" onAction="#seleccionarDatosAnalizar" prefWidth="150.0"
-                      promptText="Seleccione los datos" styleClass="combo-box-datos"/>
+            <ComboBox fx:id="datosAnalizarComboBox" onAction="#seleccionarDatosAnalizar" prefWidth="150.0" promptText="Seleccione los datos" styleClass="combo-box-datos" />
         </HBox>
-        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="174.0" text="Sincronizar datos"
-                textFill="WHITE">
+        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="174.0" text="Sincronizar datos" textFill="WHITE">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../images/icons/synchronization-icon.png"/>
+                    <Image url="@../../images/icons/synchronization-icon.png" />
                 </ImageView>
             </graphic>
             <VBox.margin>
-                <Insets right="2.0"/>
+                <Insets right="2.0" />
             </VBox.margin>
         </Button>
         <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="1036.0">
             <ScrollPane prefWidth="1036.0">
                 <StackPane prefHeight="434.0" prefWidth="1036.0">
-                    <TableView maxHeight="434.0" minHeight="434.0" prefHeight="434.0" prefWidth="1036.0"
-                               styleClass="table-view-datos-natalidad">
+                    <TableView maxHeight="434.0" minHeight="434.0" prefHeight="434.0" prefWidth="1036.0">
                         <columns>
-                            <TableColumn prefWidth="75.0" text="C1"/>
-                            <TableColumn prefWidth="75.0" text="C2"/>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
                         </columns>
                     </TableView>
                 </StackPane>

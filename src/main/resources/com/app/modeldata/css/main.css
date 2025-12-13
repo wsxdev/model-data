@@ -10,9 +10,9 @@
 
 /* BUTTON */
 .button {
-    -fx-background-color: -fx-primary;
-    background-color: -fx-primary;
-    -fx-text-fill: -fx-text-button;
+    -fx-background-color: -fx-boton-primario;
+    background-color: -fx-boton-primario;
+    -fx-text-fill: -fx-texto-boton-primario;
     -fx-background-radius: 15px;
     -fx-font-size: 14px;
     font-size: 14px;
@@ -20,26 +20,54 @@
 
 /* CUANDO SE PASA EL PUNTERO */
 .button:hover {
-    -fx-background-color: -fx-primary-hover;
-    background-color: -fx-primary-hover;
-    -fx-text-fill: -fx-text-primary;
+    -fx-background-color: -fx-boton-primario-hover;
+    background-color: -fx-boton-primario-hover;
+    -fx-text-fill: -fx-texto-boton-primario;
 }
 
+.toggle-button {
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill: -fx-texto-boton-general;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 15 10 15;
+    padding: 10 15 10 15;
+    -fx-font-size: 20px;
+    font-size: 20px;
+}
+
+/* HOVER */
+.toggle-button:hover {
+    -fx-background-color: -fx-boton-primario-hover;
+    background-color: -fx-boton-primario-hover;
+}
+
+/* CLICK / PRESSED */
+.toggle-button:pressed {
+    -fx-background-color: -fx-boton-primario-pressed;
+    background-color: -fx-boton-primario-pressed;
+}
+
+/* BOTÓN SELECCIONADO */
+.toggle-button:selected {
+    -fx-background-color: -fx-boton-primario-selected;
+    background-color: -fx-boton-primario-selected;
+
+}
 /* COMBO BOX DEL FRAME */
 .combo-box {
-    -fx-background-color: #1b9abf;
-    background-color: #1b9abf;
+    -fx-background-color: -fx-boton-primario;
+    background-color: -fx-boton-primario;
     -fx-background-radius: 12px;
     -fx-font-size: 12px;
     font-size: 12px;
 }
 
-
 /* PARA EL TEXTO SELECCIONADO DENTRO DEL COMBO BOX */
 .combo-box .list-cell:selected {
-    -fx-background-color: #1b9abf;
-    background-color: #1b9abf;
-    -fx-text-fill: white;
+    -fx-background-color: -fx-boton-primario;
+    background-color: -fx-boton-primario;
+    -fx-text-fill: -fx-texto-en-primario;
 }
 /* PARA LOS ITEMS DEL COMBO BOX */
 .combo-box .list-cell {
@@ -48,7 +76,7 @@
     -fx-background-radius: 12px;
     -fx-font-size: 12px;
     font-size: 12px;
-    -fx-text-fill: -fx-text-primary;
+    -fx-text-fill: -fx-texto-primario;
 }
 /* PARA EL POPUP DEL COMBO BOX */
 .combo-box .combo-box-popup .list-view {
@@ -64,8 +92,8 @@
 
 /* PARA LOS ITEMS DEL COMBO BOX CUANDO SE PASA EL PUNTERO SOBRE ELLOS */
 .combo-box .list-cell:hover {
-    -fx-background-color: #1e455b;
-    background-color: #1e455b;
+    -fx-background-color: -fx-boton-primario-hover;
+    background-color: -fx-boton-primario-hover;
     -fx-text-fill: -fx-text-hover;
 }   
 
@@ -83,4 +111,8 @@
 /* PARA EL FONDO DE LAS COLUMNAS DEL HEADER DE LA TABLA */
 .table-view .column-header-background {
     -fx-background-radius: 12px 12px 0px 0px;
+}
+
+.label {
+    -fx-text-fill: -fx-texto-en-general;
 }

@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ModelDataApp extends Application {
     @Override
@@ -16,8 +17,8 @@ public class ModelDataApp extends Application {
         FXMLLoader loginLoader = new FXMLLoader(ModelDataApp.class.getResource("/com/app/modeldata/fxml/login/login-vista.fxml"));
 
         // AÑADIR ICONO AL STAGE
-        stage.getIcons().add(new Image(
-                getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png")
+    stage.getIcons().add(new Image(
+            Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png"))
         ));
 
         Parent root = loginLoader.load();

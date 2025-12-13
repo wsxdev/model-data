@@ -1,7 +1,7 @@
 .root {
 
     /* =========================================================================== */
-    /*                              PALETA DE COLORES                                */
+    /*                              PALETA DE COLORES                              */
     /* =========================================================================== */
     -fx-calypso-50:  #eefbfd;
     -fx-calypso-100: #d4f3f9;
@@ -16,7 +16,7 @@
     -fx-calypso-950: #0e2c3e;
 
     /* =========================================================================== */
-    /*                      PALETA PRIMARIA PARA COMPATIBILIDAD                      */
+    /*                      PALETA PRIMARIA PARA COMPATIBILIDAD                    */
     /* =========================================================================== */
     -fx-primary-50:  -fx-calypso-50;
     -fx-primary-100: -fx-calypso-100;
@@ -44,7 +44,7 @@
     border-color:           -fx-borde;              /* Sinónimo */
 
     /* =========================================================================== */
-    /*                              COLORES DE TEXTO                                  */
+    /*                              COLORES DE TEXTO                               */
     /* =========================================================================== */
     -fx-texto-primario:     #1F2A32;              /* Texto principal */
     -fx-texto-secundario:   #4B5A67;              /* Texto secundario */
@@ -53,9 +53,10 @@
     -fx-texto-enlace:       -fx-primary-500;        /* Color de enlaces */
     -fx-texto-enlace-hover: -fx-primary-600;        /* Hover en enlaces */
     -fx-texto-en-primario:  #FFFFFF;              /* Texto sobre botones primarios */
+    -fx-texto-en-general:   -fx-primary-700;        /* Texto de label */
 
     /* =========================================================================== */
-    /*                            CONTROLES E INPUTS                                  */
+    /*                            CONTROLES E INPUTS                               */
     /* =========================================================================== */
     -fx-control-bg:         -fx-superficie;         /* Fondo por defecto controles */
     -fx-control-border:     -fx-borde;              /* Borde de controles */
@@ -72,8 +73,10 @@
     /* =========================================================================== */
     -fx-boton-primario:           -fx-primary-700;
     -fx-boton-primario-hover:     -fx-primary-600;
-    -fx-boton-primario-pressed:   -fx-primary-500;
+    -fx-boton-primario-pressed:   -fx-primary-600;
+    -fx-boton-primario-selected:  -fx-primary-800;
     -fx-texto-boton-primario:     -fx-texto-en-primario;
+    -fx-texto-boton-general:      white;
 
     -fx-boton-secundario:         -fx-primary-300;
     -fx-boton-secundario-hover:   -fx-primary-400;

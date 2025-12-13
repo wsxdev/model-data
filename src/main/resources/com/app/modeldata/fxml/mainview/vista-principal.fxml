@@ -56,7 +56,7 @@
                 <!-- VBOX PARA BOTONES DEL SIDEBAR -->
                 <VBox alignment="CENTER_LEFT" prefHeight="270.0" prefWidth="260.0" style="-fx-padding:20 0 0 0;">
                     <!-- BOTÓN INICIO -->
-                    <ToggleButton fx:id="btnInicio" maxWidth="Infinity" text="INICIO" textFill="#ff3434">
+                    <ToggleButton fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" text="INICIO" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/home-icon.png" />
@@ -67,7 +67,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN DATOS -->
-                    <ToggleButton fx:id="btnDatos" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="DATOS" textFill="WHITE">
+                    <ToggleButton fx:id="btnDatos" alignment="CENTER_LEFT" maxWidth="Infinity" text="DATOS" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/data-icon.png" />
@@ -78,7 +78,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN MODELADO -->
-                    <ToggleButton fx:id="btnModelado" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="MODELADO" textFill="WHITE">
+                    <ToggleButton fx:id="btnModelado" alignment="CENTER_LEFT" maxWidth="Infinity" text="MODELADO" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/model-icon.png" />
@@ -89,7 +89,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN GRÁFICOS -->
-                    <ToggleButton fx:id="btnGraficos" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="GRÁFICOS" textFill="WHITE">
+                    <ToggleButton fx:id="btnGraficos" alignment="CENTER_LEFT" maxWidth="Infinity" text="GRÁFICOS" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/graphics-bar-icon.png" />
@@ -100,7 +100,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN CONFIGURACIÓN -->
-                    <ToggleButton fx:id="btnConfiguracion" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT;" styleClass="menu-toggle-button-lateral" text="CONFIGURACIÓN" textFill="WHITE">
+                    <ToggleButton fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity" text="CONFIGURACIÓN" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/setting-icon.png" />
@@ -196,7 +196,7 @@
                             </MenuButton>
                         </Pane>
                     </HBox>
-                    <!-- BREADCRUMB -->
+                    <!-- MENU BAR -->
                     <HBox prefWidth="940.0" style="-fx-background-color: #197CA1; -fx-background-radius: 15;">
                         <padding>
                             <Insets right="20.0" />
@@ -222,7 +222,7 @@
                             </Menu>
                             <Menu mnemonicParsing="false" text="Ayuda">
                                 <MenuItem mnemonicParsing="false" text="Manual de usuario" />
-                                <MenuItem mnemonicParsing="false" text="Acerca de" />
+                                <MenuItem mnemonicParsing="false" onAction="#itemOpenAbout" text="Acerca de" />
                             </Menu>
                         </MenuBar>
                     </HBox>

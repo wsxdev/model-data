@@ -1,104 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.ConfiguracionController">
    <children>
-      <VBox prefHeight="599.0" prefWidth="1116.0">
+      <VBox prefHeight="599.0" prefWidth="1116.0" spacing="10.0">
          <children>
-            <Pane prefHeight="599.0" prefWidth="1116.0">
+            <HBox layoutX="10.0" layoutY="295.0" prefWidth="200.0">
                <children>
-                  <Text fill="#1d6b8c" layoutX="81.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tema de la interfaz">
+                  <Label text="Temas">
                      <font>
-                        <Font name="System Bold" size="32.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
-                  </Text>
-                  <RadioButton layoutX="84.0" layoutY="116.0" mnemonicParsing="false" text="Claro" textFill="#1d6b8c">
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Automático" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Claro" />
+                  <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Oscuro" />
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label text="Tipos de letras">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
-                  </RadioButton>
-                  <RadioButton layoutX="84.0" layoutY="154.0" mnemonicParsing="false" text="Oscuro" textFill="#1d6b8c">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </RadioButton>
-                  <Text fill="#1d6b8c" layoutX="88.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tamaño de fuente">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                  </Text>
-                  <RadioButton layoutX="88.0" layoutY="252.0" mnemonicParsing="false" text="Pequeña" textFill="#1d6b8c">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton layoutX="236.0" layoutY="252.0" mnemonicParsing="false" text="Mediano" textFill="#1d6b8c">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton layoutX="383.0" layoutY="252.0" mnemonicParsing="false" text="Grande" textFill="#1d6b8c">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </RadioButton>
-                  <Text fill="#1d6b8c" layoutX="91.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Idioma">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                  </Text>
-                  <RadioButton layoutX="92.0" layoutY="358.0" mnemonicParsing="false" text="Español" textFill="#1d6b8c">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton layoutX="235.0" layoutY="358.0" mnemonicParsing="false" text="Ingles" textFill="#1d6b8c">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton layoutX="353.0" layoutY="358.0" mnemonicParsing="false" text="Aleman" textFill="#1d6b8c">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton layoutX="498.0" layoutY="358.0" mnemonicParsing="false" text="Coreano" textFill="#1d6b8c">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </RadioButton>
-                  <Text fill="#1d6b8c" layoutX="98.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restablecer configuración">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                  </Text>
-                  <Button layoutX="98.0" layoutY="474.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="152.0" style="-fx-background-color: #1B9ABF;">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="30.0" fitWidth="24.0" layoutX="212.0" layoutY="478.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons/reset-icon.png" />
-                     </image>
-                  </ImageView>
-                  <Text fill="WHITE" layoutX="129.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restablecer">
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label text="Tipografía predeterminada">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
-                  </Text>
+                  </Label>
+                  <ComboBox prefHeight="30.0" prefWidth="150.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Tamaño">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox layoutX="152.0" layoutY="10.0" prefHeight="30.0" prefWidth="150.0" />
                </children>
-            </Pane>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="203.0" prefWidth="200.0">
+               <children>
+                  <Label text="Idioma">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="44.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label text="Seleccione el idioma del menu">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox prefHeight="30.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label text="Archivos y aplicaciones">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="60.0" layoutY="341.0" prefWidth="200.0">
+               <children>
+                  <Label text="Guardar en">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #ededed;">
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons/download-icon.png" />
+                           </image>
+                        </ImageView>
+                        <TextField prefHeight="35.0" prefWidth="229.0" promptText="Descargas" style="-fx-background-color: #ededed;" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" text="Examinar" />
+               </children>
+            </HBox>
          </children>
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>

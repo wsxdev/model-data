@@ -53,6 +53,7 @@
     -fx-texto-enlace:       -fx-primary-300;          /* Color enlace */
     -fx-texto-enlace-hover: -fx-primary-200;
     -fx-texto-en-primario:  #000000;                /* Texto sobre botones claros */
+    -fx-texto-en-general:   -fx-primary-700;        /* Texto de label */
     
     /* =========================================================================== */
     /*                    CONTROLES E INPUTS (MODO OSCURO)                         */
@@ -73,7 +74,9 @@
     -fx-boton-primario:         -fx-primary-300;
     -fx-boton-primario-hover:   -fx-primary-200;
     -fx-boton-primario-pressed: -fx-primary-100;
+    -fx-boton-primario-selected:  -fx-primary-800;
     -fx-texto-boton-primario:   -fx-texto-primario;
+    -fx-texto-boton-general:      white;
 
     -fx-boton-secundario:       #263238;
     -fx-boton-secundario-hover: #2f3f47;
