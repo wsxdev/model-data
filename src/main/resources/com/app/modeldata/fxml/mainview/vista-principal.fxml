@@ -218,7 +218,7 @@
                                 <MenuItem mnemonicParsing="false" text="Delete" />
                             </Menu>
                             <Menu mnemonicParsing="false" text="Analizar">
-                                <MenuItem mnemonicParsing="false" text="Delete" />
+                                <MenuItem mnemonicParsing="false" onAction="#itemOpenFrequency" text="Frecuencias" />
                             </Menu>
                             <Menu mnemonicParsing="false" text="Ayuda">
                                 <MenuItem mnemonicParsing="false" text="Manual de usuario" />

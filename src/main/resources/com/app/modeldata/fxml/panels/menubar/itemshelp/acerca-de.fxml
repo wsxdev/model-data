@@ -10,156 +10,153 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.AcercaDeController">
+<AnchorPane maxHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.menubar.itemshelp.AcercaDeController">
     <HBox prefHeight="599.0" prefWidth="1116.0">
         <padding>
-            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
         </padding>
-        <VBox prefHeight="578.0" prefWidth="496.0" spacing="20.0">
-            <HBox prefHeight="100.0" prefWidth="200.0">
+        <VBox prefWidth="496.0" spacing="15.0">
+            <HBox prefWidth="200.0">
                 <Label text="ACERCA DE NOSOTROS">
                     <font>
-                        <Font name="System Bold" size="24.0"/>
+                        <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
             </HBox>
             <HBox prefWidth="200.0">
                 <Label text="Información general">
                     <font>
-                        <Font name="System Bold" size="18.0"/>
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
             </HBox>
             <VBox prefWidth="100.0" spacing="10.0">
                 <Label text="Nombre de la aplicación: ModelData">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <Label text="Propósito: Analizar y modelar datos de la natalidad del Ecuador.">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
             </VBox>
             <VBox prefHeight="83.0" prefWidth="444.0" spacing="10.0">
                 <Label text="Equipo de desarrollo">
                     <font>
-                        <Font name="System Bold" size="18.0"/>
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
                 <Label text="Desarrolladores: William Chisag, Licet Ibarra">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <Label text="Proyecto académico: PAO 3">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
             </VBox>
             <VBox prefWidth="100.0" spacing="10.0">
                 <Label text="Contacto">
                     <font>
-                        <Font name="System Bold" size="18.0"/>
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
                 <Label text="Correos elecrónicos">
                     <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
                 <Label text="williamsxdev@gmail.com">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <Label text="marialiset13@gmail.com">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <Label text="Usuarios de GitHub">
                     <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
                 <Label text="wsxdev">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
                 <Label text="licetdev">
                     <font>
-                        <Font size="14.0"/>
-                    </font>
-                </Label>
-            </VBox>
-            <VBox prefWidth="100.0" spacing="10.0">
-                <Label text="Información Técnica">
-                    <font>
-                        <Font name="System Bold" size="18.0"/>
-                    </font>
-                </Label>
-                <Label text="Versión: v1.0.0">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                </Label>
-                <Label text="Año de lanzamiento: 2025">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                </Label>
-                <Label text="Tecnologías utilizadas: JavaFX">
-                    <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
             </VBox>
         </VBox>
         <VBox prefHeight="599.0" prefWidth="344.0" spacing="20.0">
             <HBox.margin>
-                <Insets top="50.0"/>
+                <Insets top="50.0" />
             </HBox.margin>
+            <VBox prefHeight="98.0" prefWidth="496.0" spacing="10.0">
+                <Label text="Información Técnica">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Versión: v1.0.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label text="Año de lanzamiento: 2025">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label text="Tecnologías utilizadas: JavaFX">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </VBox>
             <VBox prefWidth="100.0" spacing="10.0">
                 <Label text="Manuales">
                     <font>
-                        <Font name="System Bold" size="18.0"/>
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <VBox spacing="50.0">
                         <padding>
-                            <Insets right="50.0"/>
+                            <Insets right="50.0" />
                         </padding>
                         <Label text="Manual de usuario">
                             <font>
-                                <Font size="14.0"/>
+                                <Font size="14.0" />
                             </font>
                         </Label>
                         <Label text="Manual  técnico">
                             <font>
-                                <Font size="14.0"/>
+                                <Font size="14.0" />
                             </font>
                         </Label>
                     </VBox>
                     <VBox spacing="20.0">
                         <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="106.0">
                             <graphic>
-                                <ImageView fitHeight="45.0" fitWidth="36.0" pickOnBounds="true"
-                                           preserveRatio="true">
-                                    <Image url="@../../images/icons/pdf-icon.png"/>
+                                <ImageView fitHeight="45.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../../images/icons/pdf-icon.png" />
                                 </ImageView>
                             </graphic>
                         </Button>
                         <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="106.0">
                             <graphic>
-                                <ImageView fitHeight="45.0" fitWidth="36.0" pickOnBounds="true"
-                                           preserveRatio="true">
-                                    <Image url="@../../images/icons/pdf-icon.png"/>
+                                <ImageView fitHeight="45.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../../images/icons/pdf-icon.png" />
                                 </ImageView>
                             </graphic>
                         </Button>

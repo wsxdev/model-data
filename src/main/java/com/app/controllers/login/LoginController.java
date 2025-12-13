@@ -19,8 +19,8 @@ public class LoginController {
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
 
-            // vistaPrincipalScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/app/modeldata/css/colors.css")).toExternalForm());
-            // vistaPrincipalScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/app/modeldata/css/main.css")).toExternalForm());
+            vistaPrincipalScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/app/modeldata/css/colors.css")).toExternalForm());
+            vistaPrincipalScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/app/modeldata/css/main.css")).toExternalForm());
 
             // CREAR UN NUEVO STAGE Y CERRAR EL STAGE DE LOGIN
             Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

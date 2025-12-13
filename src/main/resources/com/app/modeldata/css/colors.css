@@ -14,6 +14,7 @@
     -fx-calypso-800: #1f536b;
     -fx-calypso-900: #1e455b;
     -fx-calypso-950: #0e2c3e;
+    -fx-calypso-1000: #adadad;
 
     /* =========================================================================== */
     /*                      PALETA PRIMARIA PARA COMPATIBILIDAD                    */
@@ -29,6 +30,7 @@
     -fx-primary-800: -fx-calypso-800;
     -fx-primary-900: -fx-calypso-900;
     -fx-primary-950: -fx-calypso-950;
+    -fx-primary-1000: -fx-calypso-1000;
 
     /* =========================================================================== */
     /*                             FONDOS Y SUPERFICIES                            */
@@ -83,6 +85,8 @@
 
     -fx-chip-fondo:               -fx-superficie-suave;
     -fx-chip-texto:               -fx-texto-primario;
+
+
 
     /* =========================================================================== */
     /*               ESTADOS (ÉXITO / ADVERTENCIA / ERROR / INFORMACIÓN)           */

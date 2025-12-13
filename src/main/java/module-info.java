@@ -15,7 +15,9 @@ module com.app.modeldata {
     // PERMITIR EL ACCESO A LOS PAQUETES QUE CONTIENEN LOS CONTROLADORES FXML
     opens com.app.modeldata to javafx.fxml;
     opens com.app.controllers.modeldata to javafx.fxml;
-    opens com.app.controllers.panels to javafx.fxml;
     opens com.app.controllers.login to javafx.fxml;
     exports com.app.modeldata;
+    opens com.app.controllers.panels.sidebar to javafx.fxml;
+    opens com.app.controllers.panels.menubar.itemsanalizer to javafx.fxml;
+    opens com.app.controllers.panels.menubar.itemshelp to javafx.fxml;
 }

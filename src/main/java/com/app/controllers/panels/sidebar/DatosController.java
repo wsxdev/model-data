@@ -1,6 +1,5 @@
-package com.app.controllers.panels;
+package com.app.controllers.panels.sidebar;
 
-import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

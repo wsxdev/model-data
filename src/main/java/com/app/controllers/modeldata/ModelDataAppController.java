@@ -11,7 +11,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import javax.swing.*;
 import java.util.Objects;
 
 public class ModelDataAppController {
@@ -32,6 +31,7 @@ public class ModelDataAppController {
 
     // VARIABLES DE LOS ITEMS DEL MENUBAR
     @FXML private Button btnMenuItemAcercaDe;
+    @FXML private Button btnMenuItemFrequency;
 
     // PANEL DONDE SE CARGAN LAS VISTAS DE CADA PESTAÑA
     @FXML private AnchorPane contentPane;
@@ -58,18 +58,18 @@ public class ModelDataAppController {
 
                 // CARGAR LA VISTA CORRESPONDIENTE SEGÚN EL BOTÓN SELECCIONADO
                 switch (selected.getText()) {
-                    case "INICIO" -> loadViewPanels("/com/app/modeldata/fxml/panels/inicio.fxml");
-                    case "DATOS" -> loadViewPanels("/com/app/modeldata/fxml/panels/datos.fxml");
-                    case "MODELADO" -> loadViewPanels("/com/app/modeldata/fxml/panels/modelado.fxml");
-                    case "GRÁFICOS" -> loadViewPanels("/com/app/modeldata/fxml/panels/graficos.fxml");
-                    case "CONFIGURACIÓN" -> loadViewPanels("/com/app/modeldata/fxml/panels/configuracion.fxml");
+                    case "INICIO" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/inicio.fxml");
+                    case "DATOS" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/datos.fxml");
+                    case "MODELADO" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/modelado.fxml");
+                    case "GRÁFICOS" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/graficos.fxml");
+                    case "CONFIGURACIÓN" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/configuracion.fxml");
                 }
 
             }
         });
 
         // CARGAR LA VISTA INICIAL (INICIO)
-        loadViewPanels("/com/app/modeldata/fxml/panels/inicio.fxml");
+        loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/inicio.fxml");
         btnInicio.setSelected(true);
 
     }
@@ -100,6 +100,11 @@ public class ModelDataAppController {
 
     @FXML
     public void itemOpenAbout(ActionEvent actionEvent) {
-        loadViewPanels("com/app/modeldata/fxml/panels/acerca-de.fxml");
+        loadViewPanels("/com/app/modeldata/fxml/panels/menubar/itemshelp/acerca-de.fxml");
     }
+    @FXML
+    public void itemOpenFrequency(ActionEvent actionEvent) {
+        loadViewPanels("/com/app/modeldata/fxml/panels/menubar/itemsanalizer/frequency-analyzer.fxml");
+    }
+
 }

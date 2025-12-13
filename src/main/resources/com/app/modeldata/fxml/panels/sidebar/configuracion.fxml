@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.ConfiguracionController">
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.ConfiguracionController">
    <children>
       <VBox prefHeight="599.0" prefWidth="1116.0" spacing="10.0">
          <children>
@@ -109,7 +109,7 @@
                      <children>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons/download-icon.png" />
+                              <Image url="@../../../images/icons/download-icon.png" />
                            </image>
                         </ImageView>
                         <TextField prefHeight="35.0" prefWidth="229.0" promptText="Descargas" style="-fx-background-color: #ededed;" />
