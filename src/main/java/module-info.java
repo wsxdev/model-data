@@ -2,6 +2,8 @@ module com.app.modeldata {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires transitive javafx.graphics;
+    requires javafx.base;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;

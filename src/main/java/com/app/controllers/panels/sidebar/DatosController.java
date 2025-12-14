@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 public class DatosController implements Initializable {
 
 
-    @FXML private ComboBox datosAnalizarComboBox;
+    @FXML private ComboBox<String> datosAnalizarComboBox;
 
     @Override
     public void initialize (URL url,ResourceBundle resourceBundle) {
@@ -21,6 +21,7 @@ public class DatosController implements Initializable {
         datosAnalizarComboBox.setItems(datosComboBox);
 
     }
+    @FXML
     public void seleccionarDatosAnalizar(ActionEvent actionEvent) {
     }
 }

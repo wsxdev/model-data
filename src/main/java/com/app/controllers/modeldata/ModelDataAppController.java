@@ -11,9 +11,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+import java.util.Map;
 import java.util.Objects;
 
 public class ModelDataAppController {
+
+    // COMPONENTES FXML DE LA INTERFAZ
+    // Layout principal
     @FXML public VBox sideBar;
     @FXML public BorderPane mainLayout;
     @FXML public HBox topBar;
@@ -22,56 +27,71 @@ public class ModelDataAppController {
     @FXML public MenuBar menuBar;
     @FXML private Label welcomeText;
 
-    // VARIABLES DE LOS BOTONES DEL SIDEBAR
+    // Panel de contenido donde se cargarán las vistas
+    @FXML private AnchorPane contentPane;
+
+    // Botones del sidebar
     @FXML private ToggleButton btnInicio;
     @FXML private ToggleButton btnDatos;
     @FXML private ToggleButton btnModelado;
     @FXML private ToggleButton btnGraficos;
     @FXML private ToggleButton btnConfiguracion;
 
-    // VARIABLES DE LOS ITEMS DEL MENUBAR
+    // Botones del manubar
     @FXML private Button btnMenuItemAcercaDe;
     @FXML private Button btnMenuItemFrequency;
 
-    // PANEL DONDE SE CARGAN LAS VISTAS DE CADA PESTAÑA
-    @FXML private AnchorPane contentPane;
+    // RUTAS DE LAS VISTAS FXML
+    private static final String INICIO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/inicio.fxml";
+    private static final String DATOS_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/datos.fxml";
+    private static final String MODELADO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/modelado.fxml";
+    private static final String GRAFICOS_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/graficos.fxml";
+    private static final String CONFIGURACION_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/configuracion.fxml";
+    private static final String ACERCA_DE_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemshelp/acerca-de.fxml";
+    private static final String FREQUENCY_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemsanalizer/frequency-analyzer.fxml";
+
+    // MAPA DE VISTAS ASOCIADAS A LOS BOTONES DEL SIDEBAR
+    private static final Map<String, String> SIDEBAR_VIEWS = Map.of(
+            "INICIO", INICIO_VIEW_PANEL,
+            "DATOS", DATOS_VIEW_PANEL,
+            "MODELADO", MODELADO_VIEW_PANEL,
+            "GRÁFICOS", GRAFICOS_VIEW_PANEL,
+            "CONFIGURACIÓN", CONFIGURACION_VIEW_PANEL
+    );
 
     // INICIALIZADOR DEL CONTROLADOR
     @FXML
     public void initialize() {
-        // INICIALIZAR EL GRUPO DE BOTONES DEL SIDEBAR
-        // GRUPO DE BOTONES DEL SIDEBAR
-        ToggleGroup menuButtonGroupSideBar = new ToggleGroup();
-        // AÑADIR BOTONES AL GRUPO
-        btnInicio.setToggleGroup(menuButtonGroupSideBar);
-        btnDatos.setToggleGroup(menuButtonGroupSideBar);
-        btnModelado.setToggleGroup(menuButtonGroupSideBar);
-        btnGraficos.setToggleGroup(menuButtonGroupSideBar);
-        btnConfiguracion.setToggleGroup(menuButtonGroupSideBar);
+        // INICIALIZAR EL GRUPO DE TOGGLE DEL SIDEBAR
+        initSideBarToggleGroup();
+        // CARGAR LA VISTA INICIAL
+        loadInitialView();
+    }
 
+    // MÉTODO PARA INICIALIZAR EL GRUPO DE TOGGLE DEL SIDEBAR
+    private void initSideBarToggleGroup() {
+        ToggleGroup sidebarGroup = new ToggleGroup();
 
-        // GESTIONAR EL CAMBIO DE VISTA SEGÚN EL BOTÓN SELECCIONADO
-        menuButtonGroupSideBar.selectedToggleProperty().addListener((obs, oldT, newT) -> {
-            if (newT != null) {
-                // OBTENER EL BOTÓN SELECCIONADO
-                ToggleButton selected = (ToggleButton) newT;
+        btnInicio.setToggleGroup(sidebarGroup);
+        btnDatos.setToggleGroup(sidebarGroup);
+        btnModelado.setToggleGroup(sidebarGroup);
+        btnGraficos.setToggleGroup(sidebarGroup);
+        btnConfiguracion.setToggleGroup(sidebarGroup);
 
-                // CARGAR LA VISTA CORRESPONDIENTE SEGÚN EL BOTÓN SELECCIONADO
-                switch (selected.getText()) {
-                    case "INICIO" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/inicio.fxml");
-                    case "DATOS" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/datos.fxml");
-                    case "MODELADO" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/modelado.fxml");
-                    case "GRÁFICOS" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/graficos.fxml");
-                    case "CONFIGURACIÓN" -> loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/configuracion.fxml");
+        sidebarGroup.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
+            if (newToggle instanceof ToggleButton selectedButton) {
+                String viewPath = SIDEBAR_VIEWS.get(selectedButton.getText());
+                if (viewPath != null) {
+                    loadViewPanels(viewPath);
                 }
-
             }
         });
+    }
 
-        // CARGAR LA VISTA INICIAL (INICIO)
-        loadViewPanels("/com/app/modeldata/fxml/panels/sidebar/inicio.fxml");
+    // MÉTODO PARA CARGAR LA VISTA INICIAL
+    private void loadInitialView() {
+        loadViewPanels(INICIO_VIEW_PANEL);
         btnInicio.setSelected(true);
-
     }
 
     // MÉTODO PARA CARGAR LAS VISTAS EN EL PANEL DE CONTENIDO
@@ -84,11 +104,13 @@ public class ModelDataAppController {
             AnchorPane.setBottomAnchor(viewPanel, 0.0);
             AnchorPane.setLeftAnchor(viewPanel, 0.0);
             AnchorPane.setRightAnchor(viewPanel, 0.0);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IOException | NullPointerException exception) {
+            throw new RuntimeException("Error cargando la vista: " + fxmlPath, exception);
         }
     }
     
+
+    // EVENTOS FXML DE LA INTERFAZ
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
@@ -100,11 +122,11 @@ public class ModelDataAppController {
 
     @FXML
     public void itemOpenAbout(ActionEvent actionEvent) {
-        loadViewPanels("/com/app/modeldata/fxml/panels/menubar/itemshelp/acerca-de.fxml");
+        loadViewPanels(ACERCA_DE_VIEW_PANEL);
     }
     @FXML
     public void itemOpenFrequency(ActionEvent actionEvent) {
-        loadViewPanels("/com/app/modeldata/fxml/panels/menubar/itemsanalizer/frequency-analyzer.fxml");
+        loadViewPanels(FREQUENCY_VIEW_PANEL);
     }
 
 }

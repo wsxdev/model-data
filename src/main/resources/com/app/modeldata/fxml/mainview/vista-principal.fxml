@@ -28,7 +28,7 @@
         <URL value="@../../css/app-menu-bar.css" />
     </stylesheets> -->
 
-    <!-- SIDEBAR IZQUIERDO-->
+    <!-- SIDEBAR IZQUIERDO -->
     <left>
         <VBox fx:id="sideBar" maxWidth="260" prefHeight="600.0" prefWidth="237.0" style="-fx-background-color: #1D6B8C; -fx-background-radius: 0 0 15 0;">
             <AnchorPane>
