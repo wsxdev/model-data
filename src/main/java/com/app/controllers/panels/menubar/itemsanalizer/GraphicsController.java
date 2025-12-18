@@ -1,4 +1,4 @@
 package com.app.controllers.panels.menubar.itemsanalizer;
 
-public class FrequencyAnalizerController {
+public class GraphicsController {
 }
