@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.app.controllers.panels.menubar.itemsanalizer.FrequencyAnalizerController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.menubar.itemsanalizer.AnalyzerGraphicsController">
+   <children>
+      <VBox prefHeight="250.0" prefWidth="300.0" spacing="15.0">
+         <children>
+            <HBox prefWidth="300.0">
+               <children>
+                  <Label text="Tipo de gráficos">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <VBox prefWidth="263.0" spacing="15.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="127.0" text="Gŕaficos de barras" />
+                        <RadioButton mnemonicParsing="false" text="Gŕaficos circulares" />
+                        <RadioButton mnemonicParsing="false" text="Ninguno" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label text="Valores del gráfico">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0" spacing="20.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="Frecuencias" />
+                  <RadioButton mnemonicParsing="false" text="Porcentajes" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="275.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Aceptar" />
+                  <Button mnemonicParsing="false" text="Cancelar" textOverrun="CLIP" />
+                  <Button layoutX="87.0" layoutY="10.0" mnemonicParsing="false" text="Ayuda" textOverrun="CLIP" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
 </AnchorPane>

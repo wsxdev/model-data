@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class LoginController {
 
-    @FXML private Button btnIniciarSesion;
+    @FXML public Button btnIniciarSesion;
 
     // MÉTODO PARA ABRIR LA VENTANA PRINCIPAL DESPUÉS DE UN LOGIN VÁLIDO
     @FXML

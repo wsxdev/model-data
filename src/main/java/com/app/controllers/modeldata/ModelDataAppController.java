@@ -3,6 +3,8 @@ package com.app.controllers.modeldata;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -10,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Map;
@@ -49,6 +52,7 @@ public class ModelDataAppController {
     private static final String CONFIGURACION_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/configuracion.fxml";
     private static final String ACERCA_DE_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemshelp/acerca-de.fxml";
     private static final String FREQUENCY_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemsanalizer/frequency-analyzer.fxml";
+
 
     // MAPA DE VISTAS ASOCIADAS A LOS BOTONES DEL SIDEBAR
     private static final Map<String, String> SIDEBAR_VIEWS = Map.of(
@@ -108,10 +112,23 @@ public class ModelDataAppController {
             throw new RuntimeException("Error cargando la vista: " + fxmlPath, exception);
         }
     }
-    
+
+    private void createAndShowStage(String fxmlPath, String title) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     // EVENTOS FXML DE LA INTERFAZ
-    @FXML
+    @FXML // NO TOCAR >:(
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
@@ -122,11 +139,11 @@ public class ModelDataAppController {
 
     @FXML
     public void itemOpenAbout(ActionEvent actionEvent) {
-        loadViewPanels(ACERCA_DE_VIEW_PANEL);
+        createAndShowStage(ACERCA_DE_VIEW_PANEL, "Acerca de");
     }
     @FXML
     public void itemOpenFrequency(ActionEvent actionEvent) {
-        loadViewPanels(FREQUENCY_VIEW_PANEL);
+        createAndShowStage(FREQUENCY_VIEW_PANEL,"Frecuencias estadísticos");
     }
 
 }
