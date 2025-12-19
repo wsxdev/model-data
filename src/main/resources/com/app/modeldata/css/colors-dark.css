@@ -63,13 +63,14 @@
     -fx-superficie-suave:     -fx-color-bg-soft;
     -fx-panel-fondo:          -fx-superficie;
     -fx-tarjeta-fondo:        -fx-superficie;
+
     /* Bordes */
     -fx-borde:                -fx-color-border-default;
     -fx-border-color:         -fx-borde;
     border-color:             -fx-borde;
 
     /* =========================================================================== */
-    /*                       CONTROLES/INPUTS/SCROLL/ELEVACIÓN                     */
+    /*                 CONTROLES/INPUTS/SCROLL/ELEVACIÓN (MODO OSCURO)             */
     /* =========================================================================== */
     /* Colores de controles */
     -fx-control-bg:           -fx-superficie;
