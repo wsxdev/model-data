@@ -61,7 +61,7 @@
 }
 
 /* Hover */
-.button:hover {
+.button.primary:hover {
     -fx-background-color: -fx-boton-primario-hover;
     -fx-text-fill: -fx-texto-boton-primario;
     background-color: -fx-boton-primario-hover;

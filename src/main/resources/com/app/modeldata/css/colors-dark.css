@@ -25,8 +25,8 @@
     -fx-color-accent:         -fx-calypso-400;
 
     /* Colores de fondo y borde */
-    -fx-color-bg-app:         #0E1114;
-    -fx-color-bg-surface:     #151A1E;
+    -fx-color-bg-app:         #202020;
+    -fx-color-bg-surface:     #2b2b2b;
     -fx-color-bg-soft:        #1B2126;
     -fx-color-border-default: #23282C;
 
