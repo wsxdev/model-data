@@ -3,6 +3,7 @@
     /* =========================================================================== */
     /*                        PALETA DE COLORES MODO OSCURO                        */
     /* =========================================================================== */
+    /* Color principal -fx-calypso-700 */
     -fx-calypso-50:  #eefbfd;
     -fx-calypso-100: #d4f3f9;
     -fx-calypso-200: #aee6f3;
@@ -10,117 +11,98 @@
     -fx-calypso-400: #37b7d9;
     -fx-calypso-500: #1b9abf;
     -fx-calypso-600: #197ca1;
-    -fx-calypso-700: #1d6b8c; /* COLOR PRINCIPAL */
+    -fx-calypso-700: #1d6b8c;
     -fx-calypso-800: #1f536b;
     -fx-calypso-900: #1e455b;
-    -fx-calypso-950: #0e2c3e;
 
     /* =========================================================================== */
-    /*                     PALETA PRIMARIA (PARA COMPATIBILIDAD)                   */
+    /*                              COLORES PRINCIPALES                            */
     /* =========================================================================== */
-    -fx-primary-50:  -fx-calypso-50;
-    -fx-primary-100: -fx-calypso-100;
-    -fx-primary-200: -fx-calypso-200;
-    -fx-primary-300: -fx-calypso-300;
-    -fx-primary-400: -fx-calypso-400;
-    -fx-primary-500: -fx-calypso-500;
-    -fx-primary-600: -fx-calypso-600;
-    -fx-primary-700: -fx-calypso-700;
-    -fx-primary-800: -fx-calypso-800;
-    -fx-primary-900: -fx-calypso-900;
-    -fx-primary-950: -fx-calypso-950;
+    /* Colores principales */
+    -fx-color-primary:        -fx-calypso-300;
+    -fx-color-primary-hover:  -fx-calypso-200;
+    -fx-color-primary-active: -fx-calypso-400;
+    -fx-color-accent:         -fx-calypso-400;
 
-    /* =========================================================================== */
-    /*                      FONDOS Y SUPERFICIES (MODO OSCURO)                     */
-    /* =========================================================================== */
-    -fx-fondo:              #0F1417;                /* Fondo general app (oscuro) */
-    -fx-superficie:         #15191C;                /* Tarjetas y paneles */
-    -fx-superficie-suave:   #12161A;                /* Superficies secundarias */
-    -fx-panel-fondo:        -fx-superficie;
-    -fx-tarjeta-fondo:      -fx-superficie;
-    -fx-overlay:            rgba(0,0,0,0.6);
-    -fx-borde:              #23282C;
-    border:                 1px solid -fx-borde;      /* Propiedad estándar */
-    border-color:           -fx-borde;                /* Sinónimo */
+    /* Colores de fondo y borde */
+    -fx-color-bg-app:         #0E1114;
+    -fx-color-bg-surface:     #151A1E;
+    -fx-color-bg-soft:        #1B2126;
+    -fx-color-border-default: #23282C;
+
+    /* Colores de texto */
+    -fx-color-text-main:      #E6EEF3;
+    -fx-color-text-secondary: #9AA6B2;
+    -fx-color-text-muted:     #7F8B94;
+    -fx-color-text-disabled:  #55626A;
+
+    /* Colores de estados */
+    -fx-color-success:        #1FA35A;
+    -fx-color-warning:        #E0B44A;
+    -fx-color-error:          #E14B45;
+    -fx-color-info:           -fx-calypso-300;
 
     /* =========================================================================== */
     /*                       COLORES DE TEXTO (MODO OSCURO)                        */
     /* =========================================================================== */
-    -fx-texto-primario:     #E6EEF3;                /* Texto principal (claro) */
-    -fx-texto-secundario:   #9AA6B2;                /* Texto secundario */
-    -fx-texto-muted:        #7F8B94;                /* Ayuda/meta */
-    -fx-texto-deshabilitado:#55626A;
-    -fx-texto-enlace:       -fx-primary-300;          /* Color enlace */
-    -fx-texto-enlace-hover: -fx-primary-200;
-    -fx-texto-en-primario:  #000000;                /* Texto sobre botones claros */
-    -fx-texto-en-general:   -fx-primary-700;        /* Texto de label */
-    
-    /* =========================================================================== */
-    /*                    CONTROLES E INPUTS (MODO OSCURO)                         */
-    /* =========================================================================== */
-    -fx-control-bg:         -fx-superficie;
-    -fx-control-border:     -fx-borde;
-    -fx-control-disabled-bg:#0D1113;
+    -fx-texto-primario:       -fx-color-text-main;
+    -fx-texto-secundario:     -fx-color-text-secondary;
+    -fx-texto-muted:          -fx-color-text-muted;
+    -fx-texto-deshabilitado:  -fx-color-text-disabled;
+    -fx-texto-enlace:         -fx-color-primary;
+    -fx-texto-enlace-hover:   -fx-color-primary-hover;
+    -fx-texto-en-primario:    #000000;
+    -fx-texto-en-general:     -fx-texto-primario;
 
-    -fx-input-bg:           #101316;
-    -fx-input-borde:        #273033;
-    -fx-input-text:         -fx-texto-primario;
-    -fx-input-placeholder:  #39454A;
-    -fx-input-focus:        -fx-primary-300;
+    /* =========================================================================== */
+    /*                      FONDOS Y SUPERFICIES (MODO OSCURO)                     */
+    /* =========================================================================== */
+    /* Fondos */
+    -fx-fondo:                -fx-color-bg-app;
+    -fx-superficie:           -fx-color-bg-surface;
+    -fx-superficie-suave:     -fx-color-bg-soft;
+    -fx-panel-fondo:          -fx-superficie;
+    -fx-tarjeta-fondo:        -fx-superficie;
+    /* Bordes */
+    -fx-borde:                -fx-color-border-default;
+    -fx-border-color:         -fx-borde;
+    border-color:             -fx-borde;
+
+    /* =========================================================================== */
+    /*                       CONTROLES/INPUTS/SCROLL/ELEVACIÓN                     */
+    /* =========================================================================== */
+    /* Colores de controles */
+    -fx-control-bg:           -fx-superficie;
+    -fx-control-border:       -fx-borde;
+    -fx-control-disabled-bg:  #0D1113;
+
+    /* Colores de inputs */
+    -fx-input-bg:             #101316;
+    -fx-input-borde:          -fx-borde;
+    -fx-input-text:           -fx-texto-primario;
+    -fx-input-placeholder:    -fx-texto-muted;
+    -fx-input-focus:          -fx-color-primary;
+
+    /* Colores de scroll */
+    -fx-scroll-track:         #0C0F11;
+    -fx-scroll-thumb:         #2C383C;
+    -fx-scroll-hover:         #3B474B;
+
+    /* Colores de elevación */
+    -fx-elevacion-1:          rgba(0,0,0,0.6);
+    -fx-elevacion-2:          rgba(0,0,0,0.8);
 
     /* =========================================================================== */
     /*                    BOTONES Y ACCIONES (MODO OSCURO)                         */
     /* =========================================================================== */
-    -fx-boton-primario:         -fx-primary-300;
-    -fx-boton-primario-hover:   -fx-primary-200;
-    -fx-boton-primario-pressed: -fx-primary-100;
-    -fx-boton-primario-selected:  -fx-primary-800;
-    -fx-texto-boton-primario:   -fx-texto-primario;
-    -fx-texto-boton-general:      white;
+    /* Colores de botones */
+    -fx-boton-primario:           -fx-color-primary;
+    -fx-boton-primario-hover:     -fx-color-primary-hover;
+    -fx-boton-primario-pressed:   -fx-color-primary-active;
+    -fx-boton-primario-selected:  -fx-color-primary-active;
+    -fx-texto-boton-primario:     -fx-texto-primario;
 
-    -fx-boton-secundario:       #263238;
-    -fx-boton-secundario-hover: #2f3f47;
-
-    -fx-chip-fondo:             #111418;
-    -fx-chip-texto:             -fx-texto-primario;
-
-    /* =========================================================================== */
-    /*                         ESTADOS (MODO OSCURO)                               */
-    /* =========================================================================== */
-    -fx-exito-claro:       #123b1f;
-    -fx-exito:             #1fa35a;
-    -fx-exito-oscuro:      #147844;
-
-    -fx-advertencia-claro: #4b3f17;
-    -fx-advertencia:       #e0b44a;
-    -fx-advertencia-oscuro:#8f6a1a;
-
-    -fx-error-claro:       #4d1c1c;
-    -fx-error:             #e14b45;
-    -fx-error-oscuro:      #9e2f2a;
-
-    -fx-info-claro:        #153047;
-    -fx-info:               -fx-primary-300;
-    -fx-info-oscuro:        -fx-primary-400;
-
-    /* =========================================================================== */
-    /*                BARRA DE DESPLAZAMIENTO / ACENTOS UI                         */
-    /* =========================================================================== */
-    -fx-scroll-track:      #0C0F11;
-    -fx-scroll-thumb:      #2C383C;
-    -fx-scroll-hover:      #3B474B;
-
-    /* =========================================================================== */
-    /*                             SOMBRAS / ELEVACIONES                           */
-    /* =========================================================================== */
-    -fx-elevacion-1:       rgba(0,0,0,0.6);
-    -fx-elevacion-2:       rgba(0,0,0,0.8);
-
-    /* =========================================================================== */
-    /*                      SINÓNIMOS / COMPATIBILIDAD                             */
-    /* =========================================================================== */
-    -fx-bg-color:          -fx-fondo;
-    -fx-surface-color:     -fx-superficie;
-    -fx-border-color:      -fx-borde;
+    -fx-boton-secundario:         -fx-color-primary;
+    -fx-boton-secundario-hover:   -fx-color-primary-hover;
 
 }
