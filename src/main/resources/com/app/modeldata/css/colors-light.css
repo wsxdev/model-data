@@ -27,7 +27,7 @@
     /* Colores de fondo y borde */
     -fx-color-bg-app:         #F5F7FA;
     -fx-color-bg-surface:     #FFFFFF;
-    -fx-color-bg-softer:      #F0F4F7;
+    -fx-color-bg-soft:        #F0F4F7;
     -fx-color-boder-default:  #DADFE4;
 
     /* Colores de texto */
@@ -60,7 +60,7 @@
     /* Fondos */
     -fx-fondo:                -fx-color-bg-app;
     -fx-superficie:           -fx-color-bg-surface;
-    -fx-superficie-suave:     -fx-color-bg-softer;
+    -fx-superficie-suave:     -fx-color-bg-soft;
     -fx-panel-fondo:          -fx-superficie;
     -fx-tarjeta-fondo:        -fx-superficie;
 

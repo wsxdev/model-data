@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -11,22 +12,20 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.modeldata.ModelDataAppController">
+<BorderPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.modeldata.ModelDataAppController">
     <!-- ESTILO PARA EL SIDEBAR -->
-    <!-- <stylesheets>
-        <URL value="@../../css/menu.css" />
-        <URL value="@../../css/main.css"/>
-        <URL value="@../../css/user-button-toolbar.css" />
-        <URL value="@../../css/user-button-side-bar.css" />
-        <URL value="@../../css/app-menu-bar.css" />
-    </stylesheets> -->
+    <stylesheets>
+        <URL value="@../../css/main.css" />
+    </stylesheets>
 
     <!-- SIDEBAR IZQUIERDO -->
     <left>
@@ -56,7 +55,7 @@
                 <!-- VBOX PARA BOTONES DEL SIDEBAR -->
                 <VBox alignment="CENTER_LEFT" prefHeight="270.0" prefWidth="260.0" style="-fx-padding:20 0 0 0;">
                     <!-- BOTÓN INICIO -->
-                    <ToggleButton fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" text="INICIO" textFill="WHITE">
+                    <ToggleButton fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="INICIO" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/home-icon.png" />
@@ -67,7 +66,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN DATOS -->
-                    <ToggleButton fx:id="btnDatos" alignment="CENTER_LEFT" maxWidth="Infinity" text="DATOS" textFill="WHITE">
+                    <ToggleButton fx:id="btnDatos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="DATOS" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/data-icon.png" />
@@ -78,7 +77,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN MODELADO -->
-                    <ToggleButton fx:id="btnModelado" alignment="CENTER_LEFT" maxWidth="Infinity" text="MODELADO" textFill="WHITE">
+                    <ToggleButton fx:id="btnModelado" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="MODELADO" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/model-icon.png" />
@@ -89,7 +88,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN GRÁFICOS -->
-                    <ToggleButton fx:id="btnGraficos" alignment="CENTER_LEFT" maxWidth="Infinity" text="GRÁFICOS" textFill="WHITE">
+                    <ToggleButton fx:id="btnGraficos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="GRÁFICOS" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/graphics-bar-icon.png" />
@@ -100,7 +99,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN CONFIGURACIÓN -->
-                    <ToggleButton fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity" text="CONFIGURACIÓN" textFill="WHITE">
+                    <ToggleButton fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="CONFIGURACIÓN" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/setting-icon.png" />
@@ -151,13 +150,20 @@
                 <VBox>
                     <!-- HBOX PARA EL TOOLBAR -->
                     <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="50" spacing="15" style="-fx-background-color: #F2F2F2;">
-                        <!-- BOTÓN BURGER -->
-                        <ImageView fx:id="menuButton" fitHeight="25" fitWidth="25" onMouseClicked="#toggleMenu" preserveRatio="true">
+                        <!-- BOTÓN BURGER / FLECHA -->
+                        <StackPane fx:id="menuButton" onMouseClicked="#toggleMenu">
                             <HBox.margin>
                                 <Insets left="15.0" />
                             </HBox.margin>
-                            <Image url="@../../images/icons/burger-button-colo-blue-icon.png" />
-                        </ImageView>
+                            <!-- Icono burger -->
+                            <children>
+                                <ImageView fx:id="burgerIcon" fitHeight="25" fitWidth="25" preserveRatio="true">
+                                    <Image url="@../../images/icons/burger-button-colo-blue-icon.png" />
+                                </ImageView>
+                                <!-- SVG flecha -->
+                                <SVGPath fx:id="arrowIcon" content="M18 12 L6 4 L6 20 Z" fill="#197CA1" visible="false" scaleX="0.8" scaleY="0.8" />
+                            </children>
+                        </StackPane>
                         <!-- TÍTULO DE LA TOOLBAR -->
                         <Text fill="#197CA1" text="INICIO">
                             <font>

@@ -25,7 +25,9 @@ public class ModelDataAppController {
     @FXML public VBox sideBar;
     @FXML public BorderPane mainLayout;
     @FXML public HBox topBar;
-    @FXML public ImageView menuButton;
+    @FXML public javafx.scene.layout.StackPane menuButton;
+    @FXML public ImageView burgerIcon;
+    @FXML public javafx.scene.shape.SVGPath arrowIcon;
     @FXML public TextField searchField;
     @FXML public MenuBar menuBar;
     @FXML private Label welcomeText;
@@ -133,8 +135,24 @@ public class ModelDataAppController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    // MÉTODO PARA TOGGLEAR EL MENÚ (SIDEBAR) - POR IMPLEMENTAR
+    // MÉTODO PARA TOGGLEAR EL MENÚ (SIDEBAR)
     public void toggleMenu(MouseEvent mouseEvent) {
+        boolean currentlyVisible = sideBar.isVisible() && sideBar.isManaged();
+        if (currentlyVisible) {
+            // ocultar sidebar
+            sideBar.setManaged(false);
+            sideBar.setVisible(false);
+            // mostrar flecha (volver)
+            if (burgerIcon != null) burgerIcon.setVisible(false);
+            if (arrowIcon != null) arrowIcon.setVisible(true);
+        } else {
+            // mostrar sidebar
+            sideBar.setManaged(true);
+            sideBar.setVisible(true);
+            // restaurar icono burger
+            if (burgerIcon != null) burgerIcon.setVisible(true);
+            if (arrowIcon != null) arrowIcon.setVisible(false);
+        }
     }
 
     @FXML
