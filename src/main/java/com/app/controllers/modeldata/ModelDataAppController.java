@@ -42,11 +42,18 @@ public class ModelDataAppController {
     @FXML private ToggleButton btnGraficos;
     @FXML private ToggleButton btnConfiguracion;
 
-    // Botones del manubar
+    // Botones del menubar
     @FXML private Button btnMenuItemAcercaDe;
     @FXML private Button btnMenuItemFrequency;
 
+    // RUTAS DE ESTILOS CSS
+    private static final String COLORS_LIGHT_CSS = "/com/app/modeldata/css/colors-light.css";
+    private static final String COLORS_DARK_CSS = "/com/app/modeldata/css/colors-dark.css";
+    private static final String MAIN_CSS = "/com/app/modeldata/css/main.css";
+
+
     // RUTAS DE LAS VISTAS FXML
+    private static final String LOGIN_VIEW = "/com/app/modeldata/fxml/login/login-vista.fxml";
     private static final String INICIO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/inicio.fxml";
     private static final String DATOS_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/datos.fxml";
     private static final String MODELADO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/modelado.fxml";
@@ -163,5 +170,23 @@ public class ModelDataAppController {
     public void itemOpenFrequency(ActionEvent actionEvent) {
         createAndShowStage(FREQUENCY_VIEW_PANEL,"Frecuencias estadísticos");
     }
+    @FXML
+    public void itemLogout(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(LOGIN_VIEW)));
+            Scene loginScene = new Scene(loader.load());
 
+            try {
+                loginScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(COLORS_LIGHT_CSS)).toExternalForm());
+                loginScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(MAIN_CSS)).toExternalForm());
+            } catch (Exception e) { throw new RuntimeException(e); }
+
+            Stage mainViewStage = (Stage) mainLayout.getScene().getWindow();
+            Stage loginStage = new Stage();
+            loginStage.setScene(loginScene);
+            loginStage.setTitle("MODELDATA - LOGIN");
+            loginStage.show();
+            mainViewStage.close();
+        } catch (RuntimeException | IOException e) { throw new RuntimeException(e); }
+    }
 }

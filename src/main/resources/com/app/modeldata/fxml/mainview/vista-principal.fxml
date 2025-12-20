@@ -12,16 +12,16 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.modeldata.ModelDataAppController">
+<BorderPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.modeldata.ModelDataAppController">
     <!-- ESTILO PARA EL SIDEBAR -->
     <stylesheets>
         <URL value="@../../css/main.css" />
@@ -120,7 +120,7 @@
                     </Text>
                     <MenuButton layoutX="160.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="50.0" style="-fx-background-radius: 20;" styleClass="button-user-side-bar" textFill="WHITE">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
+                            <MenuItem mnemonicParsing="false" onAction="#itemLogout" text="Cerrar Sesión" />
                         </items>
                         <font>
                             <Font size="10.0" />
@@ -153,15 +153,14 @@
                         <!-- BOTÓN BURGER / FLECHA -->
                         <StackPane fx:id="menuButton" onMouseClicked="#toggleMenu">
                             <HBox.margin>
-                                <Insets left="15.0"/>
+                                <Insets left="15.0" />
                             </HBox.margin>
                             <!-- Icono burger -->
                             <ImageView fx:id="burgerIcon" fitHeight="25" fitWidth="25" preserveRatio="true">
-                                <Image url="@../../images/icons/burger-button-colo-blue-icon.png"/>
+                                <Image url="@../../images/icons/burger-button-colo-blue-icon.png" />
                             </ImageView>
                             <!-- SVG flecha -->
-                            <SVGPath fx:id="arrowIcon" content="M18 12 L6 4 L6 20 Z" fill="#197CA1" visible="false"
-                                     scaleX="0.8" scaleY="0.8"/>
+                            <SVGPath fx:id="arrowIcon" content="M18 12 L6 4 L6 20 Z" fill="#197CA1" scaleX="0.8" scaleY="0.8" visible="false" />
                         </StackPane>
                         <!-- TÍTULO DE LA TOOLBAR -->
                         <Text fill="#197CA1" text="INICIO">
@@ -185,7 +184,7 @@
                         <Pane prefHeight="50.0" prefWidth="89.0" style="-fx-background-color: transparent;">
                             <MenuButton layoutY="9.0" mnemonicParsing="false" style="-fx-background-radius: 23;" styleClass="button-user-toolbar">
                                 <items>
-                                    <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemLogout" text="Cerrar Sesión" />
                                 </items>
 
                                 <graphic>
