@@ -9,33 +9,28 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="599.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.InicioController">
-   <children>
-      <VBox alignment="CENTER" prefHeight="599.0" prefWidth="1116.0" spacing="20.0">
-         <children>
-            <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDOS A MODELDATA">
-               <font>
-                  <Font name="System Bold" size="48.0" />
-               </font>
-            </Text>
-            <ImageView fitHeight="205.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/logos/ModelDataLogo.png" />
-               </image>
-            </ImageView>
-            <TextFlow lineSpacing="4.0" prefHeight="164.0" prefWidth="678.0" textAlignment="JUSTIFY">
-               <children>
-                  <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="ModelData es una aplicación moderna y potente diseñada para facilitar la gestión y el modelado de bases de datos de manera práctica, intuitiva y segura. Su propósito es ofrecerte un entorno eficiente donde puedas almacenar, organizar, analizar y visualizar información con total control y precisión." textAlignment="CENTER" wrappingWidth="670.6614379882812">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets left="200.0" right="200.0" />
-               </padding>
-            </TextFlow>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="599.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.InicioController">
+   <VBox alignment="CENTER" prefHeight="599.0" prefWidth="1116.0" spacing="20.0">
+      <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDOS A MODELDATA">
+         <font>
+            <Font name="System Bold" size="48.0"/>
+         </font>
+      </Text>
+      <ImageView fitHeight="205.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../../images/logos/ModelDataLogo.png"/>
+      </ImageView>
+      <TextFlow lineSpacing="4.0" prefHeight="164.0" prefWidth="678.0" textAlignment="JUSTIFY">
+         <padding>
+            <Insets left="200.0" right="200.0"/>
+         </padding>
+         <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0"
+               text="ModelData es una aplicación moderna y potente diseñada para facilitar la gestión y el modelado de bases de datos de manera práctica, intuitiva y segura. Su propósito es ofrecerte un entorno eficiente donde puedas almacenar, organizar, analizar y visualizar información con total control y precisión."
+               textAlignment="CENTER" wrappingWidth="670.6614379882812">
+            <font>
+               <Font size="18.0"/>
+            </font>
+         </Text>
+      </TextFlow>
+   </VBox>
 </AnchorPane>

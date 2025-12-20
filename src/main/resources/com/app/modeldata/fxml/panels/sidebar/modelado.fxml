@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.ModeladoController">
     <stylesheets>
-        <URL value="@../../../css/colors.css"/>
+        <URL value="@../../../css/colors-light.css"/>
         <URL value="@../../../css/main.css"/>
     </stylesheets>
     <VBox prefHeight="599.0" prefWidth="1116.0" spacing="20.0">

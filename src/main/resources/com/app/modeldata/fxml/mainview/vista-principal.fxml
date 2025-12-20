@@ -153,16 +153,15 @@
                         <!-- BOTÓN BURGER / FLECHA -->
                         <StackPane fx:id="menuButton" onMouseClicked="#toggleMenu">
                             <HBox.margin>
-                                <Insets left="15.0" />
+                                <Insets left="15.0"/>
                             </HBox.margin>
                             <!-- Icono burger -->
-                            <children>
-                                <ImageView fx:id="burgerIcon" fitHeight="25" fitWidth="25" preserveRatio="true">
-                                    <Image url="@../../images/icons/burger-button-colo-blue-icon.png" />
-                                </ImageView>
-                                <!-- SVG flecha -->
-                                <SVGPath fx:id="arrowIcon" content="M18 12 L6 4 L6 20 Z" fill="#197CA1" visible="false" scaleX="0.8" scaleY="0.8" />
-                            </children>
+                            <ImageView fx:id="burgerIcon" fitHeight="25" fitWidth="25" preserveRatio="true">
+                                <Image url="@../../images/icons/burger-button-colo-blue-icon.png"/>
+                            </ImageView>
+                            <!-- SVG flecha -->
+                            <SVGPath fx:id="arrowIcon" content="M18 12 L6 4 L6 20 Z" fill="#197CA1" visible="false"
+                                     scaleX="0.8" scaleY="0.8"/>
                         </StackPane>
                         <!-- TÍTULO DE LA TOOLBAR -->
                         <Text fill="#197CA1" text="INICIO">

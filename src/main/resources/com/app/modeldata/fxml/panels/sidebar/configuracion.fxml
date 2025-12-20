@@ -12,116 +12,95 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.ConfiguracionController">
-   <children>
-      <VBox prefHeight="599.0" prefWidth="1116.0" spacing="10.0">
-         <children>
-            <HBox layoutX="10.0" layoutY="295.0" prefWidth="200.0">
-               <children>
-                  <Label text="Temas">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefWidth="200.0" spacing="20.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Automático" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Claro" />
-                  <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Oscuro" />
-               </children>
-            </HBox>
-            <HBox prefWidth="200.0">
-               <children>
-                  <Label text="Tipos de letras">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-            </HBox>
-            <HBox prefWidth="200.0" spacing="20.0">
-               <children>
-                  <Label text="Tipografía predeterminada">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <ComboBox prefHeight="30.0" prefWidth="150.0" />
-                  <Label layoutX="10.0" layoutY="10.0" text="Tamaño">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <ComboBox layoutX="152.0" layoutY="10.0" prefHeight="30.0" prefWidth="150.0" />
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="203.0" prefWidth="200.0">
-               <children>
-                  <Label text="Idioma">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="44.0" prefWidth="200.0" spacing="20.0">
-               <children>
-                  <Label text="Seleccione el idioma del menu">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <ComboBox prefHeight="30.0" prefWidth="150.0" />
-               </children>
-            </HBox>
-            <HBox prefWidth="200.0">
-               <children>
-                  <Label text="Archivos y aplicaciones">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox layoutX="60.0" layoutY="341.0" prefWidth="200.0">
-               <children>
-                  <Label text="Guardar en">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefWidth="200.0" spacing="20.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #ededed;">
-                     <children>
-                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/icons/download-icon.png" />
-                           </image>
-                        </ImageView>
-                        <TextField prefHeight="35.0" prefWidth="229.0" promptText="Descargas" style="-fx-background-color: #ededed;" />
-                     </children>
-                  </HBox>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" text="Examinar" />
-               </children>
-            </HBox>
-         </children>
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.app.controllers.panels.sidebar.ConfiguracionController">
+   <VBox prefHeight="599.0" prefWidth="1116.0" spacing="10.0">
+      <padding>
+         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+      </padding>
+      <HBox layoutX="10.0" layoutY="295.0" prefWidth="200.0">
+         <Label text="Temas">
+            <font>
+               <Font name="System Bold" size="18.0"/>
+            </font>
+         </Label>
+      </HBox>
+      <HBox prefWidth="200.0" spacing="20.0">
+         <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" text="Automático"/>
+         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0"
+                 text="Claro"/>
+         <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0"
+                 text="Oscuro"/>
+      </HBox>
+      <HBox prefWidth="200.0">
          <padding>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+            <Insets top="20.0"/>
          </padding>
-      </VBox>
-   </children>
+         <Label text="Tipos de letras">
+            <font>
+               <Font name="System Bold" size="18.0"/>
+            </font>
+         </Label>
+      </HBox>
+      <HBox prefWidth="200.0" spacing="20.0">
+         <Label text="Tipografía predeterminada">
+            <font>
+               <Font name="System Bold" size="14.0"/>
+            </font>
+         </Label>
+         <ComboBox prefHeight="30.0" prefWidth="150.0"/>
+         <Label layoutX="10.0" layoutY="10.0" text="Tamaño">
+            <font>
+               <Font name="System Bold" size="14.0"/>
+            </font>
+         </Label>
+         <ComboBox layoutX="152.0" layoutY="10.0" prefHeight="30.0" prefWidth="150.0"/>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="203.0" prefWidth="200.0">
+         <Label text="Idioma">
+            <font>
+               <Font name="System Bold" size="18.0"/>
+            </font>
+            <padding>
+               <Insets top="20.0"/>
+            </padding>
+         </Label>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="44.0" prefWidth="200.0" spacing="20.0">
+         <Label text="Seleccione el idioma del menu">
+            <font>
+               <Font name="System Bold" size="14.0"/>
+            </font>
+         </Label>
+         <ComboBox prefHeight="30.0" prefWidth="150.0"/>
+      </HBox>
+      <HBox prefWidth="200.0">
+         <Label text="Archivos y aplicaciones">
+            <font>
+               <Font name="System Bold" size="18.0"/>
+            </font>
+            <padding>
+               <Insets top="20.0"/>
+            </padding>
+         </Label>
+      </HBox>
+      <HBox layoutX="60.0" layoutY="341.0" prefWidth="200.0">
+         <Label text="Guardar en">
+            <font>
+               <Font name="System Bold" size="14.0"/>
+            </font>
+         </Label>
+      </HBox>
+      <HBox prefWidth="200.0" spacing="20.0">
+         <HBox alignment="CENTER" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #ededed;">
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../../images/icons/download-icon.png"/>
+            </ImageView>
+            <TextField prefHeight="35.0" prefWidth="229.0" promptText="Descargas"
+                       style="-fx-background-color: #ededed;"/>
+         </HBox>
+         <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" text="Examinar"/>
+      </HBox>
+   </VBox>
 </AnchorPane>

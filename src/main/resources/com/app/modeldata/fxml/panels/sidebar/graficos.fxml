@@ -7,150 +7,122 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.GraficosController">
-    <stylesheets>
-        <URL value="@../../../css/main.css" />
-    </stylesheets>
-   <children>
-      <HBox prefHeight="599.0" prefWidth="1116.0" spacing="70.0">
-         <children>
-            <VBox prefHeight="558.0">
-               <children>
-                  <HBox prefHeight="48.0">
-                     <children>
-                        <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Modelado de Natalidad">
-                           <font>
-                              <Font name="System Bold" size="36.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Text>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="380.0">
-                     <children>
-                        <AnchorPane prefHeight="379.0" prefWidth="620.0">
-                           <children>
-                              <ScrollPane prefHeight="380.0" prefWidth="620.0">
-                                 <content>
-                                    <StackPane prefHeight="375.0" prefWidth="620.0">
-                                       <children>
-                                          <StackedAreaChart prefHeight="373.0" prefWidth="648.0">
-                                            <xAxis>
-                                              <NumberAxis side="BOTTOM" />
-                                            </xAxis>
-                                            <yAxis>
-                                              <NumberAxis side="LEFT" />
-                                            </yAxis>
-                                          </StackedAreaChart>
-                                          <StackedBarChart prefHeight="315.0" prefWidth="604.0">
-                                            <xAxis>
-                                              <CategoryAxis prefHeight="23.0" prefWidth="549.0" side="BOTTOM" />
-                                            </xAxis>
-                                            <yAxis>
-                                              <NumberAxis side="LEFT" />
-                                            </yAxis>
-                                          </StackedBarChart>
-                                       </children>
-                                    </StackPane>
-                                 </content>
-                              </ScrollPane>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefWidth="200.0">
-                     <children>
-                        <Button mnemonicParsing="false" styleClass="primary" text="Ver detalles" />
-                        <Button mnemonicParsing="false" styleClass="primary" text="I love you, Licet &lt;3" />
-                     </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <VBox prefHeight="435.0" prefWidth="341.0" spacing="10.0">
-                     <children>
-                        <HBox prefWidth="200.0">
-                           <children>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Información del modelado">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </HBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Provincia:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Instrucción:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Año inicial:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Año final:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Tasa de cambio:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Población:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Constante k:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </VBox>
-                        <HBox>
-                           <children>
-                              <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Resumen del comportamiento">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="149.0" prefWidth="341.0">
-                           <children>
-                              <Label prefHeight="57.0" prefWidth="667.0" textFill="#d9d9d9" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-               <padding>
-                  <Insets top="60.0" />
-               </padding>
-            </VBox>
-         </children>
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.GraficosController">
+   <stylesheets>
+      <URL value="@../../../css/main.css"/>
+   </stylesheets>
+   <HBox prefHeight="599.0" prefWidth="1116.0" spacing="70.0">
+      <padding>
+         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+      </padding>
+      <VBox prefHeight="558.0">
+         <HBox prefHeight="48.0">
+            <VBox.margin>
+               <Insets bottom="20.0"/>
+            </VBox.margin>
+            <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Modelado de Natalidad">
+               <font>
+                  <Font name="System Bold" size="36.0"/>
+               </font>
+               <HBox.margin>
+                  <Insets/>
+               </HBox.margin>
+            </Text>
+         </HBox>
+         <HBox prefHeight="380.0">
+            <AnchorPane prefHeight="379.0" prefWidth="620.0">
+               <ScrollPane prefHeight="380.0" prefWidth="620.0">
+                  <StackPane prefHeight="375.0" prefWidth="620.0">
+                     <StackedAreaChart prefHeight="373.0" prefWidth="648.0">
+                        <xAxis>
+                           <NumberAxis side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                           <NumberAxis side="LEFT"/>
+                        </yAxis>
+                     </StackedAreaChart>
+                     <StackedBarChart prefHeight="315.0" prefWidth="604.0">
+                        <xAxis>
+                           <CategoryAxis prefHeight="23.0" prefWidth="549.0" side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                           <NumberAxis side="LEFT"/>
+                        </yAxis>
+                     </StackedBarChart>
+                  </StackPane>
+               </ScrollPane>
+            </AnchorPane>
+         </HBox>
+         <HBox alignment="CENTER_RIGHT" prefWidth="200.0">
+            <padding>
+               <Insets top="10.0"/>
+            </padding>
+            <Button mnemonicParsing="false" styleClass="primary" text="Ver detalles"/>
+            <Button mnemonicParsing="false" styleClass="primary" text="I love you, Licet &lt;3"/>
+         </HBox>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0">
          <padding>
-            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+            <Insets top="60.0"/>
          </padding>
-      </HBox>
-   </children>
+         <VBox prefHeight="435.0" prefWidth="341.0" spacing="10.0">
+            <HBox prefWidth="200.0">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Información del modelado">
+                  <font>
+                     <Font name="System Bold" size="20.0"/>
+                  </font>
+               </Text>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Provincia:">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Text>
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Instrucción:">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Text>
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Año inicial:">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Text>
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Año final:">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Text>
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Tasa de cambio:">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Text>
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Población:">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Text>
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Constante k:">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Text>
+            </VBox>
+            <HBox>
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0"
+                     text="Resumen del comportamiento">
+                  <font>
+                     <Font name="System Bold" size="24.0"/>
+                  </font>
+               </Text>
+            </HBox>
+            <HBox prefHeight="149.0" prefWidth="341.0">
+               <Label prefHeight="57.0" prefWidth="667.0" textFill="#d9d9d9"/>
+            </HBox>
+         </VBox>
+      </VBox>
+   </HBox>
 </AnchorPane>
