@@ -6,9 +6,9 @@ public class Province {
     private String nameProvince;
 
     // Constructor
-    public Province(String id_provincia, String provincia) {
-        this.idProvince = id_provincia;
-        this.nameProvince = provincia;
+    public Province(String idProvince, String province) {
+        this.idProvince = idProvince;
+        this.nameProvince = province;
     }
     // Setters y Getters
     public String getIdProvince() {
