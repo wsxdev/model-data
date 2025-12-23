@@ -20,7 +20,7 @@ public final class DatabaseConnection {
             logger.info("The connection has been established");
             return connection;
         } catch (SQLException e) {
-            logger.error("Error establishing connection", e.getMessage());
+            logger.error("Error establishing connection", e);
             throw e;
         }
     }
