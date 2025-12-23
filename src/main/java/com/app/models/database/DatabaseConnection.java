@@ -15,8 +15,14 @@ public final class DatabaseConnection {
     }
 
     public Connection getConnection() throws SQLException {
-        logger.debug("Obteniendo conexión a la base de datos");
-        return configuration.getDataSource().getConnection();
+        try {
+            Connection connection = configuration.getDataSource().getConnection();
+            logger.info("The connection has been established");
+            return connection;
+        } catch (SQLException e) {
+            logger.error("Error establishing connection", e.getMessage());
+            throw e;
+        }
     }
 
 }
