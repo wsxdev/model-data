@@ -1,19 +1,16 @@
 package com.app.models.entities;
 
-public class BirthInstruction {
+public class BirthInstruction extends BirthRegister {
 
     // Attributes
     private int idBirth;
-    private int year;
-    private Instruction idInstruction;
-    private int quantity;
+    private Instruction instruction;
 
     // Constructor
-    public BirthInstruction(int idBirth, int year, Instruction idInstruction, int quantity) {
+    public BirthInstruction(int idBirth, int year, Instruction instruction, int quantity) {
+        super(year, quantity);
         this.idBirth = idBirth;
-        this.year = year;
-        this.idInstruction = idInstruction;
-        this.quantity = quantity;
+        this.instruction = instruction;
     }
     // Setters y Getters
     public int getIdBirth() {
@@ -22,22 +19,19 @@ public class BirthInstruction {
     public void setIdBirth(int idBirth) {
         this.idBirth = idBirth;
     }
-    public int getYear() {
-        return year;
+    public Instruction getInstruction() {
+        return instruction;
     }
-    public void setYear(int year) {
-        this.year = year;
+    public void setInstruction(Instruction instruction) {
+        this.instruction = instruction;
     }
-    public Instruction getIdInstruction() {
-        return idInstruction;
-    }
-    public void setIdInstruction(Instruction idInstruction) {
-        this.idInstruction = idInstruction;
-    }
-    public int getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+
+    @Override
+    public String toString() {
+        return "BirthInstruction{" +
+                "idBirth=" + idBirth +
+                ", instruction=" + instruction.getNameInstruction() +
+                ", " + super.toString() +
+                '}';
     }
 }

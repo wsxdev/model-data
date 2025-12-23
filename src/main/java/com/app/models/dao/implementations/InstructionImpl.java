@@ -1,4 +1,4 @@
-package com.app.models.implementations;
+package com.app.models.dao.implementations;
 
 public class InstructionImpl {
 }

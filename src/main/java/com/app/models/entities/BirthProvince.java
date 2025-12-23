@@ -1,19 +1,16 @@
 package com.app.models.entities;
 
-public class BirthProvince {
+public class BirthProvince extends BirthRegister {
 
     // Attributes
     private int idBirth;
-    private int year;
-    private Province idProvince;
-    private int quantity;
+    private Province province;
 
     // Constructor
-    public BirthProvince(int idBirth, int year, Province idProvince, int quantity) {
+    public BirthProvince(int idBirth, int year, Province province, int quantity) {
+        super(year, quantity);
         this.idBirth = idBirth;
-        this.year = year;
-        this.idProvince = idProvince;
-        this.quantity = quantity;
+        this.province = province;
     }
 
     // Setters y Getters
@@ -21,20 +18,19 @@ public class BirthProvince {
     public void setIdBirth(int idBirth) {
         this.idBirth = idBirth;
     }
-    public int getYear() {
-        return year;
+    public Province getProvince() {
+        return province;
     }
-    public void setYear(int year) {
-        this.year = year;
+    public void setProvince(Province province) {
+        this.province = province;
     }
-    public Province getIdProvince() {
-        return idProvince;
+
+    @Override
+    public String toString() {
+        return "BirthProvince{" +
+                "idBirth=" + idBirth +
+                ", province=" + province.getNameProvince() +
+                ", " + super.toString() +
+                '}';
     }
-    public void setIdProvince(Province idProvince) {
-        this.idProvince = idProvince;
-    }
-    public int getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
 }

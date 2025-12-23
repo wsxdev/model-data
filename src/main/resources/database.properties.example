@@ -1,0 +1,4 @@
+database.url=jdbc:postgresql://localhost:5432/estadisticas_vitales_ecuador
+database.driver=org.postgresql.Driver
+database.user=YOUR_USER
+database.password=YOUR_PASSWORD

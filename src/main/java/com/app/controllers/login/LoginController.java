@@ -1,5 +1,6 @@
 package com.app.controllers.login;
 
+import com.app.models.database.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,8 @@ public class LoginController {
     @FXML
     private void goToMainWindow(ActionEvent event) {
         try {
+            DatabaseConnection db = new DatabaseConnection();
+            db.getConnection();
             // PARA CARGAR LA VENTANA PRINCIPAL E INICIAR DESPUÉS DEL LOGIN VÁLIDO
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());

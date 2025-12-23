@@ -1,20 +1,20 @@
 package com.app.models.entities;
 
-public abstract class RegistroNatalidad {
+public abstract class BirthRegister {
 
     // Attributes
-    private int year;
-    private int quantity;
+    protected int year;
+    protected int quantity;
 
     // Constructor
-    public RegistroNatalidad(int year, int quantity) {
+    public BirthRegister(int year, int quantity) {
         this.year = year;
         this.quantity = quantity;
     }
 
     @Override
     public String toString() {
-        return  " year: " + year + " quantity: " + quantity ;
+        return  "year: " + year + ", quantity: " + quantity;
     }
 
 }

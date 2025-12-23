@@ -1,4 +1,4 @@
-package com.app.models.interfaces;
+package com.app.models.dao.interfaces;
 
 public interface IBirthInstruction {
 }
