@@ -1,6 +1,8 @@
 package com.app.controllers.login;
 
 import com.app.models.database.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +23,13 @@ public class LoginController {
         try {
             DatabaseConfig config = new DatabaseConfig();
             DatabaseConnection db = new DatabaseConnection(config);
-            db.getConnection();
+            try (Connection test = db.getConnection()) {
+                // SOLO PARA PROBAR LA CONEXIÓN
+            } catch (SQLException e) {
+                // SI NO SE PUEDE CONECTAR, CERRAR EL POOL Y LANZAR LA EXCEPCIÓN
+                config.closeConnection();
+                throw e;
+            }
             // PARA CARGAR LA VENTANA PRINCIPAL E INICIAR DESPUÉS DEL LOGIN VÁLIDO
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
