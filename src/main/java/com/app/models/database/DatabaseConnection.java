@@ -15,7 +15,7 @@ public final class DatabaseConnection {
     }
 
     public Connection getConnection() throws SQLException {
-        logger.debug("Obteniendo conexion a la base de datos");
+        logger.debug("Obteniendo conexión a la base de datos");
         return configuration.getDataSource().getConnection();
     }
 
