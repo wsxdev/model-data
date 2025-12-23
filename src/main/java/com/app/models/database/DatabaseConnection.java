@@ -1,27 +1,22 @@
 package com.app.models.database;
 
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public final class DatabaseConnection {
-    public Connection connection;
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseConnection.class);
+    private final DatabaseConfig configuration;
 
-    public DatabaseConnection() {}
-
-    public void getConnection() {
-        try {
-            Properties properties = new Properties();
-            properties.load(DatabaseConnection.class.getClassLoader().getResourceAsStream("database.properties"));
-            Class.forName(properties.getProperty("database.driver"));
-            connection = DriverManager.getConnection(properties.getProperty("database.url"), properties.getProperty("database.user"), properties.getProperty("database.password"));
-            System.out.println("The connection has been established");
-        } catch (ClassNotFoundException | SQLException | IOException e) {
-            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
-        }
+    public DatabaseConnection(DatabaseConfig configuration) {
+        this.configuration = configuration;
     }
+
+    public Connection getConnection() throws SQLException {
+        logger.debug("Obteniendo conexion a la base de datos");
+        return configuration.getDataSource().getConnection();
+    }
+
 }
