@@ -1,4 +1,6 @@
 package com.app.models.dao.implementations;
 
-public class BirthProvinceImpl {
+import com.app.models.dao.interfaces.IBirthProvince;
+
+public class BirthProvinceImpl implements IBirthProvince {
 }
