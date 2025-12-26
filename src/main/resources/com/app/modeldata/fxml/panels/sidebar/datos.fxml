@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.DatosController">
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.DatosController">
     <stylesheets>
         <URL value="@../../../css/main.css" />
     </stylesheets>
@@ -32,7 +23,7 @@
             </Label>
             <ComboBox fx:id="datosAnalizarComboBox" onAction="#seleccionarDatosAnalizar" prefWidth="150.0" promptText="Seleccione los datos" />
         </HBox>
-        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="174.0" text="Sincronizar datos" textFill="WHITE">
+        <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="174.0" styleClass="primary" text="Sincronizar datos" textFill="WHITE">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../images/icons/synchronization-icon.png" />
