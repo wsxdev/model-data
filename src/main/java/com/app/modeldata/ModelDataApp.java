@@ -18,8 +18,7 @@ public class ModelDataApp extends Application {
 
         // AÑADIR ICONO AL STAGE
     stage.getIcons().add(new Image(
-            Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png"))
-        ));
+            Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png"))));
 
         Parent root = loginLoader.load();
         Scene sceneLogin = new Scene(root);
@@ -28,10 +27,5 @@ public class ModelDataApp extends Application {
         stage.setResizable(false);
         stage.show();
 
-//        FXMLLoader fxmlLoader = new FXMLLoader(ModelDataApp.class.getResource("hello-view.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-//        stage.setTitle("Hello!");
-//        stage.setScene(scene);
-//        stage.show();
     }
 }
