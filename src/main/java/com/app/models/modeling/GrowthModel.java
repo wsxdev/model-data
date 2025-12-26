@@ -12,4 +12,5 @@ public abstract class GrowthModel {
     public abstract double evaluate(double time);
 
     public double getGrowthRate() { return growthRate; }
+    public double getInitialConstant() { return initialConstant; }
 }

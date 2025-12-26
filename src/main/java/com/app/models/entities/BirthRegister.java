@@ -12,6 +12,9 @@ public abstract class BirthRegister {
         this.quantity = quantity;
     }
 
+    // GETTERS
+    public int getYear() { return year; }
+    public int getQuantity() { return quantity; }
     @Override
     public String toString() {
         return  "year: " + year + ", quantity: " + quantity;
