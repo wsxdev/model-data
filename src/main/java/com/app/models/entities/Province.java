@@ -26,4 +26,9 @@ public class Province {
     public void setNameProvince(String nameProvince) {
         this.nameProvince = nameProvince;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
