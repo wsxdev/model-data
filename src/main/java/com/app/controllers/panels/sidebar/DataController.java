@@ -1,5 +1,8 @@
 package com.app.controllers.panels.sidebar;
 
+import com.app.models.dao.implementations.ProvinceImpl;
+import com.app.models.dao.interfaces.IProvince;
+import com.app.models.entities.Province;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,7 +13,7 @@ import javafx.scene.control.ComboBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DatosController implements Initializable {
+public class DataController implements Initializable {
 
 
     @FXML private ComboBox<String> datosAnalizarComboBox;
@@ -22,6 +25,8 @@ public class DatosController implements Initializable {
 
     }
     @FXML
-    public void seleccionarDatosAnalizar(ActionEvent actionEvent) {
+    public void btnDatosAnalizar(ActionEvent actionEvent) {
+        IProvince province = new ProvinceImpl();
+        province.getProvinces();
     }
 }

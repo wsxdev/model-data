@@ -1,5 +1,6 @@
 package com.app.controllers.login;
 
+import com.app.models.dao.interfaces.IProvince;
 import com.app.models.database.*;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,6 +26,7 @@ public class LoginController {
             DatabaseConnection db = new DatabaseConnection(config);
             try (Connection test = db.getConnection()) {
                 // SOLO PARA PROBAR LA CONEXIÓN
+                // IProvince province = new IProvince();
             } catch (SQLException e) {
                 // SI NO SE PUEDE CONECTAR, CERRAR EL POOL Y LANZAR LA EXCEPCIÓN
                 config.closeConnection();
