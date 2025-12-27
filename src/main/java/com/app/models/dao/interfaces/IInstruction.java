@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface IInstruction {
-
-    public List<Instruction> getInstruction();
+    public List<Instruction> getInstructions();
 
 }

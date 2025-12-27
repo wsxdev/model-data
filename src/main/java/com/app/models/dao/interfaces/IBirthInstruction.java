@@ -1,5 +1,9 @@
 package com.app.models.dao.interfaces;
 
-public interface IBirthInstruction {
+import com.app.models.entities.BirthInstruction;
 
+import java.util.List;
+
+public interface IBirthInstruction {
+    public List<BirthInstruction> getBirthInstruction();
 }

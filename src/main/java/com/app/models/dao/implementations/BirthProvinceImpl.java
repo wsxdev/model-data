@@ -11,7 +11,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BirthProvinceImpl implements IBirthProvince {
 
@@ -25,13 +27,23 @@ public class BirthProvinceImpl implements IBirthProvince {
         DatabaseConfig config = new DatabaseConfig();
         DatabaseConnection connection = new DatabaseConnection(config);
 
+        IProvince provinceDao = new ProvinceImpl();
+        List<BirthProvince> birthProvinces = new ArrayList<>();
+        List<Province> provinces = provinceDao.getProvinces();
+
         try(Connection connectionProvince = connection.getConnection();
             Statement statement = connectionProvince.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)){
 
-            List<BirthProvince> birthProvinces = new ArrayList<>();
-            IProvince province = new ProvinceImpl();
-            List<Province> provinces = province.getProvinces();
+
+            Map<String, Province> provincesMap = new HashMap<>();
+
+            for (Province prov : provinces) {
+                if (prov != null && prov.getIdProvince() != null) {
+                    provincesMap.put(prov.getIdProvince(), prov);
+                }
+
+            }
 
 
             while (resultSet.next()) {
@@ -40,15 +52,30 @@ public class BirthProvinceImpl implements IBirthProvince {
                 int year = resultSet.getInt("anio");
                 int cantidad = resultSet.getInt("cantidad");
 
+                Province provinceDb = null;
+                if (idProvince != null) {
+                    provinceDb = provincesMap.get(idProvince);
 
-                BirthProvince birthProvince = new BirthProvince( idBirth, idProvince, year, cantidad);
-                birthProvince.add(birthProvince);
+                }
+
+                BirthProvince birthProvince = new BirthProvince(idBirth, year, provinceDb, cantidad);
+                birthProvinces.add(birthProvince);
+            }
+
+            int i = 0;
+            while (i < birthProvinces.size()) {
+                System.out.print(birthProvinces.get(i).getIdBirth());
+                System.out.print(" " + birthProvinces.get(i).getProvince().getIdProvince());
+                System.out.print(" " + birthProvinces.get(i).getProvince().getNameProvince());
+                System.out.print(" " + birthProvinces.get(i).getYear());
+                System.out.println(" " + birthProvinces.get(i).getQuantity());
+                i++;
             }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return birthProvinces;
     }
 
 }

@@ -32,11 +32,11 @@ public class ProvinceImpl implements IProvince {
                 Province province = new Province(idProvince, nameProvince);
                 provinces.add(province);
             }
-            int i = 0;
-            while (i < provinces.size()) {
-                System.out.println(provinces.get(i).getNameProvince());
-                i++;
-            }
+//            int i = 0;
+//            while (i < provinces.size()) {
+//                System.out.println(provinces.get(i).getNameProvince());
+//                i++;
+//            }
 
 
         } catch (Exception e) {

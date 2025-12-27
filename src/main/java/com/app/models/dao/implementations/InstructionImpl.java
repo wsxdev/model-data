@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class InstructionImpl implements IInstruction {
-    public List<Instruction> getInstruction(){
+    public List<Instruction> getInstructions(){
          String sql = """
          SELECT id_instruccion, instruccion
          FROM instrucciones

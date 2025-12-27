@@ -1,8 +1,11 @@
 package com.app.controllers.panels.sidebar;
 
 import com.app.models.dao.implementations.BirthInstructionImpl;
+import com.app.models.dao.implementations.BirthProvinceImpl;
 import com.app.models.dao.implementations.InstructionImpl;
 import com.app.models.dao.implementations.ProvinceImpl;
+import com.app.models.dao.interfaces.IBirthInstruction;
+import com.app.models.dao.interfaces.IBirthProvince;
 import com.app.models.dao.interfaces.IInstruction;
 import com.app.models.dao.interfaces.IProvince;
 import com.app.models.entities.Instruction;
@@ -34,10 +37,14 @@ public class DataController implements Initializable {
     @FXML
     public void btnDatosAnalizar(ActionEvent actionEvent) {
         IProvince province = new ProvinceImpl();
-        province.getProvinces();
+        // province.getProvinces();
 
         IInstruction instruction = new InstructionImpl();
-        instruction.getInstruction();
+        // instruction.getInstruction();
+        IBirthProvince birthProvince = new BirthProvinceImpl();
+        // birthProvince.getBirthProvince();
+        IBirthInstruction birthInstructions = new BirthInstructionImpl();
+        birthInstructions.getBirthInstruction();
     }
 
 

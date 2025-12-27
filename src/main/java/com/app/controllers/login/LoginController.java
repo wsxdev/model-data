@@ -22,16 +22,6 @@ public class LoginController {
     @FXML
     private void goToMainWindow(ActionEvent event) {
         try {
-            DatabaseConfig config = new DatabaseConfig();
-            DatabaseConnection db = new DatabaseConnection(config);
-            try (Connection test = db.getConnection()) {
-                // SOLO PARA PROBAR LA CONEXIÓN
-                // IProvince province = new IProvince();
-            } catch (SQLException e) {
-                // SI NO SE PUEDE CONECTAR, CERRAR EL POOL Y LANZAR LA EXCEPCIÓN
-                config.closeConnection();
-                throw e;
-            }
             // PARA CARGAR LA VENTANA PRINCIPAL E INICIAR DESPUÉS DEL LOGIN VÁLIDO
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
