@@ -6,11 +6,12 @@ import com.app.models.database.DatabaseConnection;
 import com.app.models.entities.Province;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ProvinceImpl implements IProvince {
 
-    private Province province;
-    public Province getProvinces() {
+    private ArrayList<Province> province = new ArrayList<>();
+    public ArrayList<Province> getProvinces() {
         String sql =
         """
         SELECT id_provincia, provincia
@@ -35,7 +36,6 @@ public class ProvinceImpl implements IProvince {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        return null;
+        return province;
     }
 }

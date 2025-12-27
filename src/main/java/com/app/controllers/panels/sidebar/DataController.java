@@ -27,6 +27,6 @@ public class DataController implements Initializable {
     @FXML
     public void btnDatosAnalizar(ActionEvent actionEvent) {
         IProvince province = new ProvinceImpl();
-        province.getProvinces();
+        // province.getProvinces();
     }
 }

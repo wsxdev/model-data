@@ -45,7 +45,7 @@
         <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="1036.0">
             <ScrollPane prefWidth="1036.0">
                 <StackPane prefHeight="434.0" prefWidth="1036.0">
-                    <TableView maxHeight="434.0" minHeight="434.0" prefHeight="434.0" prefWidth="1036.0">
+                    <TableView fx:id="tableData" maxHeight="434.0" minHeight="434.0" onSort="#OpenTableData" prefHeight="434.0" prefWidth="1036.0">
                         <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
