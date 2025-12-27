@@ -2,13 +2,10 @@ package com.app.models.dao.implementations;
 
 import com.app.models.dao.interfaces.IBirthInstruction;
 import com.app.models.dao.interfaces.IInstruction;
-import com.app.models.dao.interfaces.IProvince;
 import com.app.models.database.DatabaseConfig;
 import com.app.models.database.DatabaseConnection;
 import com.app.models.entities.BirthInstruction;
-import com.app.models.entities.BirthProvince;
 import com.app.models.entities.Instruction;
-import com.app.models.entities.Province;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
