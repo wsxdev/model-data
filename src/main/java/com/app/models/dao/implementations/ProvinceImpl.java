@@ -7,11 +7,11 @@ import com.app.models.entities.Province;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProvinceImpl implements IProvince {
 
-    private ArrayList<Province> province = new ArrayList<>();
-    public ArrayList<Province> getProvinces() {
+    public List<Province> getProvinces() {
         String sql =
         """
         SELECT id_provincia, provincia
@@ -20,22 +20,28 @@ public class ProvinceImpl implements IProvince {
 
         DatabaseConfig config = new DatabaseConfig();
         DatabaseConnection connection = new DatabaseConnection(config);
+        List<Province> provinces = new ArrayList<>();
 
-        try (Connection test = connection.getConnection();
-             Statement statement = test.createStatement();
+        try (Connection connectionProvince = connection.getConnection();
+             Statement statement = connectionProvince.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
 
-            // test.getConnection().prepareStatement(sql).executeQuery();
             while (resultSet.next()) {
-                int id_provincia = resultSet.getInt("id_provincia");
-                String provincia = resultSet.getString("provincia");
-                System.out.println("ID: " + id_provincia + "    Provincia: " + provincia);
+                String idProvince = resultSet.getString("id_provincia");
+                String nameProvince = resultSet.getString("provincia");
+                Province province = new Province(idProvince, nameProvince);
+                provinces.add(province);
+            }
+            int i = 0;
+            while (i < provinces.size()) {
+                System.out.println(provinces.get(i).getNameProvince());
+                i++;
             }
 
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return province;
+        return provinces;
     }
 }

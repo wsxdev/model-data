@@ -3,8 +3,9 @@ package com.app.models.dao.interfaces;
 import com.app.models.entities.Province;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IProvince {
-    public ArrayList<Province> getProvinces();
+    public List<Province> getProvinces();
 
 }

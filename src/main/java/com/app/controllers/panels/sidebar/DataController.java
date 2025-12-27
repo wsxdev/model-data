@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SortEvent;
+import javafx.scene.control.TableView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +29,9 @@ public class DataController implements Initializable {
     @FXML
     public void btnDatosAnalizar(ActionEvent actionEvent) {
         IProvince province = new ProvinceImpl();
-        // province.getProvinces();
+        province.getProvinces();
+    }
+
+    public void OpenTableData(SortEvent<TableView> tableViewSortEvent) {
     }
 }
