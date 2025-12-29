@@ -8,10 +8,10 @@ import com.app.models.dao.interfaces.IBirthInstruction;
 import com.app.models.dao.interfaces.IBirthProvince;
 import com.app.models.dao.interfaces.IInstruction;
 import com.app.models.dao.interfaces.IProvince;
+import com.app.models.entities.Instruction;
 import com.app.models.entities.Province;
 import com.app.models.services.BirthService;
-import com.app.models.services.YearProvinceSummary;
-import javafx.beans.property.ReadOnlyListWrapper;
+import com.app.models.services.YearDataSummary;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,8 +29,7 @@ import java.util.ResourceBundle;
 
 public class DataController implements Initializable {
 
-
-    @FXML private TableView<YearProvinceSummary> tableData;
+    @FXML private TableView<YearDataSummary> tableData;
     @FXML private ComboBox<String> datosAnalizarComboBox;
 
     @Override
@@ -39,44 +38,55 @@ public class DataController implements Initializable {
             ObservableList<String> datosComboBox = FXCollections.observableArrayList("Provincia - año", "Instrucción - año");
             datosAnalizarComboBox.setItems(datosComboBox);
         }
-
     }
     @FXML
     public void btnDatosAnalizar(ActionEvent actionEvent) {
-        IProvince province = new ProvinceImpl();
-        // province.getProvinces();
-
-        IInstruction instruction = new InstructionImpl();
-        // instruction.getInstruction();
-        IBirthProvince birthProvince = new BirthProvinceImpl();
-        // birthProvince.getBirthProvinces();
-        IBirthInstruction birthInstructions = new BirthInstructionImpl();
-        // birthInstructions.getBirthInstruction();
-        BirthService oa = new BirthService();
-        // System.out.println(oa.getPivotByYear());
 
         String selected = datosAnalizarComboBox.getSelectionModel().getSelectedItem();
         if (selected == null) return;
+        boolean birthsProvincesSelected = "Provincia - año".equals(selected);
+        boolean birthsInstructionsSelected = "Instrucción - año".equals(selected);
 
         // OBTIENE LOS VALORES ORDENADOS QUE RETORNA LOS MÉTODOS DE BIRTH SERVICE
         BirthService birthService = new BirthService();
-        List<YearProvinceSummary> rows = birthService.getPivotByYear();
-        List<Province> provinces = birthService.getProvinceOrderBirths();
 
         tableData.getColumns().clear();
-        TableColumn<YearProvinceSummary, Integer> columnYear = new TableColumn<>("Año");
-        columnYear.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getYear()));
+        TableColumn<YearDataSummary, Integer> columnYear = new TableColumn<>("Año");
+        columnYear.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().year()));
         tableData.getColumns().add(columnYear);
 
-        for (Province prov :  provinces) {
-            String provId = prov.getIdProvince();
-            TableColumn<YearProvinceSummary, Integer> columnProvince = new TableColumn<>(prov.getNameProvince());
-            columnProvince.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCountForProvince(provId)));
-            tableData.getColumns().add(columnProvince);
+        if (birthsProvincesSelected){
+            List<YearDataSummary> rows = birthService.getPivotByYear();
+            List<Province> provinces = birthService.getProvinceOrderBirths();
+
+
+            for (Province prov :  provinces) {
+                String provId = prov.getIdProvince();
+                TableColumn<YearDataSummary, Integer> columnProvince = new TableColumn<>(prov.getNameProvince());
+                columnProvince.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCountForRecord(provId)));
+                tableData.getColumns().add(columnProvince);
+            }
+
+            ObservableList<YearDataSummary> items = FXCollections.observableArrayList(rows);
+            tableData.setItems(items);
+            return;
         }
 
-        ObservableList<YearProvinceSummary> items = FXCollections.observableArrayList(rows);
-        tableData.setItems(items);
+        if (birthsInstructionsSelected){
+            List<YearDataSummary> rowsI = birthService.getPivotYearInstruction();
+            List<Instruction> instructions = birthService.getInstructionOrderBirths();
+
+            for (Instruction instr : instructions) {
+                String instructionId = instr.getIdInstruction();
+                TableColumn<YearDataSummary, Integer> columnInstruction = new TableColumn<>(instr.getNameInstruction());
+                columnInstruction.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCountForRecord(instructionId)));
+                tableData.getColumns().add(columnInstruction);
+            }
+
+            ObservableList<YearDataSummary> items = FXCollections.observableArrayList(rowsI);
+            tableData.setItems(items);
+            return;
+        }
 
 
     }

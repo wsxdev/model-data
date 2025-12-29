@@ -177,7 +177,7 @@ public class ModelDataAppController {
             Scene loginScene = new Scene(loader.load());
 
             try {
-                loginScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(COLORS_LIGHT_CSS)).toExternalForm());
+                loginScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(COLORS_DARK_CSS)).toExternalForm());
                 loginScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(MAIN_CSS)).toExternalForm());
             } catch (Exception e) { throw new RuntimeException(e); }
 

@@ -23,12 +23,12 @@
             <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
         </padding>
         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-            <Label text="DATOS A ANALIZAR" textFill="#1d6b8c">
+            <Label text="DATOS PARA ANALIZAR" textFill="#1d6b8c">
                 <font>
                     <Font name="System Bold" size="18.0" />
                 </font>
             </Label>
-            <ComboBox fx:id="datosAnalizarComboBox" prefWidth="150.0" promptText="Seleccione los datos" />
+            <ComboBox fx:id="datosAnalizarComboBox" prefHeight="23.0" promptText="Seleccione los datos" />
         </HBox>
         <Button mnemonicParsing="false" onAction="#btnDatosAnalizar" prefHeight="44.0" prefWidth="174.0" styleClass="primary" text="Sincronizar datos" textFill="WHITE">
             <graphic>

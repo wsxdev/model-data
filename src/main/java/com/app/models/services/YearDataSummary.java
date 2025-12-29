@@ -1,34 +1,22 @@
 package com.app.models.services;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class YearProvinceSummary {
-    private final int year;
-    private final Map<String, Integer> countsByProvince;
-    private final Map<String, Integer> countsByInstruction;
-    public YearProvinceSummary(int year, Map<String, Integer> countsByProvince) {
+public record YearDataSummary(int year, Map<String, Integer> countByColumnBirth) {
+    public YearDataSummary(int year, Map<String, Integer> countByColumnBirth) {
         this.year = year;
-        this.countsByProvince = new LinkedHashMap<>(countsByProvince);
-        this.countsByInstruction = new LinkedHashMap<>();
+        this.countByColumnBirth = new LinkedHashMap<>(countByColumnBirth);
     }
 
-    public YearProvinceSummary( Map<String, Integer> countsByInstruction) {
-        this(countsByInstruction, year );
-        this.countsByProvince = new LinkedHashMap<>();
+    // OBTENER CANTIDAD DE REGISTROS
+    public Map<String, Integer> countByRecord() {
+        return Collections.unmodifiableMap(countByColumnBirth);
     }
-
-    public int getYear() { return year; }
-    // OBTENER CANTIDAD DE PROVINCIAS
-    public Map<String, Integer> getCountsByProvince() {
-        return Collections.unmodifiableMap(countsByProvince);
-    }
-
-    public int getCountForProvince(String provinceId) {
+    public int getCountForRecord(String provinceId) {
         // RETORNA UN ID POR DEFECTO
-        return countsByProvince.getOrDefault(provinceId, 0);
+        return countByColumnBirth.getOrDefault(provinceId, 0);
     }
 
 }

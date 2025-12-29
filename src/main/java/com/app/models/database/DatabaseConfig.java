@@ -32,7 +32,7 @@ public class DatabaseConfig {
 		}
 
         // CONFIGURACIÓN DEL POOL DE CONEXIONES
-		configuration.setMaximumPoolSize(Integer.parseInt(properties.getProperty("db.pool.max", "10")));
+		configuration.setMaximumPoolSize(Integer.parseInt(properties.getProperty("db.pool.max", "1")));
 		configuration.setConnectionTimeout(Long.parseLong(properties.getProperty("db.pool.connectionTimeout", "30000")));
 		configuration.setIdleTimeout(Long.parseLong(properties.getProperty("db.pool.idleTimeout", "600000")));
 		configuration.setLeakDetectionThreshold(Long.parseLong(properties.getProperty("db.pool.leakThreshold", "2000")));

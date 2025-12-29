@@ -59,15 +59,6 @@ public class BirthInstructionImpl implements IBirthInstruction {
 
             }
 
-            int i = 0;
-            while (i < birthInstructions.size()) {
-                System.out.print(birthInstructions.get(i).getIdBirth());
-                System.out.print(" " + birthInstructions.get(i).getInstruction().getIdInstruction());
-                System.out.print(" " + birthInstructions.get(i).getInstruction().getNameInstruction());
-                System.out.print(" " + birthInstructions.get(i).getYear());
-                System.out.println(" " + birthInstructions.get(i).getQuantity());
-                i++;
-            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

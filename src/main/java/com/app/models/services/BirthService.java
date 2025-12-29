@@ -1,19 +1,26 @@
 package com.app.models.services;
 
+import com.app.models.dao.implementations.BirthInstructionImpl;
 import com.app.models.dao.implementations.BirthProvinceImpl;
+import com.app.models.dao.implementations.InstructionImpl;
 import com.app.models.dao.implementations.ProvinceImpl;
+import com.app.models.dao.interfaces.IBirthInstruction;
 import com.app.models.dao.interfaces.IBirthProvince;
+import com.app.models.dao.interfaces.IInstruction;
 import com.app.models.dao.interfaces.IProvince;
+import com.app.models.entities.BirthInstruction;
 import com.app.models.entities.BirthProvince;
+import com.app.models.entities.Instruction;
 import com.app.models.entities.Province;
 
 import java.util.*;
 
 public class BirthService {
     // oa :)
+    // ORDENAR DATOS POR PROVINCIA
     IBirthProvince birthProvinceDao = new BirthProvinceImpl();
-    public List<YearProvinceSummary> getPivotByYear() {
-        // GUARDA NACIMIENTOS - PROVINCIA
+    public List<YearDataSummary> getPivotByYear() {
+        // GUARDA NACIMIENTOS - PROVINCE
         List<BirthProvince> birthProvinces = birthProvinceDao.getBirthProvinces();
 
         // ORDENAR NOMBRES DE PROVINCIAS DE ACUERDO AL REGISTRO DE NACIMIENTOS POR PROVINCIA
@@ -78,9 +85,9 @@ public class BirthService {
             rowQuantity.merge(provId, birthProv.getQuantity(),  Integer::sum);
         }
 
-        List<YearProvinceSummary> result = new ArrayList<>();
+        List<YearDataSummary> result = new ArrayList<>();
         for (Map.Entry<Integer, Map<String, Integer>> entry : matrix.entrySet()) {
-            result.add(new YearProvinceSummary(entry.getKey(), entry.getValue()));
+            result.add(new YearDataSummary(entry.getKey(), entry.getValue()));
 
         }
 
@@ -107,6 +114,94 @@ public class BirthService {
         }
         IProvince provinceDao = new ProvinceImpl();
         return provinceDao.getProvinces();
+    }
+
+    // ORDENAR DATOS POR INSTRUCCION
+    IBirthInstruction birthInstructionDao = new BirthInstructionImpl();
+
+    public List<YearDataSummary> getPivotYearInstruction() {
+
+        // GUARDAR NACIMIENTOS - INSTRUCTION
+        List<BirthInstruction> birthInstructions = birthInstructionDao.getBirthInstruction();
+
+        // ORDENAR NOMBRES DE INSTRUCCIONES DE ACUERDO AL REGISTRO DE NACIMIENTOS POR INSTRUCCIÓN
+        LinkedHashMap<String, String> instructionsMap = new LinkedHashMap<>();
+        for (BirthInstruction birthInstr : birthInstructions) {
+            if(birthInstr.getInstruction() != null && birthInstr.getInstruction().getIdInstruction() != null){
+                instructionsMap.putIfAbsent(birthInstr.getInstruction().getIdInstruction(), birthInstr.getInstruction().getNameInstruction());
+            }
+        }
+
+        // ORDENAR DESDE LA PROPIA CLASE DAO
+        List<String> instructIds = new ArrayList<>();
+        if (instructionsMap.isEmpty()) {
+            IInstruction instructionDao = new InstructionImpl();
+
+            for(Instruction instr :  instructionDao.getInstructions()) instructIds.add(instr.getIdInstruction());
+
+        }else {
+            instructIds.addAll(instructionsMap.keySet());
+        }
+
+        // AÑOS ORDENADOS
+        Set<Integer> years = new TreeSet<>();
+
+        for(BirthInstruction birthsI : birthInstructions) years.add(birthsI.getYear());
+
+        // INICIALIZAR ESTRUCTURA AÑOS DE ACUERDO CON LA INSTRUCCIÓN - CANTIDAD
+        Map<Integer, Map<String, Integer>> matrixInstruction = new LinkedHashMap<>();
+
+        for (Integer year : years) {
+            Map<String, Integer> row = new LinkedHashMap<>();
+            for (String instructId : instructIds) row.put(instructId, 0);
+            matrixInstruction.put(year, row);
+        }
+
+        // LLENAR LA MATRIX PARCIALMENTE
+        for (BirthInstruction birthsI : birthInstructions) {
+            if (birthsI.getInstruction() == null || birthsI.getInstruction().getIdInstruction() == null) continue;
+            String instructId = birthsI.getInstruction().getIdInstruction();
+            int year = birthsI.getYear();
+
+            matrixInstruction.computeIfAbsent(year, k -> {
+               Map<String, Integer> w = new LinkedHashMap<>();
+               for (String id : instructIds) w.put(id, 0);
+               return w;
+            });
+
+            Map<String, Integer> rowQuantity = matrixInstruction.get(year);
+            rowQuantity.merge(instructId, birthsI.getQuantity(),  Integer::sum);
+
+        }
+
+        List<YearDataSummary> resultInstruction = new ArrayList<>();
+        for (Map.Entry<Integer, Map<String, Integer>> entry : matrixInstruction.entrySet()) {
+            resultInstruction.add(new YearDataSummary(entry.getKey(), entry.getValue()));
+        }
+        return resultInstruction;
+    }
+    public List<Instruction> getInstructionOrderBirths(){
+
+        IBirthInstruction birthInstructionDao = new BirthInstructionImpl();
+        List<BirthInstruction> birthInstructions = birthInstructionDao.getBirthInstruction();
+
+        LinkedHashMap<String, String> instructionsMap = new LinkedHashMap<>();
+        for (BirthInstruction birthsI : birthInstructions) {
+            if (birthsI.getInstruction() != null || birthsI.getInstruction().getIdInstruction() != null){
+                instructionsMap.putIfAbsent(birthsI.getInstruction().getIdInstruction(), birthsI.getInstruction().getNameInstruction());
+            }
+
+        }
+        List<Instruction> resulInstructions = new ArrayList<>();
+        if (!instructionsMap.isEmpty()) {
+            for (Map.Entry<String, String> entry : instructionsMap.entrySet()) {
+                resulInstructions.add(new Instruction(entry.getKey(), entry.getValue()));
+            }
+            return resulInstructions;
+        }
+        IInstruction instructionDao = new InstructionImpl();
+        return instructionDao.getInstructions();
+
     }
 
 }
