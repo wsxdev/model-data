@@ -46,6 +46,7 @@ build/
 /build
 /dist/
 /output/
+/out/
 /target/
 
 # Logs y cachés
