@@ -11,8 +11,8 @@ import java.util.*;
 
 public class BirthService {
     // oa :)
+    IBirthProvince birthProvinceDao = new BirthProvinceImpl();
     public List<YearProvinceSummary> getPivotByYear() {
-        IBirthProvince birthProvinceDao = new BirthProvinceImpl();
         // GUARDA NACIMIENTOS - PROVINCIA
         List<BirthProvince> birthProvinces = birthProvinceDao.getBirthProvinces();
 
