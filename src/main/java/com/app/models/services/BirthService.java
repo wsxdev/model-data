@@ -63,7 +63,7 @@ public class BirthService {
 
         // LLENAR MATRIX PARCIALMENTE
         for (BirthProvince birthProv : birthProvinces) {
-            if (birthProv.getProvince() != null || birthProv.getProvince().getIdProvince() != null) continue;
+            if (birthProv.getProvince() == null || birthProv.getProvince().getIdProvince() == null) continue;
             String provId = birthProv.getProvince().getIdProvince();
             int year =  birthProv.getYear();
 
