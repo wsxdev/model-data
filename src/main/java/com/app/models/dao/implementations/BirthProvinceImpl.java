@@ -17,13 +17,13 @@ import java.util.Map;
 
 public class BirthProvinceImpl implements IBirthProvince {
 
-    public List<BirthProvince> getBirthProvince() {
+    public List<BirthProvince> getBirthProvinces() {
 
         String sql = """
             SELECT id_nacimiento, anio, id_provincia, cantidad
             FROM nacimientos_provincias
             ORDER BY id_nacimiento""";
-
+        // CONEXIÓN A LA BASE DE DATOS
         DatabaseConfig config = new DatabaseConfig();
         DatabaseConnection connection = new DatabaseConnection(config);
 
@@ -62,15 +62,15 @@ public class BirthProvinceImpl implements IBirthProvince {
                 birthProvinces.add(birthProvince);
             }
 
-            int i = 0;
-            while (i < birthProvinces.size()) {
-                System.out.print(birthProvinces.get(i).getIdBirth());
-                System.out.print(" " + birthProvinces.get(i).getProvince().getIdProvince());
-                System.out.print(" " + birthProvinces.get(i).getProvince().getNameProvince());
-                System.out.print(" " + birthProvinces.get(i).getYear());
-                System.out.println(" " + birthProvinces.get(i).getQuantity());
-                i++;
-            }
+//            int i = 0;
+//            while (i < birthProvinces.size()) {
+//                System.out.print(birthProvinces.get(i).getIdBirth());
+//                System.out.print(" " + birthProvinces.get(i).getProvince().getIdProvince());
+//                System.out.print(" " + birthProvinces.get(i).getProvince().getNameProvince());
+//                System.out.print(" " + birthProvinces.get(i).getYear());
+//                System.out.println(" " + birthProvinces.get(i).getQuantity());
+//                i++;
+//            }
 
         } catch (Exception e) {
             throw new RuntimeException(e);

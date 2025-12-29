@@ -8,8 +8,7 @@ import com.app.models.dao.interfaces.IBirthInstruction;
 import com.app.models.dao.interfaces.IBirthProvince;
 import com.app.models.dao.interfaces.IInstruction;
 import com.app.models.dao.interfaces.IProvince;
-import com.app.models.entities.Instruction;
-import com.app.models.entities.Province;
+import com.app.models.services.BirthService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,12 +19,12 @@ import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableView;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class DataController implements Initializable {
 
 
+    public TableView tableData;
     @FXML private ComboBox<String> datosAnalizarComboBox;
 
     @Override
@@ -42,9 +41,12 @@ public class DataController implements Initializable {
         IInstruction instruction = new InstructionImpl();
         // instruction.getInstruction();
         IBirthProvince birthProvince = new BirthProvinceImpl();
-        // birthProvince.getBirthProvince();
+        // birthProvince.getBirthProvinces();
         IBirthInstruction birthInstructions = new BirthInstructionImpl();
-        birthInstructions.getBirthInstruction();
+        // birthInstructions.getBirthInstruction();
+        BirthService oa = new BirthService();
+        System.out.println(oa.getPivotByYear());
+
     }
 
 
