@@ -1,5 +1,8 @@
 package com.app.models.services;
 
+import com.app.models.services.records.ColumnHeader;
+import com.app.models.services.records.YearDataSummary;
+
 import java.util.List;
 
 public class DataCache {

@@ -12,6 +12,7 @@ import com.app.models.entities.BirthInstruction;
 import com.app.models.entities.BirthProvince;
 import com.app.models.entities.Instruction;
 import com.app.models.entities.Province;
+import com.app.models.services.records.YearDataSummary;
 
 import java.util.*;
 

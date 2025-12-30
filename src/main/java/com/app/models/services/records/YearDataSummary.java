@@ -1,4 +1,4 @@
-package com.app.models.services;
+package com.app.models.services.records;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
