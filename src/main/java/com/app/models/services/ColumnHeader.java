@@ -1,4 +1,2 @@
 package com.app.models.services;
-
-public class ColumnHeader {
-}
+public record ColumnHeader(String id, String name) { }
