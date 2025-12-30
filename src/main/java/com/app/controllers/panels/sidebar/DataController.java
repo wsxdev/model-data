@@ -95,4 +95,13 @@ public class DataController implements Initializable {
     }
 
     public void OpenTableData(SortEvent<TableView> tableViewSortEvent) { }
+
+    public void btnClearTable(ActionEvent actionEvent) {
+        // TABLA ACTUAL
+        tableData.getItems().clear();
+        tableData.getColumns().clear();
+        // TABLA EN CACHÉ
+        DataCache dataCache = DataCache.getInstance();
+        dataCache.clearCache();
+    }
 }
