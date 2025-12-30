@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BirthProvinceImpl implements IBirthProvince {
-
     public List<BirthProvince> getBirthProvinces() {
 
         String sql = """
@@ -35,16 +34,13 @@ public class BirthProvinceImpl implements IBirthProvince {
             Statement statement = connectionProvince.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)){
 
-
             Map<String, Province> provincesMap = new HashMap<>();
-
             for (Province prov : provinces) {
                 if (prov != null && prov.getIdProvince() != null) {
                     provincesMap.put(prov.getIdProvince(), prov);
                 }
 
             }
-
 
             while (resultSet.next()) {
                 int idBirth = resultSet.getInt("id_nacimiento");
@@ -55,27 +51,13 @@ public class BirthProvinceImpl implements IBirthProvince {
                 Province provinceDb = null;
                 if (idProvince != null) {
                     provinceDb = provincesMap.get(idProvince);
-
                 }
-
                 BirthProvince birthProvince = new BirthProvince(idBirth, year, provinceDb, cantidad);
                 birthProvinces.add(birthProvince);
             }
-
-//            int i = 0;
-//            while (i < birthProvinces.size()) {
-//                System.out.print(birthProvinces.get(i).getIdBirth());
-//                System.out.print(" " + birthProvinces.get(i).getProvince().getIdProvince());
-//                System.out.print(" " + birthProvinces.get(i).getProvince().getNameProvince());
-//                System.out.print(" " + birthProvinces.get(i).getYear());
-//                System.out.println(" " + birthProvinces.get(i).getQuantity());
-//                i++;
-//            }
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return birthProvinces;
     }
-
 }

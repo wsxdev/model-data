@@ -1,13 +1,5 @@
 package com.app.controllers.panels.sidebar;
 
-import com.app.models.dao.implementations.BirthInstructionImpl;
-import com.app.models.dao.implementations.BirthProvinceImpl;
-import com.app.models.dao.implementations.InstructionImpl;
-import com.app.models.dao.implementations.ProvinceImpl;
-import com.app.models.dao.interfaces.IBirthInstruction;
-import com.app.models.dao.interfaces.IBirthProvince;
-import com.app.models.dao.interfaces.IInstruction;
-import com.app.models.dao.interfaces.IProvince;
 import com.app.models.entities.Instruction;
 import com.app.models.entities.Province;
 import com.app.models.services.BirthService;
@@ -59,14 +51,12 @@ public class DataController implements Initializable {
             List<YearDataSummary> rows = birthService.getPivotByYear();
             List<Province> provinces = birthService.getProvinceOrderBirths();
 
-
             for (Province prov :  provinces) {
                 String provId = prov.getIdProvince();
                 TableColumn<YearDataSummary, Integer> columnProvince = new TableColumn<>(prov.getNameProvince());
                 columnProvince.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCountForRecord(provId)));
                 tableData.getColumns().add(columnProvince);
             }
-
             ObservableList<YearDataSummary> items = FXCollections.observableArrayList(rows);
             tableData.setItems(items);
             return;
@@ -82,15 +72,11 @@ public class DataController implements Initializable {
                 columnInstruction.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCountForRecord(instructionId)));
                 tableData.getColumns().add(columnInstruction);
             }
-
             ObservableList<YearDataSummary> items = FXCollections.observableArrayList(rowsI);
             tableData.setItems(items);
             return;
         }
-
-
     }
-
 
     public void OpenTableData(SortEvent<TableView> tableViewSortEvent) {
 

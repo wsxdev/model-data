@@ -33,32 +33,9 @@ public class InstructionImpl implements IInstruction {
                 Instruction instruction = new Instruction(idInstruction, nameInstruccion);
                 instructions.add(instruction);
             }
-
-            int i = 0;
-            while (i < instructions.size()) {
-                System.out.println(instructions.get(i).getNameInstruction());
-                i++;
-            }
-
         }catch (Exception e){
             throw new RuntimeException(e);
         }
-
         return instructions;
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-                

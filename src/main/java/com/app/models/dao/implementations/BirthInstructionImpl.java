@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BirthInstructionImpl implements IBirthInstruction {
-
     public List<BirthInstruction> getBirthInstruction (){
 
         String sql = """
@@ -36,7 +35,6 @@ public class BirthInstructionImpl implements IBirthInstruction {
              ResultSet resultSet = statement.executeQuery(sql)){
 
             Map<String, Instruction> instructionsMap = new HashMap<>();
-
             for (Instruction instr : instructions) {
                 if (instr != null && instr.getIdInstruction() != null) {
                     instructionsMap.put(instr.getIdInstruction(), instr);
@@ -53,16 +51,12 @@ public class BirthInstructionImpl implements IBirthInstruction {
                     instructionDb = instructionsMap.get(idInstruction);
 
                 }
-
                 BirthInstruction birthInstruction = new BirthInstruction(idBirth, year, instructionDb, cantidad);
                 birthInstructions.add(birthInstruction);
-
             }
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return birthInstructions;
-
     }
 }
