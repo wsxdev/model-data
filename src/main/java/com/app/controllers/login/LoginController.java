@@ -1,9 +1,6 @@
 package com.app.controllers.login;
 
-import com.app.models.dao.interfaces.IProvince;
 import com.app.models.database.*;
-import java.sql.Connection;
-import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
