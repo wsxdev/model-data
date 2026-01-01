@@ -168,7 +168,7 @@ public class ModelDataAppController {
     }
     @FXML
     public void itemOpenFrequency(ActionEvent actionEvent) {
-        createAndShowStage(FREQUENCY_VIEW_PANEL,"Frecuencias estadísticos");
+        createAndShowStage(FREQUENCY_VIEW_PANEL,"Frecuencias estadísticas");
     }
     @FXML
     public void itemLogout(ActionEvent actionEvent) {

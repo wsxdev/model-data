@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -30,7 +31,13 @@ public class FrequencyAnalyzerController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            if (btnEstadisticos != null && btnEstadisticos.getScene() != null) {
+                stage.initOwner(btnEstadisticos.getScene().getWindow());
+            } else if (btnGraficos != null && btnGraficos.getScene() != null) {
+                stage.initOwner(btnGraficos.getScene().getWindow());
+            }
+            stage.showAndWait();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
