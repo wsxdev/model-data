@@ -18,7 +18,7 @@
          </font>
       </Text>
       <ImageView fitHeight="205.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../../images/logos/ModelDataLogo.png"/>
+         <Image url="@../../../images/logos/login/ModelDataLogo.png"/>
       </ImageView>
       <TextFlow lineSpacing="4.0" prefHeight="164.0" prefWidth="678.0" textAlignment="JUSTIFY">
          <padding>

@@ -18,7 +18,7 @@ public class ModelDataApp extends Application {
 
         // AÑADIR ICONO AL STAGE
     stage.getIcons().add(new Image(
-            Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png"))));
+            Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/vistaprincipal/ModelDataLogoConBG.png"))));
 
         Parent root = loginLoader.load();
         Scene sceneLogin = new Scene(root);

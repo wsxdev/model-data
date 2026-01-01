@@ -35,7 +35,7 @@
                 <Pane prefHeight="121.0" prefWidth="260.0">
                     <!-- HEADER - LOGO MODELDATA  -->
                     <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../../images/logos/ModelDataLogoBordeSaliente.png" />
+                        <Image url="@../../images/logos/login/ModelDataLogoBordeSaliente.png" />
                     </ImageView>
                     <!-- TITLE - MODELDATA -->
                     <Text fill="white" layoutX="82.0" layoutY="36.0" text="MODEL">

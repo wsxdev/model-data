@@ -23,10 +23,10 @@ public class DatabaseConfig {
 
         // CONFIGURACIÓN DE LA BASE DE DATOS CON HIKARI
 		HikariConfig configuration = new HikariConfig();
-		configuration.setJdbcUrl(properties.getProperty("database.url"));
-		configuration.setUsername(properties.getProperty("database.user"));
-		configuration.setPassword(properties.getProperty("database.password"));
-		String driver = properties.getProperty("database.driver");
+		configuration.setJdbcUrl(properties.getProperty("localDatabase.url"));
+		configuration.setUsername(properties.getProperty("localDatabase.user"));
+		configuration.setPassword(properties.getProperty("localDatabase.password"));
+		String driver = properties.getProperty("localDatabase.driver");
 		if (driver != null && !driver.isBlank()) {
 			configuration.setDriverClassName(driver);
 		}

@@ -1,6 +1,5 @@
 package com.app.controllers.login;
 
-import com.app.models.database.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +42,7 @@ public class LoginController {
             // AÑADIR ICONO A LA VENTANA SI NO TIENE ICONO ASIGNADO
             try {
                 vistaPrincipalStage.getIcons().add(new javafx.scene.image.Image(
-                        Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/ModelDataLogoConBG.png"))
+                        Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/vistaprincipal/ModelDataLogoConBG.png"))
                 ));
             } catch (Exception ignored) {
                 // SI NO SE PUEDE CARGAR EL ICONO, SE IGNORA EL ERROR

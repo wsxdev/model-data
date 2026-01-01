@@ -2,6 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+/src/test/**/*
 .kotlin
 
 ### IntelliJ IDEA ###
@@ -44,7 +45,6 @@ build/
 
 # Carpetas de compilación
 /build
-/dist/
 /output/
 /out/
 /target/

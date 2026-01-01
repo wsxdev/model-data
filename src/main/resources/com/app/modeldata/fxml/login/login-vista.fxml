@@ -20,7 +20,7 @@
       <Pane prefHeight="500.0" prefWidth="530.0" style="-fx-background-color: #F2F2F2;">
          <ImageView fitHeight="59.0" fitWidth="63.0" layoutX="55.0" layoutY="46.0" nodeOrientation="INHERIT"
                     pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../images/logos/ModelDataLogoConBG.png"/>
+            <Image url="@../../images/logos/vistaprincipal/ModelDataLogoConBG.png"/>
          </ImageView>
          <Text layoutX="55.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0"
                text="INICIA SESIÓN PARA CONTINUAR">
@@ -67,7 +67,7 @@
       <Pane prefHeight="500.0" prefWidth="270.0">
          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="60.0" layoutY="41.0" pickOnBounds="true"
                     preserveRatio="true">
-            <Image url="@../../images/logos/ModelDataLogoBordeSaliente.png"/>
+            <Image url="@../../images/logos/login/ModelDataLogoBordeSaliente.png"/>
          </ImageView>
          <Text fill="#f2f2f2" layoutX="34.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0"
                text="¡BIENVENIDO!">
