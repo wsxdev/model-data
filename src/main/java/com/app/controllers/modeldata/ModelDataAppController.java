@@ -1,5 +1,6 @@
 package com.app.controllers.modeldata;
 
+import com.app.utils.ThemeManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +59,7 @@ public class ModelDataAppController {
     private static final String DATOS_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/datos.fxml";
     private static final String MODELADO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/modelado.fxml";
     private static final String GRAFICOS_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/graficos.fxml";
-    private static final String CONFIGURACION_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/configuracion.fxml";
+    private static final String CONFIGURACION_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/setting.fxml";
     private static final String ACERCA_DE_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemshelp/acerca-de.fxml";
     private static final String FREQUENCY_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemsanalizer/frequency-analyzer.fxml";
 
@@ -129,6 +130,11 @@ public class ModelDataAppController {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(scene);
+            try {
+                ThemeManager.getInstance().registerStage(stage);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             stage.show();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -177,8 +183,7 @@ public class ModelDataAppController {
             Scene loginScene = new Scene(loader.load());
 
             try {
-                loginScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(COLORS_DARK_CSS)).toExternalForm());
-                loginScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(MAIN_CSS)).toExternalForm());
+                ThemeManager.getInstance().applyToScene(loginScene);
             } catch (Exception e) { throw new RuntimeException(e); }
 
             Stage mainViewStage = (Stage) mainLayout.getScene().getWindow();

@@ -17,6 +17,7 @@ module com.app.modeldata {
     requires org.postgresql.jdbc;
     requires com.zaxxer.hikari;
     requires org.slf4j;
+    requires java.prefs;
 
     // PERMITIR EL ACCESO A LOS PAQUETES QUE CONTIENEN LOS CONTROLADORES FXML
     opens com.app.modeldata to javafx.fxml;

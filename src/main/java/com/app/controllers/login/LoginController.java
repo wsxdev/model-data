@@ -1,5 +1,6 @@
 package com.app.controllers.login;
 
+import com.app.utils.ThemeManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,14 +23,17 @@ public class LoginController {
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
 
-            vistaPrincipalScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/app/modeldata/css/colors-light.css")).toExternalForm());
-            vistaPrincipalScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/app/modeldata/css/main.css")).toExternalForm());
+            Stage vistaPrincipalStage = new Stage();
+            vistaPrincipalStage.setScene(vistaPrincipalScene);
+            try {
+                ThemeManager.getInstance().registerStage(vistaPrincipalStage);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
             // CREAR UN NUEVO STAGE Y CERRAR EL STAGE DE LOGIN
             Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            Stage vistaPrincipalStage = new Stage();
-            vistaPrincipalStage.setScene(vistaPrincipalScene);
             vistaPrincipalStage.setTitle("ModelData");
 
             // CONFIGURAR LA VENTANA PRINCIPAL
