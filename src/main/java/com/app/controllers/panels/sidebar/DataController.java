@@ -79,7 +79,7 @@ public class DataController implements Initializable {
             return;
         }
 
-        Stage loadingStage = DialogUtil.showLoadingDialog("Cargando", "Cargando datos... Cálmese, no sea impaciente. >:(");
+        Stage loadingStage = DialogUtil.showLoadingDialog("ModelData", "Cargando datos... Cálmese, no sea impaciente. >:(");
         Task<DataResult> task = new Task<>() {
             @Override
             protected DataResult call() throws Exception {
@@ -130,11 +130,17 @@ public class DataController implements Initializable {
     public void OpenTableData(SortEvent<TableView> tableViewSortEvent) { }
 
     public void btnClearTable(ActionEvent actionEvent) {
-        // TABLA ACTUAL
-        tableData.getItems().clear();
-        tableData.getColumns().clear();
-        // TABLA EN CACHÉ
-        DataCache dataCache = DataCache.getInstance();
-        dataCache.clearCache();
+        if (tableData.getItems().isEmpty()) {
+            DialogUtil.showInformationDialog("ModelData", "La tabla está vacía. No hay datos para limpiar.");
+        } else {
+            // TABLA ACTUAL
+            tableData.getItems().clear();
+            tableData.getColumns().clear();
+            // TABLA EN CACHÉ
+            DataCache dataCache = DataCache.getInstance();
+            dataCache.clearCache();
+            DialogUtil.showInformationDialog("ModelData", "Los datos de la tabla se limpiaron correctamente. Tenga buen día/tarde/noche.");
+        }
+
     }
 }
