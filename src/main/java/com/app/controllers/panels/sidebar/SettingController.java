@@ -6,12 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 
 public class SettingController {
 
-    private ToggleGroup toggleGroupTheme;
     @FXML private RadioButton rdBtnAuto;
     @FXML private RadioButton rdBtnLight;
     @FXML private RadioButton rdBtnDark;
@@ -24,7 +22,7 @@ public class SettingController {
         ThemeMode noseQuePoner = ThemeManager.getInstance().getThemeMode();
         pendingMode = noseQuePoner;
 
-        toggleGroupTheme = new ToggleGroup();
+        ToggleGroup toggleGroupTheme = new ToggleGroup();
         rdBtnAuto.setToggleGroup(toggleGroupTheme);
         rdBtnLight.setToggleGroup(toggleGroupTheme);
         rdBtnDark.setToggleGroup(toggleGroupTheme);
