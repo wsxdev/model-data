@@ -3,12 +3,15 @@ package com.app.controllers.panels.sidebar;
 import com.app.models.entities.Instruction;
 import com.app.models.entities.Province;
 import com.app.models.services.BirthService;
+import com.app.models.services.records.DataResult;
 import com.app.models.services.records.ColumnHeader;
 import com.app.models.services.DataCache;
 import com.app.models.services.records.YearDataSummary;
+import com.app.utils.DialogUtil;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,13 +48,16 @@ public class DataController implements Initializable {
     public void btnDatosAnalizar(ActionEvent actionEvent) {
 
         String selected = datosAnalizarComboBox.getSelectionModel().getSelectedItem();
-        if (selected == null) return;
+        if (selected == null) {
+            DialogUtil.showInformationDialog("ModelData", "No ha seleccionado ninguna opción. Por favor, seleccione una opción para cargar. :)");
+            return;
+        }
         loadData(selected, true);
     }
 
     private void buildTable(List<YearDataSummary> rows, List<ColumnHeader> headers) {
         tableData.getColumns().clear();
-        TableColumn<YearDataSummary, Integer> columnYear = new TableColumn<>("Año");
+        TableColumn<YearDataSummary, Integer> columnYear = new TableColumn<>("Año nuevo"); // Happy new year! :)
         columnYear.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().year()));
         tableData.getColumns().add(columnYear);
 
@@ -71,27 +78,53 @@ public class DataController implements Initializable {
             buildTable(cache.getLastRows(), cache.getLastHeaders());
             return;
         }
-        BirthService birthService = new BirthService();
-        if ("Provincia - año".equals(selected)) {
-            List<YearDataSummary> rows = birthService.getPivotByYear();
-            List<Province> provinces = birthService.getProvinceOrderBirths();
-            List<ColumnHeader> headers = new ArrayList<>();
 
-            for (Province prov : provinces) headers.add(new ColumnHeader(prov.getIdProvince(), prov.getNameProvince()));
-            buildTable(rows, headers);
-            DataCache.getInstance().put(selected, rows, headers);
-            return;
-        }
-        if ("Instrucción - año".equals(selected)) {
-            List<YearDataSummary> rows = birthService.getPivotYearInstruction();
-            List<Instruction> instructions = birthService.getInstructionOrderBirths();
-            List<ColumnHeader> headers = new ArrayList<>();
+        Stage loadingStage = DialogUtil.showLoadingDialog("Cargando", "Cargando datos... Cálmese, no sea impaciente. >:(");
+        Task<DataResult> task = new Task<>() {
+            @Override
+            protected DataResult call() throws Exception {
+                BirthService birthService = new BirthService();
+                if ("Provincia - año".equals(selected)) {
+                    List<YearDataSummary> rows = birthService.getPivotByYear();
+                    List<Province> provinces = birthService.getProvinceOrderBirths();
+                    List<ColumnHeader> headers = new ArrayList<>();
 
-            for (Instruction instr : instructions) headers.add(new ColumnHeader(instr.getIdInstruction(), instr.getNameInstruction()));
-            buildTable(rows, headers);
-            DataCache.getInstance().put(selected, rows, headers);
-            return;
-        }
+                    for (Province prov : provinces) headers.add(new ColumnHeader(prov.getIdProvince(), prov.getNameProvince()));
+                    return new DataResult(rows, headers);
+                }
+                if ("Instrucción - año".equals(selected)) {
+                    List<YearDataSummary> rows = birthService.getPivotYearInstruction();
+                    List<Instruction> instructions = birthService.getInstructionOrderBirths();
+                    List<ColumnHeader> headers = new ArrayList<>();
+
+                    for (Instruction instr : instructions) headers.add(new ColumnHeader(instr.getIdInstruction(), instr.getNameInstruction()));
+                    return new  DataResult(rows, headers);
+                }
+                return new DataResult(new ArrayList<>(), new ArrayList<>());
+            }
+        };
+
+        task.setOnSucceeded(event -> {
+            DataResult result = task.getValue();
+            buildTable(result.rows(), result.columnHeaders());
+            DataCache.getInstance().put(selected, result.rows(), result.columnHeaders());
+            loadingStage.close();
+        });
+        task.setOnFailed(event -> {
+           loadingStage.close();
+           Throwable throwable = task.getException();
+           String message;
+           if (throwable == null) {
+               message = "Error al cargar datos.";
+           } else {
+               message = throwable.getMessage();
+           }
+           DialogUtil.showErrorDialog("ModelData", "Error al cargar datos, vuelva a intentar.");
+        });
+        Thread thread = new Thread(task, "data-load-thread");
+        thread.setDaemon(true);
+        thread.start();
+
     }
 
     public void OpenTableData(SortEvent<TableView> tableViewSortEvent) { }
