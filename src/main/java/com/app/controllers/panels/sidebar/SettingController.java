@@ -5,11 +5,13 @@ import com.app.utils.ThemeMode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 public class SettingController {
 
+    @FXML public ComboBox cmbLanguages;
     @FXML private RadioButton rdBtnAuto;
     @FXML private RadioButton rdBtnLight;
     @FXML private RadioButton rdBtnDark;

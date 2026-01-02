@@ -17,8 +17,7 @@ public class ModelDataApp extends Application {
         FXMLLoader loginLoader = new FXMLLoader(ModelDataApp.class.getResource("/com/app/modeldata/fxml/login/login-vista.fxml"));
 
         // AÑADIR ICONO AL STAGE
-    stage.getIcons().add(new Image(
-            Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/vistaprincipal/ModelDataLogoConBG.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/vistaprincipal/ModelDataLogoConBG.png"))));
 
         Parent root = loginLoader.load();
         Scene sceneLogin = new Scene(root);
