@@ -9,6 +9,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 
@@ -22,6 +25,9 @@ public class ThemeManagerUtil {
     private static ThemeManagerUtil instance;
     private final Preferences preferences = Preferences.userNodeForPackage(ThemeManagerUtil.class);
     private final List<Stage> registeredStages = new ArrayList<>();
+    private final List<Runnable> themeListeners = new ArrayList<>();
+    private ScheduledFuture<?> monitorHandle;
+    private volatile boolean lastSystemDark = false;
     private ThemeMode themeMode;
 
     // CONSTRUCTOR
@@ -30,6 +36,8 @@ public class ThemeManagerUtil {
         try {
             themeMode = ThemeMode.valueOf(mode);
         } catch (Exception e) { themeMode = ThemeMode.AUTO; }
+        // INICIAR MONITOR SI EL MODO ESTÁ EN AUTO
+        if (themeMode == ThemeMode.DARK) startMonitoring();
     }
 
     // GETTERS - SETTERS
@@ -37,13 +45,71 @@ public class ThemeManagerUtil {
     public void setThemeMode(ThemeMode newMode) {
         this.themeMode = newMode;
         preferences.put(PREF_THEME, newMode.name());
+        if (newMode == ThemeMode.AUTO) startMonitoring();
+        else stopMonitoring();
         applyToAllStages();
+        Platform.runLater(() -> {
+            for (Runnable listener : new ArrayList<>(themeListeners)) {
+                try { listener.run(); } catch (Exception ignored) {}
+            }
+        });
     }
+
+    // MÉTODO PARA QUE LOS CONTROLADORES CONSULTEN EL MODO EFECTIVO (THEME)
+    public ThemeMode getEffectiveMode() { return resolveEffectiveMode(); }
+    // MÉTODOS PARA MANEJAR LISTENERS QUE ACTUALICEN UI (cbBtn)
+    public void addThemeChangeListener(Runnable runnable) {
+        if (runnable != null) themeListeners.add(runnable);
+    }
+    public void removeThemeChangeListener(Runnable runnable) { themeListeners.remove(runnable); }
+
+    //
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(l -> {
+        Thread thread = new Thread(l, "ThemeMonitor");
+        thread.setDaemon(true);
+        return thread;
+    });
 
     // MÉTODO PARA APLICAR EL TEMA A UNA ESCENA
     public static synchronized ThemeManagerUtil getInstance() {
         if (instance == null) instance = new ThemeManagerUtil();
         return instance;
+    }
+
+    //
+    private synchronized void startMonitoring() {
+        if (monitorHandle != null && !monitorHandle.isCancelled()) return;
+        try {
+            lastSystemDark = isSystemDark();
+        } catch (Exception e) {
+            lastSystemDark = false;
+        }
+        monitorHandle = scheduler.scheduleAtFixedRate(() -> {
+            try {
+                boolean nowTheme = isSystemDark();
+                if (nowTheme != lastSystemDark) {
+                    lastSystemDark = nowTheme;
+                    Platform.runLater(() -> {
+                        applyToAllStages();
+                        for (Runnable meQuedeSinIdeas : new ArrayList<>(themeListeners)) {
+                            try {
+                                meQuedeSinIdeas.run();
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+
+                }
+            } catch (Throwable ignored) {}
+        }, 1, 2, TimeUnit.SECONDS);
+    }
+
+    private synchronized void stopMonitoring() {
+        if (monitorHandle != null) {
+            monitorHandle.cancel(true);
+            monitorHandle = null;
+        }
     }
 
     // MÉTODO PARA REGISTRAR UN STAGE PARA APLICARLE EL TEMA
