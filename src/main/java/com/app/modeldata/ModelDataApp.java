@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
+import com.app.utils.LanguageManagerUtil;
 import java.util.Objects;
 
 public class ModelDataApp extends Application {
@@ -15,6 +17,8 @@ public class ModelDataApp extends Application {
     public void start(Stage stage) throws IOException {
         // PARA CARGAR EL LOGIN ANTES DE LA MAIN VIEW
         FXMLLoader loginLoader = new FXMLLoader(ModelDataApp.class.getResource("/com/app/modeldata/fxml/login/login-vista.fxml"));
+        // PARA PROVEER EL RESOURCE BUNDLE Y QUE FUNCIONEN LOS %keys EN FXML
+        loginLoader.setResources(LanguageManagerUtil.getInstance().getBundle());
 
         // AÑADIR ICONO AL STAGE
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/vistaprincipal/ModelDataLogoConBG.png"))));

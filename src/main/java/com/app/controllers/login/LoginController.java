@@ -1,6 +1,7 @@
 package com.app.controllers.login;
 
 import com.app.utils.ThemeManagerUtil;
+import com.app.utils.LanguageManagerUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,8 @@ public class LoginController {
         try {
             // PARA CARGAR LA VENTANA PRINCIPAL E INICIAR DESPUÉS DEL LOGIN VÁLIDO
             FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
+            // PARA PROVEER EL RESOURCE BUNDLE Y QUE FUNCIONEN LOS %keys EN FXML
+            loaderVistaPrincipal.setResources(LanguageManagerUtil.getInstance().getBundle());
             Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
 
             Stage vistaPrincipalStage = new Stage();

@@ -1,6 +1,7 @@
 package com.app.controllers.modeldata;
 
 import com.app.utils.ThemeManagerUtil;
+import com.app.utils.LanguageManagerUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -111,8 +112,10 @@ public class ModelDataAppController {
     // MÉTODO PARA CARGAR LAS VISTAS EN EL PANEL DE CONTENIDO
     private void loadViewPanels(String fxmlPath) {
         try {
-            // CARGAR LA VISTA DESDE EL ARCHIVO FXML
-            AnchorPane viewPanel = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+            // CARGAR LA VISTA DESDE EL ARCHIVO FXML con ResourceBundle
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+            loader.setResources(LanguageManagerUtil.getInstance().getBundle());
+            AnchorPane viewPanel = loader.load();
             contentPane.getChildren().setAll(viewPanel);
             AnchorPane.setTopAnchor(viewPanel, 0.0);
             AnchorPane.setBottomAnchor(viewPanel, 0.0);
@@ -123,9 +126,13 @@ public class ModelDataAppController {
         }
     }
 
+    // MÉTODO PARA CREAR Y MOSTRAR UN NUEVO STAGE CON LA VISTA ESPECIFICADA
     private void createAndShowStage(String fxmlPath, String title) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+            // CARGAR LA VISTA DESDE EL ARCHIVO FXML con ResourceBundle
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+            loader.setResources(LanguageManagerUtil.getInstance().getBundle());
+            Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle(title);
@@ -168,18 +175,22 @@ public class ModelDataAppController {
         }
     }
 
+    // MENÚ ÍTEM DE ACERCA DE 
     @FXML
     public void itemOpenAbout(ActionEvent actionEvent) {
         createAndShowStage(ACERCA_DE_VIEW_PANEL, "Acerca de");
     }
+    // MENÚ ÍTEM DE FRECUENCIAS
     @FXML
     public void itemOpenFrequency(ActionEvent actionEvent) {
         createAndShowStage(FREQUENCY_VIEW_PANEL,"Frecuencias estadísticas");
     }
+    // MÉTODO PARA CERRAR SESIÓN
     @FXML
     public void itemLogout(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(LOGIN_VIEW)));
+            loader.setResources(LanguageManagerUtil.getInstance().getBundle());
             Scene loginScene = new Scene(loader.load());
 
             try {
