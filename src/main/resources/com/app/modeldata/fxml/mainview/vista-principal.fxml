@@ -118,9 +118,9 @@
                             <Font size="20.0" />
                         </font>
                     </Text>
-                    <MenuButton layoutX="160.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="50.0" style="-fx-background-radius: 20;" styleClass="button-user-side-bar" textFill="WHITE">
+                            <MenuButton layoutX="160.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="50.0" style="-fx-background-radius: 20;" styleClass="button-user-side-bar" textFill="WHITE">
                         <items>
-                            <MenuItem mnemonicParsing="false" onAction="#itemLogout" text="Cerrar Sesión" />
+                            <MenuItem mnemonicParsing="false" onAction="#itemLogout" text="%menu.logout" />
                         </items>
                         <font>
                             <Font size="10.0" />
@@ -163,7 +163,7 @@
                             <SVGPath fx:id="arrowIcon" content="M18 12 L6 4 L6 20 Z" fill="#197CA1" scaleX="0.8" scaleY="0.8" visible="false" />
                         </StackPane>
                         <!-- TÍTULO DE LA TOOLBAR -->
-                        <Text fill="#197CA1" text="INICIO">
+                        <Text fill="#197CA1" text="%toolbar.title.inicio">
                             <font>
                                 <Font name="System Bold" size="25.0" />
                             </font>
@@ -184,9 +184,8 @@
                         <Pane prefHeight="50.0" prefWidth="89.0" style="-fx-background-color: transparent;">
                             <MenuButton layoutY="9.0" mnemonicParsing="false" style="-fx-background-radius: 23;" styleClass="button-user-toolbar">
                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#itemLogout" text="Cerrar Sesión" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemLogout" text="%menu.logout" />
                                 </items>
-
                                 <graphic>
                                     <HBox prefHeight="24.0" prefWidth="51.0" style="-fx-alignment: CENTER;">
                                         <ImageView fitHeight="24" fitWidth="24">
@@ -206,28 +205,28 @@
                             <Insets right="20.0" />
                         </padding>
                         <MenuBar fx:id="menuBar" prefHeight="28.0" style="-fx-background-color: #197CA1; -fx-background-radius: 15;">
-                            <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="Archivo">
-                                <MenuItem mnemonicParsing="false" text="Importar" />
-                                <MenuItem mnemonicParsing="false" text="Exportar" />
-                                <MenuItem mnemonicParsing="false" text="Guardar" />
-                                <MenuItem mnemonicParsing="false" text="Guardar como" />
-                                <MenuItem mnemonicParsing="false" text="Salir" />
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Editar">
-                                <MenuItem mnemonicParsing="false" text="Deshacer" />
-                                <MenuItem mnemonicParsing="false" text="Rehacer" />
-                                <MenuItem mnemonicParsing="false" text="Borrar" />
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Ver">
-                                <MenuItem mnemonicParsing="false" text="Delete" />
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Analizar">
-                                <MenuItem mnemonicParsing="false" onAction="#itemOpenFrequency" text="Frecuencias" />
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Ayuda">
-                                <MenuItem mnemonicParsing="false" text="Manual de usuario" />
-                                <MenuItem mnemonicParsing="false" onAction="#itemOpenAbout" text="Acerca de" />
-                            </Menu>
+                                <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="%menu.file">
+                                    <MenuItem mnemonicParsing="false" text="%menu.file.item.import" />
+                                    <MenuItem mnemonicParsing="false" text="%menu.file.item.export" />
+                                    <MenuItem mnemonicParsing="false" text="%menu.file.item.save" />
+                                    <MenuItem mnemonicParsing="false" text="%menu.file.item.saveas" />
+                                    <MenuItem mnemonicParsing="false" text="%menu.logout" />
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="%menu.edit">
+                                    <MenuItem mnemonicParsing="false" text="%menu.edit.item.undo" />
+                                    <MenuItem mnemonicParsing="false" text="%menu.edit.item.redo" />
+                                    <MenuItem mnemonicParsing="false" text="%menu.edit.item.delete" />
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="%menu.view">
+                                    <MenuItem mnemonicParsing="false" text="%menu.view.item.delete" />
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="%menu.analyze">
+                                    <MenuItem mnemonicParsing="false" onAction="#itemOpenFrequency" text="%menu.analyze.item.frequency" />
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="%menu.help">
+                                    <MenuItem mnemonicParsing="false" text="%menu.help.item.manual" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemOpenAbout" text="%menu.help.item.about" />
+                                </Menu>
                         </MenuBar>
                     </HBox>
                <padding>

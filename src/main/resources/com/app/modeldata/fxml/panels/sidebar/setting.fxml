@@ -19,35 +19,35 @@
             <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
         </padding>
         <HBox layoutX="10.0" layoutY="295.0" prefWidth="200.0">
-            <Label text="Temas">
+            <Label text="%settings.themes">
                 <font>
                     <Font name="System Bold" size="18.0" />
                 </font>
             </Label>
         </HBox>
         <HBox prefWidth="200.0" spacing="20.0">
-            <RadioButton fx:id="rdBtnAuto" mnemonicParsing="false" prefHeight="40.0" prefWidth="96.0" text="Automático" />
-            <RadioButton fx:id="rdBtnLight" mnemonicParsing="false" prefHeight="40.0" prefWidth="96.0" text="Claro" />
-            <RadioButton fx:id="rdBtnDark" mnemonicParsing="false" prefHeight="40.0" prefWidth="96.0" text="Oscuro" />
+            <RadioButton fx:id="rdBtnAuto" mnemonicParsing="false" prefHeight="40.0" prefWidth="96.0" text="%settings.auto" />
+            <RadioButton fx:id="rdBtnLight" mnemonicParsing="false" prefHeight="40.0" prefWidth="96.0" text="%settings.light" />
+            <RadioButton fx:id="rdBtnDark" mnemonicParsing="false" prefHeight="40.0" prefWidth="96.0" text="%settings.dark" />
         </HBox>
         <HBox prefWidth="200.0">
             <padding>
                 <Insets top="20.0" />
             </padding>
-            <Label text="Tipos de letras">
+            <Label text="%settings.fonts">
                 <font>
                     <Font name="System Bold" size="18.0" />
                 </font>
             </Label>
         </HBox>
         <HBox prefWidth="200.0" spacing="20.0">
-            <Label text="Tipografía predeterminada">
+            <Label text="%settings.font.default">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Label>
             <ComboBox prefHeight="30.0" prefWidth="150.0" />
-            <Label layoutX="10.0" layoutY="10.0" text="Tamaño">
+            <Label layoutX="10.0" layoutY="10.0" text="%settings.font.size">
                 <font>
                     <Font size="14.0" />
                 </font>
@@ -55,7 +55,7 @@
             <ComboBox layoutX="152.0" layoutY="10.0" prefHeight="30.0" prefWidth="150.0" />
         </HBox>
         <HBox layoutX="10.0" layoutY="203.0" prefWidth="200.0">
-            <Label text="Idioma">
+            <Label text="%settings.language">
                 <font>
                     <Font name="System Bold" size="18.0" />
                 </font>
@@ -65,12 +65,12 @@
             </Label>
         </HBox>
         <HBox layoutX="10.0" layoutY="44.0" prefWidth="200.0" spacing="20.0">
-            <Label text="Seleccione el idioma del menu">
+            <Label text="%settings.language.select">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Label>
-            <ComboBox prefHeight="30.0" prefWidth="150.0" />
+            <ComboBox fx:id="cmbLanguages" prefHeight="30.0" prefWidth="150.0" />
         </HBox>
         <HBox prefWidth="200.0">
             <Label text="Archivos y aplicaciones">
@@ -83,7 +83,7 @@
             </Label>
         </HBox>
         <HBox layoutX="60.0" layoutY="341.0" prefWidth="200.0">
-            <Label text="Guardar en">
+            <Label text="%settings.files.savein">
                 <font>
                     <Font size="14.0" />
                 </font>
@@ -96,16 +96,16 @@
                 </ImageView>
                 <TextField prefHeight="35.0" prefWidth="229.0" promptText="Descargas" style="-fx-background-color: #ededed;" />
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" text="Examinar" />
+                <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" text="%button.browse" />
         </HBox>
         <HBox prefWidth="200.0" spacing="20.0">
             <padding>
                 <Insets top="10.0"/>
             </padding>
-            <Button fx:id="btnApply" mnemonicParsing="false" onAction="#onBtnApply" prefHeight="30.0" prefWidth="100.0"
-                    text="Aplicar"/>
-            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onBtnCancel" prefHeight="30.0"
-                    prefWidth="100.0" text="Cancelar"/>
+                <Button fx:id="btnApply" mnemonicParsing="false" onAction="#onBtnApply" prefHeight="30.0" prefWidth="100.0"
+                    text="%button.apply"/>
+                <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onBtnCancel" prefHeight="30.0"
+                    prefWidth="100.0" text="%button.cancel"/>
         </HBox>
     </VBox>
 </AnchorPane>

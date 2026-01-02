@@ -1,6 +1,6 @@
 package com.app.controllers.modeldata;
 
-import com.app.utils.ThemeManager;
+import com.app.utils.ThemeManagerUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -131,7 +131,7 @@ public class ModelDataAppController {
             stage.setTitle(title);
             stage.setScene(scene);
             try {
-                ThemeManager.getInstance().registerStage(stage);
+                ThemeManagerUtil.getInstance().registerStage(stage);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -183,7 +183,7 @@ public class ModelDataAppController {
             Scene loginScene = new Scene(loader.load());
 
             try {
-                ThemeManager.getInstance().applyToScene(loginScene);
+                ThemeManagerUtil.getInstance().applyToScene(loginScene);
             } catch (Exception e) { throw new RuntimeException(e); }
 
             Stage mainViewStage = (Stage) mainLayout.getScene().getWindow();

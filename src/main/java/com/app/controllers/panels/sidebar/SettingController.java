@@ -1,6 +1,6 @@
 package com.app.controllers.panels.sidebar;
 
-import com.app.utils.ThemeManager;
+import com.app.utils.ThemeManagerUtil;
 import com.app.utils.ThemeMode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ public class SettingController {
 
     @FXML
     private void initialize() {
-        ThemeMode noseQuePoner = ThemeManager.getInstance().getThemeMode();
+        ThemeMode noseQuePoner = ThemeManagerUtil.getInstance().getThemeMode();
         pendingMode = noseQuePoner;
 
         ToggleGroup toggleGroupTheme = new ToggleGroup();
@@ -39,16 +39,16 @@ public class SettingController {
     }
     @FXML
     public void onBtnApply(ActionEvent actionEvent) {
-        ThemeManager.getInstance().setThemeMode(pendingMode);
+        ThemeManagerUtil.getInstance().setThemeMode(pendingMode);
         // ASEGURAR QUE LA ESCENA ACTUAL RECIBA LOS ESTILOS
-        try { ThemeManager.getInstance().applyToScene(rdBtnAuto.getScene()); } catch (Exception e) {
+        try { ThemeManagerUtil.getInstance().applyToScene(rdBtnAuto.getScene()); } catch (Exception e) {
             throw new RuntimeException(e);
         }
         updateApplyStage();
     }
     @FXML
     public void onBtnCancel(ActionEvent actionEvent) {
-        ThemeMode noseQuePoner = ThemeManager.getInstance().getThemeMode();
+        ThemeMode noseQuePoner = ThemeManagerUtil.getInstance().getThemeMode();
         pendingMode = noseQuePoner;
         applySelectionToRadioButtons(noseQuePoner);
         updateApplyStage();
@@ -61,7 +61,7 @@ public class SettingController {
     }
 
     private void updateApplyStage() {
-        boolean changed = pendingMode != ThemeManager.getInstance().getThemeMode();
+        boolean changed = pendingMode != ThemeManagerUtil.getInstance().getThemeMode();
         btnApply.setDisable(!changed);
     }
 }

@@ -12,20 +12,20 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 
-public class ThemeManager {
+public class ThemeManagerUtil {
 
     private static final String PREF_THEME = "app.theme";
     private static final String LIGHT_THEME_CSS = "/com/app/modeldata/css/colors-light.css";
     private static final String DARK_THEME_CSS = "/com/app/modeldata/css/colors-dark.css";
     private static final String MAIN_THEME_CSS = "/com/app/modeldata/css/main.css";
 
-    private static ThemeManager instance;
-    private final Preferences preferences = Preferences.userNodeForPackage(ThemeManager.class);
+    private static ThemeManagerUtil instance;
+    private final Preferences preferences = Preferences.userNodeForPackage(ThemeManagerUtil.class);
     private final List<Stage> registeredStages = new ArrayList<>();
     private ThemeMode themeMode;
 
     // CONSTRUCTOR
-    private ThemeManager() {
+    private ThemeManagerUtil() {
         String mode = preferences.get(PREF_THEME, ThemeMode.AUTO.name());
         try {
             themeMode = ThemeMode.valueOf(mode);
@@ -41,8 +41,8 @@ public class ThemeManager {
     }
 
     // MÉTODO PARA APLICAR EL TEMA A UNA ESCENA
-    public static synchronized ThemeManager getInstance() {
-        if (instance == null) instance = new ThemeManager();
+    public static synchronized ThemeManagerUtil getInstance() {
+        if (instance == null) instance = new ThemeManagerUtil();
         return instance;
     }
 

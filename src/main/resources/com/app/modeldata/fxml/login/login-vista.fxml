@@ -22,38 +22,38 @@
                     pickOnBounds="true" preserveRatio="true">
             <Image url="@../../images/logos/vistaprincipal/ModelDataLogoConBG.png"/>
          </ImageView>
-         <Text layoutX="55.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0"
-               text="INICIA SESIÓN PARA CONTINUAR">
+            <Text layoutX="55.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0"
+               text="%login.title">
             <font>
                <Font name="System Bold" size="20.0"/>
             </font>
          </Text>
-         <Text layoutX="55.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO">
+         <Text layoutX="55.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%login.user">
             <font>
                <Font name="System Bold" size="14.0"/>
             </font>
          </Text>
          <TextField layoutX="48.0" layoutY="215.0" style="-fx-background-color: #f2f2f2;"
-                    text="Ingrese su usuario"/>
+                    promptText="%login.user.prompt"/>
          <Separator layoutX="55.0" layoutY="242.0" prefWidth="200.0"/>
          <PasswordField layoutX="48.0" layoutY="290.0"
-                        style="-fx-border-color: #f2f2f2; -fx-background-color: #f2f2f2;" text="Ingresesucontra"/>
-         <Text layoutX="55.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRASEÑA">
+                        style="-fx-border-color: #f2f2f2; -fx-background-color: #f2f2f2;" promptText="%login.password.prompt"/>
+         <Text layoutX="55.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%login.password">
             <font>
                <Font name="System Bold" size="14.0"/>
             </font>
          </Text>
          <Separator layoutX="55.0" layoutY="320.0" prefWidth="200.0"/>
-         <Text fill="#197ca1" layoutX="55.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0"
-               text="¿Olvidaste tu contraseña?">
+            <Text fill="#197ca1" layoutX="55.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0"
+               text="%login.forgot">
             <font>
                <Font size="10.0"/>
             </font>
          </Text>
-         <Button fx:id="btnIniciarSesion" onAction="#goToMainWindow" layoutX="55.0" layoutY="364.0"
-                 mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0"
-                 style="-fx-background-color: #197CA1; -fx-background-radius: 12;" text="Iniciar Sesión"
-                 textFill="WHITE"/>
+          <Button fx:id="btnIniciarSesion" onAction="#goToMainWindow" layoutX="55.0" layoutY="364.0"
+             mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0"
+             style="-fx-background-color: #197CA1; -fx-background-radius: 12;" text="%login.button"
+             textFill="WHITE"/>
          <Text layoutX="123.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODEL DATA">
             <font>
                <Font name="Arial Bold" size="32.0"/>
@@ -69,14 +69,14 @@
                     preserveRatio="true">
             <Image url="@../../images/logos/login/ModelDataLogoBordeSaliente.png"/>
          </ImageView>
-         <Text fill="#f2f2f2" layoutX="34.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0"
-               text="¡BIENVENIDO!">
+            <Text fill="#f2f2f2" layoutX="34.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0"
+               text="%login.welcomeHeader">
             <font>
                <Font name="System Bold" size="30.0"/>
             </font>
          </Text>
-         <Text fill="#f2f2f2" layoutX="30.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0"
-               text="El modelado empieza aquí">
+            <Text fill="#f2f2f2" layoutX="30.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0"
+               text="%login.welcomeSub">
             <font>
                <Font size="18.0"/>
             </font>
