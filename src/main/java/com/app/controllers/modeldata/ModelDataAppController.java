@@ -67,15 +67,13 @@ public class ModelDataAppController {
 
     // LISTENER PARA CAMBIOS DE IDIOMA EN EL PANEL ACTUAL
     private Runnable currentLocaleListener;
-
-
-    // MAPA DE VISTAS ASOCIADAS A LOS BOTONES DEL SIDEBAR
+        // MAPA DE VISTAS ASOCIADAS A LOS BOTONES DEL SIDEBAR
     private static final Map<String, String> SIDEBAR_VIEWS = Map.of(
-            "INICIO", INICIO_VIEW_PANEL,
-            "DATOS", DATOS_VIEW_PANEL,
-            "MODELADO", MODELADO_VIEW_PANEL,
-            "GRÁFICOS", GRAFICOS_VIEW_PANEL,
-            "CONFIGURACIÓN", CONFIGURACION_VIEW_PANEL
+        "btnInicio", INICIO_VIEW_PANEL,
+        "btnDatos", DATOS_VIEW_PANEL,
+        "btnModelado", MODELADO_VIEW_PANEL,
+        "btnGraficos", GRAFICOS_VIEW_PANEL,
+        "btnConfiguracion", CONFIGURACION_VIEW_PANEL
     );
 
     // INICIALIZADOR DEL CONTROLADOR
@@ -99,7 +97,8 @@ public class ModelDataAppController {
 
         sidebarGroup.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
             if (newToggle instanceof ToggleButton selectedButton) {
-                String viewPath = SIDEBAR_VIEWS.get(selectedButton.getText());
+                String id = selectedButton.getId();
+                String viewPath = id != null ? SIDEBAR_VIEWS.get(id) : null;
                 if (viewPath != null) {
                     loadViewPanels(viewPath);
                 }
