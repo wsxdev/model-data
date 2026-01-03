@@ -177,7 +177,7 @@
                                     <Image url="@../../images/icons/search-icon.png" />
                                 </ImageView>
 
-                                <TextField fx:id="searchField" promptText="%oolbar.search.prompt" style="-fx-background-color:transparent; -fx-border-color:transparent;" HBox.hgrow="ALWAYS" />
+                                <TextField fx:id="searchField" promptText="%toolbar.search.prompt" style="-fx-background-color:transparent; -fx-border-color:transparent;" HBox.hgrow="ALWAYS" />
                             </HBox>
                         </Pane>
                         <!-- PANEL PARA EL ÍCONO Y BOTÓN DE USUARIO -->
