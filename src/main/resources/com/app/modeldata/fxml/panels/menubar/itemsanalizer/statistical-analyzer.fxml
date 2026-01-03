@@ -9,84 +9,82 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.app.controllers.panels.menubar.itemsanalizer.StatisticalAnalyzerController">
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.menubar.itemsanalizer.StatisticalAnalyzerController">
    <VBox prefHeight="300.0" prefWidth="500.0">
       <padding>
-         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
       </padding>
       <HBox prefHeight="210.0" prefWidth="460.0">
          <VBox maxHeight="200.0" prefWidth="250.0">
             <HBox prefWidth="200.0">
                <padding>
-                  <Insets bottom="10.0"/>
+                  <Insets bottom="10.0" />
                </padding>
-               <Label text="Tendencia central">
+               <Label text="%menu.analyze.item.frequency.button.estadisticos.label.tendenciaCentral">
                   <font>
-                     <Font name="System Bold" size="18.0"/>
+                     <Font name="System Bold" size="18.0" />
                   </font>
                </Label>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-               <RadioButton mnemonicParsing="false" text="Media">
+               <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.media">
                   <font>
-                     <Font size="14.0"/>
+                     <Font size="14.0" />
                   </font>
                </RadioButton>
-               <RadioButton mnemonicParsing="false" text="Mediana">
+               <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.mediana">
                   <font>
-                     <Font size="14.0"/>
+                     <Font size="14.0" />
                   </font>
                </RadioButton>
-               <RadioButton mnemonicParsing="false" text="Moda">
+               <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.moda">
                   <font>
-                     <Font size="14.0"/>
+                     <Font size="14.0" />
                   </font>
                </RadioButton>
-               <RadioButton mnemonicParsing="false" text="Suma">
+               <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.suma">
                   <font>
-                     <Font size="14.0"/>
+                     <Font size="14.0" />
                   </font>
                </RadioButton>
             </VBox>
          </VBox>
          <VBox maxHeight="200.0" prefHeight="200.0" prefWidth="250.0">
             <HBox prefWidth="200.0">
-               <Label text="Dispersión">
+               <Label text="%menu.analyze.item.frequency.button.estadisticos.label.dispersion">
                   <font>
-                     <Font name="System Bold" size="18.0"/>
+                     <Font name="System Bold" size="18.0" />
                   </font>
                   <padding>
-                     <Insets bottom="10.0"/>
+                     <Insets bottom="10.0" />
                   </padding>
                </Label>
             </HBox>
             <HBox prefHeight="173.0" prefWidth="230.0">
                <VBox prefHeight="129.0" prefWidth="230.0" spacing="20.0">
-                  <RadioButton mnemonicParsing="false" text="Desviación estándar">
+                  <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.desviacionEstandar">
                      <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Varianza">
+                  <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.varianza">
                      <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Máximo">
+                  <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.maximo">
                      <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Mínimo">
+                  <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.minimo">
                      <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Rango">
+                  <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.radioButton.rango">
                      <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                      </font>
                   </RadioButton>
                </VBox>
@@ -94,8 +92,8 @@
          </VBox>
       </HBox>
       <HBox alignment="CENTER_LEFT" prefWidth="460.0" spacing="20.0">
-         <Button mnemonicParsing="false" text="Continuar"/>
-         <Button mnemonicParsing="false" text="Cancelar"/>
+         <Button mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.button.continuar" />
+         <Button mnemonicParsing="false" text="%menu.analyze.item.frequency.button.estadisticos.button.cancelar" />
       </HBox>
    </VBox>
 </AnchorPane>

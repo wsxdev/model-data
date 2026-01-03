@@ -9,46 +9,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.app.controllers.panels.menubar.itemsanalizer.FrequencyAnalyzerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.menubar.itemsanalizer.FrequencyAnalyzerController">
    <VBox prefHeight="400.0" prefWidth="600.0" spacing="15.0">
       <padding>
-         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
       </padding>
       <HBox prefWidth="200.0">
-         <Label text="Frecuencias">
+         <Label text="%menu.analyze.item.frequency.title">
             <font>
-               <Font name="System Bold" size="24.0"/>
+               <Font name="System Bold" size="24.0" />
             </font>
          </Label>
       </HBox>
       <HBox prefWidth="200.0" spacing="20.0">
-         <Label text="Variables">
+         <Label text="%menu.analyze.item.frequency.label.variables">
             <font>
-               <Font name="System Bold" size="16.0"/>
+               <Font name="System Bold" size="16.0" />
             </font>
          </Label>
-         <ComboBox prefHeight="25.0" prefWidth="97.0"/>
+         <ComboBox prefHeight="25.0" prefWidth="97.0" />
       </HBox>
       <HBox prefHeight="180.0" prefWidth="200.0" spacing="20.0">
          <VBox minHeight="180.0" prefWidth="300.0">
-            <HBox maxWidth="300.0" prefHeight="200.0" prefWidth="300.0"
-                  style="-fx-background-color: #d9d9d9;"/>
+            <HBox maxWidth="300.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #d9d9d9;" />
          </VBox>
          <VBox prefHeight="200.0" prefWidth="150.0" spacing="10.0">
-            <Button fx:id="btnEstadisticos" mnemonicParsing="false" onAction="#buttonOpenEstadisticos"
-                    prefHeight="30.0" prefWidth="180.0" text="Estadísticos"/>
-            <Button fx:id="btnGraficos" mnemonicParsing="false" onAction="#buttonOpenGraficos"
-                    prefHeight="30.0" prefWidth="180.0" text="Gráficos"/>
+            <Button fx:id="btnEstadisticos" mnemonicParsing="false" onAction="#buttonOpenEstadisticos" prefHeight="30.0" prefWidth="180.0" text="%menu.analyze.item.frequency.button.estadisticos" />
+            <Button fx:id="btnGraficos" mnemonicParsing="false" onAction="#buttonOpenGraficos" prefHeight="30.0" prefWidth="180.0" text="%menu.analyze.item.frequency.button.graficos" />
          </VBox>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
-         <Button fx:id="btnAceptarFrecuencias" mnemonicParsing="false" onAction="#buttonOpenAceptarFrecuencias"
-                 prefHeight="30.0" prefWidth="130.0" text="Aceptar"/>
-         <Button fx:id="btnRestablecer" mnemonicParsing="false" onAction="#buttonOpenRestablecer"
-                 prefHeight="30.0" prefWidth="130.0" text="Restablecer"/>
-         <Button fx:id="btnCancelarFrecuencias" mnemonicParsing="false" onAction="#buttonOpenCancelarFrecuencias"
-                 prefHeight="30.0" prefWidth="130.0" text="Cancelar"/>
+         <Button fx:id="btnAceptarFrecuencias" mnemonicParsing="false" onAction="#buttonOpenAceptarFrecuencias" prefHeight="30.0" prefWidth="130.0" text="%menu.analyze.item.frequency.button.aceptar" />
+         <Button fx:id="btnRestablecer" mnemonicParsing="false" onAction="#buttonOpenRestablecer" prefHeight="30.0" prefWidth="130.0" text="%menu.analyze.item.frequency.button.restablecer" />
+         <Button fx:id="btnCancelarFrecuencias" mnemonicParsing="false" onAction="#buttonOpenCancelarFrecuencias" prefHeight="30.0" prefWidth="130.0" text="%menu.analyze.item.frequency.button.cancelar" />
       </HBox>
    </VBox>
 </AnchorPane>

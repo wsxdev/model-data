@@ -9,43 +9,40 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.app.controllers.panels.menubar.itemsanalizer.AnalyzerGraphicsController">
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.menubar.itemsanalizer.AnalyzerGraphicsController">
    <VBox prefHeight="250.0" prefWidth="300.0" spacing="15.0">
       <padding>
-         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
       </padding>
       <HBox prefWidth="300.0">
-         <Label text="Tipo de gráficos">
+         <Label text="%menu.analyze.item.frequency.button.graficos.label.tipoGraficos">
             <font>
-               <Font name="System Bold" size="18.0"/>
+               <Font name="System Bold" size="18.0" />
             </font>
          </Label>
       </HBox>
       <HBox prefWidth="200.0">
          <VBox prefWidth="263.0" spacing="15.0">
-            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="127.0"
-                         text="Gráficos de barras"/>
-            <RadioButton mnemonicParsing="false" text="Gráficos circulares"/>
-            <RadioButton mnemonicParsing="false" text="Ninguno"/>
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="127.0" text="%menu.analyze.item.frequency.button.graficos.radioButton.graficoDeBarras" />
+            <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.graficos.radioButton.graficoCircular" />
+            <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.graficos.radioButton.ninguno" />
          </VBox>
       </HBox>
       <HBox prefWidth="200.0">
-         <Label text="Valores del gráfico">
+         <Label text="%menu.analyze.item.frequency.button.graficos.label.valoresDelGrafico">
             <font>
-               <Font name="System Bold" size="14.0"/>
+               <Font name="System Bold" size="14.0" />
             </font>
          </Label>
       </HBox>
       <HBox prefWidth="200.0" spacing="20.0">
-         <RadioButton mnemonicParsing="false" text="Frecuencias"/>
-         <RadioButton mnemonicParsing="false" text="Porcentajes"/>
+         <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.graficos.radioButton.frecuencias" />
+         <RadioButton mnemonicParsing="false" text="%menu.analyze.item.frequency.button.graficos.radioButton.porcentajes" />
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="275.0" spacing="20.0">
-         <Button mnemonicParsing="false" text="Aceptar"/>
-         <Button mnemonicParsing="false" text="Cancelar" textOverrun="CLIP"/>
-         <Button layoutX="87.0" layoutY="10.0" mnemonicParsing="false" text="Ayuda" textOverrun="CLIP"/>
+         <Button mnemonicParsing="false" text="%menu.analyze.item.frequency.button.graficos.button.aceptar" />
+         <Button mnemonicParsing="false" text="%menu.analyze.item.frequency.button.graficos.button.cancelar" textOverrun="CLIP" />
+         <Button layoutX="87.0" layoutY="10.0" mnemonicParsing="false" text="%menu.analyze.item.frequency.button.graficos.button.ayuda" textOverrun="CLIP" />
       </HBox>
    </VBox>
 </AnchorPane>

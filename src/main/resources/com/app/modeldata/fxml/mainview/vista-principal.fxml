@@ -55,7 +55,7 @@
                 <!-- VBOX PARA BOTONES DEL SIDEBAR -->
                 <VBox alignment="CENTER_LEFT" prefHeight="270.0" prefWidth="260.0" style="-fx-padding:20 0 0 0;">
                     <!-- BOTÓN INICIO -->
-                    <ToggleButton fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="INICIO" textFill="WHITE">
+                    <ToggleButton fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.inicio" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/home-icon.png" />
@@ -66,7 +66,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN DATOS -->
-                    <ToggleButton fx:id="btnDatos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="DATOS" textFill="WHITE">
+                    <ToggleButton fx:id="btnDatos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.datos" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/data-icon.png" />
@@ -77,7 +77,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN MODELADO -->
-                    <ToggleButton fx:id="btnModelado" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="MODELADO" textFill="WHITE">
+                    <ToggleButton fx:id="btnModelado" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.modelado" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/model-icon.png" />
@@ -88,7 +88,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN GRÁFICOS -->
-                    <ToggleButton fx:id="btnGraficos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="GRÁFICOS" textFill="WHITE">
+                    <ToggleButton fx:id="btnGraficos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.graficos" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/graphics-bar-icon.png" />
@@ -99,7 +99,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN CONFIGURACIÓN -->
-                    <ToggleButton fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="CONFIGURACIÓN" textFill="WHITE">
+                    <ToggleButton fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.configuracion" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/setting-icon.png" />
@@ -177,7 +177,7 @@
                                     <Image url="@../../images/icons/search-icon.png" />
                                 </ImageView>
 
-                                <TextField fx:id="searchField" promptText="Buscar..." style="-fx-background-color:transparent; -fx-border-color:transparent;" HBox.hgrow="ALWAYS" />
+                                <TextField fx:id="searchField" promptText="%oolbar.search.prompt" style="-fx-background-color:transparent; -fx-border-color:transparent;" HBox.hgrow="ALWAYS" />
                             </HBox>
                         </Pane>
                         <!-- PANEL PARA EL ÍCONO Y BOTÓN DE USUARIO -->
