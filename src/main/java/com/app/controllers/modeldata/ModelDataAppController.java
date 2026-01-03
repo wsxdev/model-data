@@ -2,6 +2,7 @@ package com.app.controllers.modeldata;
 
 import com.app.utils.ThemeManagerUtil;
 import com.app.utils.LanguageManagerUtil;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +65,9 @@ public class ModelDataAppController {
     private static final String ACERCA_DE_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemshelp/acerca-de.fxml";
     private static final String FREQUENCY_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemsanalizer/frequency-analyzer.fxml";
 
+    // LISTENER PARA CAMBIOS DE IDIOMA EN EL PANEL ACTUAL
+    private Runnable currentLocaleListener;
+
 
     // MAPA DE VISTAS ASOCIADAS A LOS BOTONES DEL SIDEBAR
     private static final Map<String, String> SIDEBAR_VIEWS = Map.of(
@@ -121,6 +125,37 @@ public class ModelDataAppController {
             AnchorPane.setBottomAnchor(viewPanel, 0.0);
             AnchorPane.setLeftAnchor(viewPanel, 0.0);
             AnchorPane.setRightAnchor(viewPanel, 0.0);
+
+            // REMOVER LISTENER ANTERIOR
+            if (currentLocaleListener != null) {
+                LanguageManagerUtil.getInstance().removeLocaleChangeListener(currentLocaleListener);
+                currentLocaleListener = null;
+            }
+
+            // REGISTRAR NUEVO LISTENER QUE RECARGA ESTE PANEL CON EL NUEVO BUNDLE
+            Runnable reload = () -> {
+                try {
+                    FXMLLoader masLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+                    masLoader.setResources(LanguageManagerUtil.getInstance().getBundle());
+                    AnchorPane newView = masLoader.load();
+                    Platform.runLater(() -> {
+                        contentPane.getChildren().setAll(newView);
+                        AnchorPane.setTopAnchor(newView, 0.0);
+                        AnchorPane.setBottomAnchor(newView, 0.0);
+                        AnchorPane.setLeftAnchor(newView, 0.0);
+                        AnchorPane.setRightAnchor(newView, 0.0);
+                    });
+                } catch (Exception e) { }
+            };
+            currentLocaleListener = reload;
+            LanguageManagerUtil.getInstance().addLocaleChangeListener(currentLocaleListener);
+
+            // REGISTRAR EL STAGE PRINCIPAL PARA QUE RECIBA CAMBIOS GLOBALES DE IDIOMA
+            try {
+                if (contentPane.getScene() != null && contentPane.getScene().getWindow() instanceof Stage stage) {
+                    LanguageManagerUtil.getInstance().registerStage(stage, reload);
+                }
+            } catch (Exception ignored) {}
         } catch (IOException | NullPointerException exception) {
             throw new RuntimeException("Error cargando la vista: " + fxmlPath, exception);
         }
@@ -139,6 +174,20 @@ public class ModelDataAppController {
             stage.setScene(scene);
             try {
                 ThemeManagerUtil.getInstance().registerStage(stage);
+                // REGISTRAR STAGE Y SU ACCIÓN DE RELOAD
+                Runnable reload = () -> {
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+                        fxmlLoader.setResources(LanguageManagerUtil.getInstance().getBundle());
+                        Parent newRoot = fxmlLoader.load();
+                        Platform.runLater(() -> {
+                            Scene sceneHereOCualquierCosa = stage.getScene();
+                            if (sceneHereOCualquierCosa != null) sceneHereOCualquierCosa.setRoot(newRoot);
+                            ThemeManagerUtil.getInstance().applyToScene(sceneHereOCualquierCosa);
+                        });
+                    } catch (Exception ignored) {}
+                };
+                LanguageManagerUtil.getInstance().registerStage(stage, reload);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -201,6 +250,24 @@ public class ModelDataAppController {
             Stage loginStage = new Stage();
             loginStage.setScene(loginScene);
             loginStage.setTitle("MODELDATA - LOGIN");
+            // REGISTRAR LOGINSTAGE PARA ACTUALIZACIONES DE IDIOMA
+            try {
+                Runnable reload = () -> {
+                    try {
+                        FXMLLoader otroLoaderMas = new FXMLLoader(Objects.requireNonNull(getClass().getResource(LOGIN_VIEW)));
+                        otroLoaderMas.setResources(LanguageManagerUtil.getInstance().getBundle());
+                        Scene sceneHereOCualquierCosa = loginStage.getScene();
+                        if (sceneHereOCualquierCosa != null) {
+                            Parent root = otroLoaderMas.load();
+                            Platform.runLater(() -> {
+                                sceneHereOCualquierCosa.setRoot(root);
+                                ThemeManagerUtil.getInstance().applyToScene(sceneHereOCualquierCosa);
+                            });
+                        }
+                    } catch (Exception ignored) {}
+                };
+                LanguageManagerUtil.getInstance().registerStage(loginStage, reload);
+            } catch (Exception ignored) {}
             loginStage.show();
             mainViewStage.close();
         } catch (RuntimeException | IOException e) { throw new RuntimeException(e); }

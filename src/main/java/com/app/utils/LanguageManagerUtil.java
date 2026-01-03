@@ -1,5 +1,8 @@
 package com.app.utils;
 
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
 import java.util.*;
 import java.util.prefs.Preferences;
 
@@ -21,6 +24,8 @@ public class LanguageManagerUtil {
     private final Preferences preferences = Preferences.userNodeForPackage(LanguageManagerUtil.class);
     private Locale locale;
     private final List<Runnable> listeners = new ArrayList<>();
+    private final List<Stage> registeredStages = new ArrayList<>();
+    private final Map<Stage, Runnable> stageRefreshers = new HashMap<>();
 
     private LanguageManagerUtil() {
         String defaultLanguage = preferences.get(PREF_LOCALE, Locale.getDefault().getLanguage());
@@ -46,10 +51,12 @@ public class LanguageManagerUtil {
         if (newLocale == null) return;
         this.locale = newLocale;
         preferences.put(PREF_LOCALE, newLocale.getLanguage());
-        // NOTIFICAR A LOS LISTENERS
-        for (Runnable runnable : new ArrayList<>(listeners)) {
-            try { runnable.run(); } catch (Exception ignored) {}
-        }
+        // NOTIFICAR A LOS LISTENERS EN JavaFX APP THREAD
+        Platform.runLater(() -> {
+            for (Runnable runnable : new ArrayList<>(listeners)) {
+                try { runnable.run(); } catch (Exception ignored) {}
+            }
+        });
     }
 
     // MÉTODO PARA OBTENER EL RESOURCE BUNDLE SEGÚN EL IDIOMA ACTUAL
@@ -62,4 +69,36 @@ public class LanguageManagerUtil {
     // MÉTODOS PARA GESTIONAR LISTENERS DE CAMBIO DE IDIOMA
     public void addLocaleChangeListener(Runnable runnable) { if (runnable != null) listeners.add(runnable); }
     public void removeLocaleChangeListener(Runnable runnable) { listeners.remove(runnable); }
+
+    // REGISTRAR STAGE Y UNA ACCIÓN DE RECARGA (refresh) QUE SE EJECUTARÁ AL CAMBIAR EL IDIOMA
+    public void registerStage(Stage stage, Runnable refreshAction) {
+        if (stage == null) return;
+        if (!registeredStages.contains(stage)) registeredStages.add(stage);
+        if (refreshAction != null) {
+            stageRefreshers.put(stage, refreshAction);
+            addLocaleChangeListener(refreshAction);
+        }
+        // LIMPIAR REFERENCIAS AL CERRAR EL STAGE
+        try {
+            stage.setOnHidden(l -> {
+                registeredStages.remove(stage);
+                Runnable runnable = stageRefreshers.remove(stage);
+                if (runnable != null) removeLocaleChangeListener(runnable);
+            });
+        } catch (Exception ignored) {}
+    }
+
+    public void registerStage(Stage stage) { registerStage(stage, null); }
+
+    // APLICAR RECARGA A TODOS LOS STAGES REGISTRADOS
+    public void applyToAllRegisteredStages() {
+        Platform.runLater(() -> {
+            for (Stage stage : new ArrayList<>(registeredStages)) {
+                Runnable runnable = stageRefreshers.get(stage);
+                if (runnable != null) {
+                    try { runnable.run(); } catch (Exception ignored) {}
+                }
+            }
+        });
+    }
 }

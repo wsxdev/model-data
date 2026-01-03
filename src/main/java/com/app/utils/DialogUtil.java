@@ -13,7 +13,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.util.MissingResourceException;
 import java.util.Objects;
+import com.app.utils.LanguageManagerUtil;
 
 public final class DialogUtil {
     // PREVIA INSTANCIA
@@ -24,6 +26,14 @@ public final class DialogUtil {
     // MÉTODO PARA MOSTRAR DIÁLOGO DE ADVERTENCIA
     public static void showWarningDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
+        // INTENTAR TRADUCIR TÍTULO Y MENSAJE
+        try {
+            title = LanguageManagerUtil.getInstance().getBundle().getString(title);
+        } catch (MissingResourceException ignored) {}
+        try {
+            message = LanguageManagerUtil.getInstance().getBundle().getString(message);
+        } catch (MissingResourceException ignored) {}
+
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
@@ -38,6 +48,13 @@ public final class DialogUtil {
     // MÉTODO PARA MOSTRAR DIÁLOGO DE ERROR
     public static void showErrorDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        try {
+            title = LanguageManagerUtil.getInstance().getBundle().getString(title);
+        } catch (MissingResourceException ignored) {}
+        try {
+            message = LanguageManagerUtil.getInstance().getBundle().getString(message);
+        } catch (MissingResourceException ignored) {}
+
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
@@ -52,6 +69,14 @@ public final class DialogUtil {
     // MÉTODO PARA MOSTRAR DIÁLOGO DE CONFIRMACIÓN
     public static void showConfirmationDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        // INTENTAR TRADUCIR TÍTULO Y MENSAJE
+        try {
+            title = LanguageManagerUtil.getInstance().getBundle().getString(title);
+        } catch (MissingResourceException ignored) {}
+        try {
+            message = LanguageManagerUtil.getInstance().getBundle().getString(message);
+        } catch (MissingResourceException ignored) {}
+
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
@@ -61,6 +86,14 @@ public final class DialogUtil {
     // MÉTODO PARA MOSTRAR DIÁLOGO DE INFORMACIÓN
     public static void showInformationDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        // INTENTAR TRADUCIR TÍTULO Y MENSAJE
+        try {
+            title = LanguageManagerUtil.getInstance().getBundle().getString(title);
+        } catch (MissingResourceException ignored) {}
+        try {
+            message = LanguageManagerUtil.getInstance().getBundle().getString(message);
+        } catch (MissingResourceException ignored) {}
+
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

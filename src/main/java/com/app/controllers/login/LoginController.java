@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.application.Platform;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -57,6 +59,24 @@ public class LoginController {
 
             // MOSTRAR LA VENTANA PRINCIPAL Y CERRAR LA DE LOGIN
             vistaPrincipalStage.show();
+            // REGISTRAR STAGE PARA ACTUALIZACIONES DE IDIOMA
+            try {
+                Runnable reload = () -> {
+                    try {
+                        FXMLLoader loaderHere = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
+                        loaderHere.setResources(LanguageManagerUtil.getInstance().getBundle());
+                        Scene sceneHere = vistaPrincipalStage.getScene();
+                        if (sceneHere != null) {
+                            Parent root = loaderHere.load();
+                            Platform.runLater(() -> {
+                                sceneHere.setRoot(root);
+                                try { ThemeManagerUtil.getInstance().applyToScene(sceneHere); } catch (Exception ignored) {}
+                            });
+                        }
+                    } catch (Exception ignored) {}
+                };
+                LanguageManagerUtil.getInstance().registerStage(vistaPrincipalStage, reload);
+            } catch (Exception ignored) {}
             loginStage.close();
 
         } catch (Exception e) {

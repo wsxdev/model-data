@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import com.app.utils.LanguageManagerUtil;
+import com.app.utils.ThemeManagerUtil;
+import javafx.application.Platform;
 import java.util.Objects;
 
 public class ModelDataApp extends Application {
@@ -29,6 +31,24 @@ public class ModelDataApp extends Application {
         stage.setTitle("MODELDATA - LOGIN");
         stage.setResizable(false);
         stage.show();
+        // REGISTRAR STAGE PARA SOPORTAR CAMBIOS DE TEMA
+        try {
+            ThemeManagerUtil.getInstance().registerStage(stage);
+            // REGISTRAR STAGE PARA SOPORTAR CAMBIOS DE IDIOMA
+            Runnable reload = () -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(ModelDataApp.class.getResource("/com/app/modeldata/fxml/login/login-vista.fxml"));
+                    loader.setResources(LanguageManagerUtil.getInstance().getBundle());
+                    Parent newRoot = loader.load();
+                    Platform.runLater(() -> {
+                        Scene scene = stage.getScene();
+                        if (scene != null) scene.setRoot(newRoot);
+                        ThemeManagerUtil.getInstance().applyToScene(scene);
+                    });
+                } catch (Exception ignored) {}
+            };
+            LanguageManagerUtil.getInstance().registerStage(stage, reload);
+        } catch (Exception ignored) {}
 
     }
 }
