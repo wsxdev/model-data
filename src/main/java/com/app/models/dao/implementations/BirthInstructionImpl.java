@@ -95,4 +95,17 @@ public class BirthInstructionImpl implements IBirthInstruction {
             throw new RuntimeException("Error saving/updating birth instruction: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public void deleteByYear(int year) {
+        String sql = "DELETE FROM nacimientos_instruccion WHERE anio = ?";
+        DatabaseConnection connection = DatabaseConnection.getInstance();
+        try (Connection conn = connection.getConnection();
+                java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, year);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting birth instruction consolidation: " + e.getMessage(), e);
+        }
+    }
 }

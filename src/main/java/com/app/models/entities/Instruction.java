@@ -16,14 +16,36 @@ public class Instruction {
     public String getIdInstruction() {
         return idInstruction;
     }
+
     public void setIdInstruction(String idInstruction) {
         this.idInstruction = idInstruction;
     }
+
     public String getNameInstruction() {
         return nameInstruction;
     }
+
     public void setNameInstruction(String nameInstruction) {
         this.nameInstruction = nameInstruction;
     }
 
+    @Override
+    public String toString() {
+        return nameInstruction != null ? nameInstruction : "";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Instruction that = (Instruction) o;
+        return java.util.Objects.equals(idInstruction, that.idInstruction);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(idInstruction);
+    }
 }

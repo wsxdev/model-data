@@ -342,4 +342,12 @@ public class BirthService {
     public void deleteBirthRegistration(int id) {
         birthRegistrationDao.delete(id);
     }
+
+    /**
+     * Elimina la consolidación (estadísticas agregadas) de un año específico.
+     */
+    public void deleteConsolidation(int year) {
+        birthProvinceDao.deleteByYear(year);
+        birthInstructionDao.deleteByYear(year);
+    }
 }

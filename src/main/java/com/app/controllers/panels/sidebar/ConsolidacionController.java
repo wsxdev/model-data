@@ -20,6 +20,8 @@ public class ConsolidacionController {
     @FXML
     private Button btnConsolidate;
     @FXML
+    private Button btnDeleteConsolidation;
+    @FXML
     private Label statusLabel;
     @FXML
     private ProgressIndicator progressIndicator;
@@ -48,6 +50,22 @@ public class ConsolidacionController {
             statusLabel.setText("Seleccione un año.");
             statusLabel.setStyle("-fx-text-fill: red;");
             return;
+        }
+
+        // Warning for past years
+        if (year <= 2024) {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
+                    javafx.scene.control.Alert.AlertType.WARNING);
+            alert.setTitle("Advertencia de Consolidación");
+            alert.setHeaderText("Año Histórico Detectado (" + year + ")");
+            alert.setContentText("Está intentando consolidar un año que ya ha finalizado. " +
+                    "Esto sobrescribirá los datos estadísticos existentes para este año. " +
+                    "¿Desea continuar bajo su responsabilidad?");
+
+            java.util.Optional<javafx.scene.control.ButtonType> result = alert.showAndWait();
+            if (!result.isPresent() || result.get() != javafx.scene.control.ButtonType.OK) {
+                return;
+            }
         }
 
         statusLabel.setText("Consolidando datos para el año " + year + "...");
@@ -80,5 +98,48 @@ public class ConsolidacionController {
             });
             return null;
         });
+    }
+
+    @FXML
+    public void onDeleteConsolidation() {
+        Integer year = cbYear.getValue();
+        if (year == null) {
+            statusLabel.setText("Seleccione un año.");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
+                javafx.scene.control.Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Eliminar Consolidación");
+        alert.setHeaderText("¿Está seguro?");
+        alert.setContentText(
+                "Se eliminarán permanentemente los datos agregados (provincias e instrucciones) para el año " + year
+                        + ".");
+
+        java.util.Optional<javafx.scene.control.ButtonType> res = alert.showAndWait();
+        if (res.isPresent() && res.get() == javafx.scene.control.ButtonType.OK) {
+            statusLabel.setText("Eliminando consolidación para " + year + "...");
+            statusLabel.setStyle("-fx-text-fill: black;");
+            btnDeleteConsolidation.setDisable(true);
+            progressIndicator.setVisible(true);
+
+            CompletableFuture.runAsync(() -> {
+                birthService.deleteConsolidation(year);
+            }).handle((result, ex) -> {
+                javafx.application.Platform.runLater(() -> {
+                    btnDeleteConsolidation.setDisable(false);
+                    progressIndicator.setVisible(false);
+                    if (ex != null) {
+                        statusLabel.setText("Error al eliminar: " + ex.getMessage());
+                        statusLabel.setStyle("-fx-text-fill: red;");
+                    } else {
+                        statusLabel.setText("Consolidación del año " + year + " eliminada.");
+                        statusLabel.setStyle("-fx-text-fill: blue;");
+                    }
+                });
+                return null;
+            });
+        }
     }
 }

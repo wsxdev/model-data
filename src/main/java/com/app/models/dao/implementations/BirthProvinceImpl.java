@@ -97,4 +97,17 @@ public class BirthProvinceImpl implements IBirthProvince {
             throw new RuntimeException("Error saving/updating birth province: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public void deleteByYear(int year) {
+        String sql = "DELETE FROM nacimientos_provincias WHERE anio = ?";
+        DatabaseConnection connection = DatabaseConnection.getInstance();
+        try (Connection conn = connection.getConnection();
+                java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, year);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting birth province consolidation: " + e.getMessage(), e);
+        }
+    }
 }

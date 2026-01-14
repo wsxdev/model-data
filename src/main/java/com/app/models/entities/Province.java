@@ -10,6 +10,7 @@ public class Province {
         this.idProvince = idProvince;
         this.nameProvince = province;
     }
+
     // Setters y Getters
     public String getIdProvince() {
         return idProvince;
@@ -29,6 +30,21 @@ public class Province {
 
     @Override
     public String toString() {
-        return super.toString();
+        return nameProvince != null ? nameProvince : "";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Province province = (Province) o;
+        return java.util.Objects.equals(idProvince, province.idProvince);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(idProvince);
     }
 }

@@ -10,6 +10,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -32,9 +33,9 @@ public class RegistroNacimientoController {
     private ComboBox<Instruction> cbInstruction;
 
     @FXML
-    private ComboBox<String> cbSex;
-    @FXML
     private ComboBox<String> cbBirthType;
+    @FXML
+    private VBox vboxSexContainer;
     @FXML
     private DatePicker dpBirthDate;
 
@@ -47,13 +48,20 @@ public class RegistroNacimientoController {
     @FXML
     private Label statusLabel;
 
-    // Table
     @FXML
     private TableView<BirthRegistration> tvBirths;
     @FXML
-    private TableColumn<BirthRegistration, Integer> colId;
-    @FXML
     private TableColumn<BirthRegistration, String> colMotherId;
+    @FXML
+    private TableColumn<BirthRegistration, String> colBirthType;
+    @FXML
+    private TableColumn<BirthRegistration, String> colMotherName;
+    @FXML
+    private TableColumn<BirthRegistration, Integer> colMotherAge;
+    @FXML
+    private TableColumn<BirthRegistration, String> colMotherCivilStatus;
+    @FXML
+    private TableColumn<BirthRegistration, String> colMotherInstruction;
     @FXML
     private TableColumn<BirthRegistration, String> colProvince;
     @FXML
@@ -83,8 +91,10 @@ public class RegistroNacimientoController {
     private void setupComboBoxes() {
         cbCivilStatus.setItems(FXCollections.observableArrayList(
                 "Soltera", "Casada", "Divorciada", "Viuda", "Unión Libre"));
-        cbSex.setItems(FXCollections.observableArrayList("Masculino", "Femenino"));
         cbBirthType.setItems(FXCollections.observableArrayList("Simple", "Doble", "Triple", "Cuádruple", "Quíntuple"));
+        cbBirthType.valueProperty().addListener((obs, oldVal, newVal) -> {
+            updateSexFields(newVal);
+        });
 
         List<Province> provinces = birthService.getAllProvinces();
         System.out.println("DEBUG: Cargadas " + provinces.size() + " provincias.");
@@ -121,13 +131,23 @@ public class RegistroNacimientoController {
     }
 
     private void setupTable() {
-        colId.setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getIdBirthRegistration()));
         colMotherId
                 .setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getMother().getIdentification()));
+        colMotherName
+                .setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getMother().getNames()));
+        colMotherAge
+                .setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getMother().getAge()));
+        colMotherCivilStatus
+                .setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getMother().getCivilStatus()));
+        colMotherInstruction
+                .setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(
+                        cd.getValue().getInstruction() != null ? cd.getValue().getInstruction().getNameInstruction()
+                                : "N/A"));
         colProvince
                 .setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getProvince().getNameProvince()));
         colDate.setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getBirthDate()));
         colSex.setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getSex()));
+        colBirthType.setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(cd.getValue().getBirthType()));
 
         tvBirths.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
@@ -151,8 +171,15 @@ public class RegistroNacimientoController {
 
         cbProvince.setValue(br.getProvince());
         cbInstruction.setValue(br.getInstruction());
-        cbSex.setValue(br.getSex());
         cbBirthType.setValue(br.getBirthType());
+        updateSexFields(br.getBirthType());
+
+        // Set sex for the single selected record (first combo)
+        if (!vboxSexContainer.getChildren().isEmpty()) {
+            ComboBox<String> firstSex = (ComboBox<String>) ((VBox) vboxSexContainer.getChildren().get(0))
+                    .getChildren().get(1);
+            firstSex.setValue(br.getSex());
+        }
 
         if (br.getBirthDate() != null) {
             dpBirthDate.setValue(br.getBirthDate().toLocalDate());
@@ -163,6 +190,39 @@ public class RegistroNacimientoController {
         btnDelete.setDisable(false);
     }
 
+    private void updateSexFields(String birthType) {
+        vboxSexContainer.getChildren().clear();
+        if (birthType == null)
+            return;
+
+        int count = 1;
+        switch (birthType) {
+            case "Doble":
+                count = 2;
+                break;
+            case "Triple":
+                count = 3;
+                break;
+            case "Cuádruple":
+                count = 4;
+                break;
+            case "Quíntuple":
+                count = 5;
+                break;
+        }
+
+        for (int i = 1; i <= count; i++) {
+            VBox sexBox = new VBox(5);
+            Label label = new Label("Sexo Bebé " + (count > 1 ? i : ""));
+            label.setStyle("-fx-font-weight: bold; -fx-text-fill: #1d6b8c;");
+            ComboBox<String> combo = new ComboBox<>(FXCollections.observableArrayList("Masculino", "Femenino"));
+            combo.setPromptText("Seleccione Sexo");
+            combo.setMaxWidth(Double.MAX_VALUE);
+            sexBox.getChildren().addAll(label, combo);
+            vboxSexContainer.getChildren().add(sexBox);
+        }
+    }
+
     @FXML
     public void onRegister() {
         if (!validateInput())
@@ -171,10 +231,20 @@ public class RegistroNacimientoController {
         try {
             Mother mother = getMotherFromForm();
             Date date = Date.valueOf(dpBirthDate.getValue());
-            birthService.registerBirth(mother, cbProvince.getValue(), cbInstruction.getValue(), date, cbSex.getValue(),
-                    cbBirthType.getValue());
+            Province province = cbProvince.getValue();
+            Instruction instruction = cbInstruction.getValue();
+            String birthType = cbBirthType.getValue();
 
-            showMessage("Nacimiento registrado exitosamente.", "green");
+            // Register each baby as an individual birth
+            for (javafx.scene.Node node : vboxSexContainer.getChildren()) {
+                if (node instanceof VBox) {
+                    ComboBox<String> combo = (ComboBox<String>) ((VBox) node).getChildren().get(1);
+                    String sex = combo.getValue();
+                    birthService.registerBirth(mother, province, instruction, date, sex, birthType);
+                }
+            }
+
+            showMessage("Registros creados exitosamente.", "green");
             loadRegistrations();
             clearForm();
         } catch (Exception e) {
@@ -198,7 +268,13 @@ public class RegistroNacimientoController {
             selectedRegistration.setProvince(cbProvince.getValue());
             selectedRegistration.setInstruction(cbInstruction.getValue());
             selectedRegistration.setBirthDate(Date.valueOf(dpBirthDate.getValue()));
-            selectedRegistration.setSex(cbSex.getValue());
+
+            // For update, we only update the selected baby record
+            if (!vboxSexContainer.getChildren().isEmpty()) {
+                ComboBox<String> firstSex = (ComboBox<String>) ((VBox) vboxSexContainer.getChildren().get(0))
+                        .getChildren().get(1);
+                selectedRegistration.setSex(firstSex.getValue());
+            }
             selectedRegistration.setBirthType(cbBirthType.getValue());
 
             birthService.updateBirthRegistration(selectedRegistration);
@@ -240,11 +316,22 @@ public class RegistroNacimientoController {
         String ageText = txtMotherAge.getText().trim();
 
         if (motherId.isEmpty() || motherNames.isEmpty() || ageText.isEmpty() ||
-                cbCivilStatus.getValue() == null || cbSex.getValue() == null ||
-                cbBirthType.getValue() == null || cbProvince.getValue() == null ||
-                cbInstruction.getValue() == null || dpBirthDate.getValue() == null) {
+                cbCivilStatus.getValue() == null || cbBirthType.getValue() == null ||
+                cbProvince.getValue() == null || cbInstruction.getValue() == null ||
+                dpBirthDate.getValue() == null) {
             showMessage("Por favor, complete todos los campos.", "red");
             return false;
+        }
+
+        // Validate all sex fields
+        for (javafx.scene.Node node : vboxSexContainer.getChildren()) {
+            if (node instanceof VBox) {
+                ComboBox<String> combo = (ComboBox<String>) ((VBox) node).getChildren().get(1);
+                if (combo.getValue() == null) {
+                    showMessage("Por favor, seleccione el sexo de todos los bebés.", "red");
+                    return false;
+                }
+            }
         }
 
         try {
@@ -277,8 +364,8 @@ public class RegistroNacimientoController {
         txtMotherNames.clear();
         txtMotherAge.clear();
         cbCivilStatus.getSelectionModel().clearSelection();
-        cbSex.getSelectionModel().clearSelection();
         cbBirthType.getSelectionModel().clearSelection();
+        vboxSexContainer.getChildren().clear();
         cbProvince.getSelectionModel().clearSelection();
         cbInstruction.getSelectionModel().clearSelection();
         dpBirthDate.setValue(null);
