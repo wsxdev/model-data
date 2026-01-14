@@ -333,6 +333,9 @@ public class BirthService {
     }
 
     public void updateBirthRegistration(com.app.models.entities.BirthRegistration registration) {
+        if (registration.getMother() != null) {
+            motherDao.update(registration.getMother());
+        }
         birthRegistrationDao.update(registration);
     }
 

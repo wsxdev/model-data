@@ -77,4 +77,25 @@ public class MotherImpl implements IMother {
         }
         return null;
     }
+
+    @Override
+    public void update(Mother mother) {
+        String sql = "UPDATE madre SET nombres = ?, edad = ?, estado_civil = ? WHERE identificacion = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, mother.getNames());
+            stmt.setInt(2, mother.getAge());
+            stmt.setString(3, mother.getCivilStatus());
+            stmt.setString(4, mother.getIdentification());
+
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new RuntimeException("No se encontró la madre con identificación: " + mother.getIdentification());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating mother: " + e.getMessage(), e);
+        }
+    }
 }

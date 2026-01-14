@@ -6,4 +6,6 @@ public interface IMother {
     Mother create(Mother mother);
 
     Mother findByIdentification(String identification);
+
+    void update(Mother mother);
 }
