@@ -31,7 +31,7 @@ public class LanguageManagerUtil {
         String defaultLanguage = preferences.get(PREF_LOCALE, Locale.getDefault().getLanguage());
         Locale locale = Locale.forLanguageTag(defaultLanguage);
         if (!SUPPORTED.contains(locale)) {
-            // FALLBACK: BUSQUEDA POR CÓDIGO DE IDIOMA
+            // FALLBACK: BÚSQUEDA POR CÓDIGO DE IDIOMA
             for (Locale supported : SUPPORTED) if (supported.getLanguage().equalsIgnoreCase(defaultLanguage)) { locale = supported; break; }
         }
         if (!SUPPORTED.contains(locale)) locale = Locale.ENGLISH;

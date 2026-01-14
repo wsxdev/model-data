@@ -13,8 +13,8 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.login.LoginController">
-   <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="530.0" style="-fx-background-color: #F2F2F2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="0.0">
-      <Pane prefHeight="500.0" prefWidth="530.0" style="-fx-background-color: #F2F2F2;">
+   <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="530.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="500.0" prefWidth="530.0">
          <ImageView fitHeight="59.0" fitWidth="63.0" layoutX="55.0" layoutY="46.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../images/logos/vistaprincipal/ModelDataLogoConBG.png" />
          </ImageView>
@@ -28,9 +28,9 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </Text>
-         <TextField layoutX="48.0" layoutY="215.0" promptText="%login.user.prompt" style="-fx-background-color: #f2f2f2;" />
+         <TextField layoutX="48.0" layoutY="215.0" promptText="%login.user.prompt"/>
          <Separator layoutX="55.0" layoutY="242.0" prefWidth="200.0" />
-         <PasswordField layoutX="48.0" layoutY="290.0" promptText="%login.password.prompt" style="-fx-border-color: #f2f2f2; -fx-background-color: #f2f2f2;" />
+         <PasswordField layoutX="48.0" layoutY="290.0" promptText="%login.password.prompt"/>
          <Text layoutX="55.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%login.password">
             <font>
                <Font name="System Bold" size="14.0" />

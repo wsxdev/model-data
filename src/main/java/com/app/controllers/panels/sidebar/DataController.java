@@ -21,23 +21,28 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class DataController implements Initializable {
 
     @FXML private TableView<YearDataSummary> tableData;
     @FXML private ComboBox<String> datosAnalizarComboBox;
+    private ResourceBundle william;
 
     @Override
-    public void initialize (URL url,ResourceBundle resourceBundle) {
+    public void initialize (URL url, ResourceBundle resourceBundle) {
         if (datosAnalizarComboBox.getItems() == null || datosAnalizarComboBox.getItems().isEmpty()) {
             ObservableList<String> datosComboBox = FXCollections.observableArrayList("Provincia - año", "Instrucción - año");
             datosAnalizarComboBox.setItems(datosComboBox);
         }
 
+        william = resourceBundle;
         // RESTAURAR TABLA SI HAY DATOS EN CACHÉ
         DataCache cache = DataCache.getInstance();
         if (cache.hasCache()) {
@@ -46,10 +51,9 @@ public class DataController implements Initializable {
     }
     @FXML
     public void btnDatosAnalizar(ActionEvent actionEvent) {
-
         String selected = datosAnalizarComboBox.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            DialogUtil.showInformationDialog("ModelData", "No ha seleccionado ninguna opción. Por favor, seleccione una opción para cargar. :)");
+            DialogUtil.showInformationDialog("ModelData", william.getString("dialog.popup.dataController.information"));
             return;
         }
         loadData(selected, true);
@@ -57,7 +61,7 @@ public class DataController implements Initializable {
 
     private void buildTable(List<YearDataSummary> rows, List<ColumnHeader> headers) {
         tableData.getColumns().clear();
-        TableColumn<YearDataSummary, Integer> columnYear = new TableColumn<>("Año nuevo"); // Happy new year! :)
+        TableColumn<YearDataSummary, Integer> columnYear = new TableColumn<>("Año"); // Happy new year! :)
         columnYear.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().year()));
         tableData.getColumns().add(columnYear);
 

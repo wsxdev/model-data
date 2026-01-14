@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedAreaChart?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.GraficosController">
-   <stylesheets>
-      <URL value="@../../../css/main.css"/>
-   </stylesheets>
+<AnchorPane prefHeight="599.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.GraficosController">
    <HBox prefHeight="599.0" prefWidth="1116.0" spacing="70.0">
       <padding>
-         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
       </padding>
       <VBox prefHeight="558.0">
          <HBox prefHeight="48.0">
             <VBox.margin>
-               <Insets bottom="20.0"/>
+               <Insets bottom="20.0" />
             </VBox.margin>
-            <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Modelado de Natalidad">
+            <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.title">
                <font>
-                  <Font name="System Bold" size="36.0"/>
+                  <Font name="System Bold" size="36.0" />
                </font>
                <HBox.margin>
-                  <Insets/>
+                  <Insets />
                </HBox.margin>
             </Text>
          </HBox>
@@ -36,18 +41,18 @@
                   <StackPane prefHeight="375.0" prefWidth="620.0">
                      <StackedAreaChart prefHeight="373.0" prefWidth="648.0">
                         <xAxis>
-                           <NumberAxis side="BOTTOM"/>
+                           <NumberAxis side="BOTTOM" />
                         </xAxis>
                         <yAxis>
-                           <NumberAxis side="LEFT"/>
+                           <NumberAxis side="LEFT" />
                         </yAxis>
                      </StackedAreaChart>
                      <StackedBarChart prefHeight="315.0" prefWidth="604.0">
                         <xAxis>
-                           <CategoryAxis prefHeight="23.0" prefWidth="549.0" side="BOTTOM"/>
+                           <CategoryAxis prefHeight="23.0" prefWidth="549.0" side="BOTTOM" />
                         </xAxis>
                         <yAxis>
-                           <NumberAxis side="LEFT"/>
+                           <NumberAxis side="LEFT" />
                         </yAxis>
                      </StackedBarChart>
                   </StackPane>
@@ -56,71 +61,70 @@
          </HBox>
          <HBox alignment="CENTER_RIGHT" prefWidth="200.0">
             <padding>
-               <Insets top="10.0"/>
+               <Insets top="10.0" />
             </padding>
-            <Button mnemonicParsing="false" styleClass="primary" text="Ver detalles"/>
-            <Button mnemonicParsing="false" styleClass="primary" text="I love you, Licet &lt;3"/>
+            <Button mnemonicParsing="false" styleClass="primary" text="%graficos.button.VerDetalles" />
+            <Button mnemonicParsing="false" styleClass="primary" text="I love you, Licet &lt;3" />
          </HBox>
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <padding>
-            <Insets top="60.0"/>
+            <Insets top="60.0" />
          </padding>
          <VBox prefHeight="435.0" prefWidth="341.0" spacing="10.0">
             <HBox prefWidth="200.0">
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Información del modelado">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.label.Informacion">
                   <font>
-                     <Font name="System Bold" size="20.0"/>
+                     <Font name="System Bold" size="20.0" />
                   </font>
                </Text>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Provincia:">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.label.provincia">
                   <font>
-                     <Font size="18.0"/>
+                     <Font size="18.0" />
                   </font>
                </Text>
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Instrucción:">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.label.instruccion">
                   <font>
-                     <Font size="18.0"/>
+                     <Font size="18.0" />
                   </font>
                </Text>
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Año inicial:">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.label.anioInicial">
                   <font>
-                     <Font size="18.0"/>
+                     <Font size="18.0" />
                   </font>
                </Text>
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Año final:">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.label.anioFinal">
                   <font>
-                     <Font size="18.0"/>
+                     <Font size="18.0" />
                   </font>
                </Text>
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Tasa de cambio:">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.label.tasaCambio">
                   <font>
-                     <Font size="18.0"/>
+                     <Font size="18.0" />
                   </font>
                </Text>
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Población:">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.poblacion">
                   <font>
-                     <Font size="18.0"/>
+                     <Font size="18.0" />
                   </font>
                </Text>
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Constante k:">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.constante">
                   <font>
-                     <Font size="18.0"/>
+                     <Font size="18.0" />
                   </font>
                </Text>
             </VBox>
             <HBox>
-               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0"
-                     text="Resumen del comportamiento">
+               <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%graficos.resumen">
                   <font>
-                     <Font name="System Bold" size="24.0"/>
+                     <Font name="System Bold" size="24.0" />
                   </font>
                </Text>
             </HBox>
             <HBox prefHeight="149.0" prefWidth="341.0">
-               <Label prefHeight="57.0" prefWidth="667.0" textFill="#d9d9d9"/>
+               <Label prefHeight="57.0" prefWidth="667.0" textFill="#d9d9d9" />
             </HBox>
          </VBox>
       </VBox>
