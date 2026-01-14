@@ -65,6 +65,28 @@
                             <Font size="20.0" />
                         </font>
                     </ToggleButton>
+                    <!-- BOTÓN REGISTRO -->
+                    <ToggleButton fx:id="btnRegistro" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="Registro" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../images/icons/user-icon.png" />
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </ToggleButton>
+                    <!-- BOTÓN CONSOLIDACIÓN -->
+                    <ToggleButton fx:id="btnConsolidacion" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="Consolidación" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../images/icons/synchronization-icon.png" />
+                            </ImageView>
+                        </graphic>
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </ToggleButton>
                     <!-- BOTÓN DATOS -->
                     <ToggleButton fx:id="btnDatos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.datos" textFill="WHITE">
                         <graphic>

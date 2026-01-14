@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IBirthProvince {
     public List<BirthProvince> getBirthProvinces();
+
+    public void saveOrUpdate(BirthProvince birthProvince);
 }

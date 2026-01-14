@@ -25,56 +25,80 @@ public class ModelDataAppController {
 
     // COMPONENTES FXML DE LA INTERFAZ
     // Layout principal
-    @FXML public VBox sideBar;
-    @FXML public BorderPane mainLayout;
-    @FXML public HBox topBar;
-    @FXML public javafx.scene.layout.StackPane menuButton;
-    @FXML public ImageView burgerIcon;
-    @FXML public javafx.scene.shape.SVGPath arrowIcon;
-    @FXML public TextField searchField;
-    @FXML public MenuBar menuBar;
-    @FXML private Label welcomeText;
+    @FXML
+    public VBox sideBar;
+    @FXML
+    public BorderPane mainLayout;
+    @FXML
+    public HBox topBar;
+    @FXML
+    public javafx.scene.layout.StackPane menuButton;
+    @FXML
+    public ImageView burgerIcon;
+    @FXML
+    public javafx.scene.shape.SVGPath arrowIcon;
+    @FXML
+    public TextField searchField;
+    @FXML
+    public MenuBar menuBar;
+    @FXML
+    private Label welcomeText;
 
     // Panel de contenido donde se cargarán las vistas
-    @FXML private AnchorPane contentPane;
+    @FXML
+    private AnchorPane contentPane;
 
     // Botones del sidebar
-    @FXML private ToggleButton btnInicio;
-    @FXML private ToggleButton btnDatos;
-    @FXML private ToggleButton btnModelado;
-    @FXML private ToggleButton btnGraficos;
-    @FXML private ToggleButton btnConfiguracion;
+    @FXML
+    private ToggleButton btnInicio;
+    @FXML
+    private ToggleButton btnDatos;
+    @FXML
+    private ToggleButton btnModelado;
+    @FXML
+    private ToggleButton btnGraficos;
+    @FXML
+    private ToggleButton btnConfiguracion;
 
     // Botones del menubar
-    @FXML private Button btnMenuItemAcercaDe;
-    @FXML private Button btnMenuItemFrequency;
+    @FXML
+    private Button btnMenuItemAcercaDe;
+    @FXML
+    private Button btnMenuItemFrequency;
 
     // RUTAS DE ESTILOS CSS
     private static final String COLORS_LIGHT_CSS = "/com/app/modeldata/css/colors-light.css";
     private static final String COLORS_DARK_CSS = "/com/app/modeldata/css/colors-dark.css";
     private static final String MAIN_CSS = "/com/app/modeldata/css/main.css";
 
-
     // RUTAS DE LAS VISTAS FXML
     private static final String LOGIN_VIEW = "/com/app/modeldata/fxml/login/login-vista.fxml";
     private static final String INICIO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/inicio.fxml";
     private static final String DATOS_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/datos.fxml";
+    private static final String REGISTRO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/registro-nacimiento.fxml";
+    private static final String CONSOLIDACION_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/consolidacion.fxml";
     private static final String MODELADO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/modelado.fxml";
     private static final String GRAFICOS_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/graficos.fxml";
     private static final String CONFIGURACION_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/setting.fxml";
     private static final String ACERCA_DE_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemshelp/acerca-de.fxml";
     private static final String FREQUENCY_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemsanalizer/frequency-analyzer.fxml";
 
+    @FXML
+    private ToggleButton btnRegistro;
+    @FXML
+    private ToggleButton btnConsolidacion;
+
     // LISTENER PARA CAMBIOS DE IDIOMA EN EL PANEL ACTUAL
     private Runnable currentLocaleListener;
-        // MAPA DE VISTAS ASOCIADAS A LOS BOTONES DEL SIDEBAR
+    // MAPA DE VISTAS ASOCIADAS A LOS BOTONES DEL SIDEBAR
     private static final Map<String, String> SIDEBAR_VIEWS = Map.of(
-        "btnInicio", INICIO_VIEW_PANEL,
-        "btnDatos", DATOS_VIEW_PANEL,
-        "btnModelado", MODELADO_VIEW_PANEL,
-        "btnGraficos", GRAFICOS_VIEW_PANEL,
-        "btnConfiguracion", CONFIGURACION_VIEW_PANEL
-    );
+            "btnInicio", INICIO_VIEW_PANEL,
+            "btnDatos", DATOS_VIEW_PANEL,
+            "btnRegistro", REGISTRO_VIEW_PANEL,
+            "btnConsolidacion", CONSOLIDACION_VIEW_PANEL,
+            "btnModelado", MODELADO_VIEW_PANEL,
+            "btnGraficos", GRAFICOS_VIEW_PANEL,
+            "btnConfiguracion", CONFIGURACION_VIEW_PANEL);
 
     // INICIALIZADOR DEL CONTROLADOR
     @FXML
@@ -90,6 +114,8 @@ public class ModelDataAppController {
         ToggleGroup sidebarGroup = new ToggleGroup();
 
         btnInicio.setToggleGroup(sidebarGroup);
+        btnRegistro.setToggleGroup(sidebarGroup);
+        btnConsolidacion.setToggleGroup(sidebarGroup);
         btnDatos.setToggleGroup(sidebarGroup);
         btnModelado.setToggleGroup(sidebarGroup);
         btnGraficos.setToggleGroup(sidebarGroup);
@@ -144,7 +170,8 @@ public class ModelDataAppController {
                         AnchorPane.setLeftAnchor(newView, 0.0);
                         AnchorPane.setRightAnchor(newView, 0.0);
                     });
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
             };
             currentLocaleListener = reload;
             LanguageManagerUtil.getInstance().addLocaleChangeListener(currentLocaleListener);
@@ -154,7 +181,8 @@ public class ModelDataAppController {
                 if (contentPane.getScene() != null && contentPane.getScene().getWindow() instanceof Stage stage) {
                     LanguageManagerUtil.getInstance().registerStage(stage, reload);
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         } catch (IOException | NullPointerException exception) {
             throw new RuntimeException("Error cargando la vista: " + fxmlPath, exception);
         }
@@ -176,15 +204,18 @@ public class ModelDataAppController {
                 // REGISTRAR STAGE Y SU ACCIÓN DE RELOAD
                 Runnable reload = () -> {
                     try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+                        FXMLLoader fxmlLoader = new FXMLLoader(
+                                Objects.requireNonNull(getClass().getResource(fxmlPath)));
                         fxmlLoader.setResources(LanguageManagerUtil.getInstance().getBundle());
                         Parent newRoot = fxmlLoader.load();
                         Platform.runLater(() -> {
                             Scene sceneHereOCualquierCosa = stage.getScene();
-                            if (sceneHereOCualquierCosa != null) sceneHereOCualquierCosa.setRoot(newRoot);
+                            if (sceneHereOCualquierCosa != null)
+                                sceneHereOCualquierCosa.setRoot(newRoot);
                             ThemeManagerUtil.getInstance().applyToScene(sceneHereOCualquierCosa);
                         });
-                    } catch (Exception ignored) {}
+                    } catch (Exception ignored) {
+                    }
                 };
                 LanguageManagerUtil.getInstance().registerStage(stage, reload);
             } catch (Exception e) {
@@ -211,28 +242,34 @@ public class ModelDataAppController {
             sideBar.setManaged(false);
             sideBar.setVisible(false);
             // mostrar flecha (volver)
-            if (burgerIcon != null) burgerIcon.setVisible(false);
-            if (arrowIcon != null) arrowIcon.setVisible(true);
+            if (burgerIcon != null)
+                burgerIcon.setVisible(false);
+            if (arrowIcon != null)
+                arrowIcon.setVisible(true);
         } else {
             // mostrar sidebar
             sideBar.setManaged(true);
             sideBar.setVisible(true);
             // restaurar icono burger
-            if (burgerIcon != null) burgerIcon.setVisible(true);
-            if (arrowIcon != null) arrowIcon.setVisible(false);
+            if (burgerIcon != null)
+                burgerIcon.setVisible(true);
+            if (arrowIcon != null)
+                arrowIcon.setVisible(false);
         }
     }
 
-    // MENÚ ÍTEM DE ACERCA DE 
+    // MENÚ ÍTEM DE ACERCA DE
     @FXML
     public void itemOpenAbout(ActionEvent actionEvent) {
         createAndShowStage(ACERCA_DE_VIEW_PANEL, "Acerca de");
     }
+
     // MENÚ ÍTEM DE FRECUENCIAS
     @FXML
     public void itemOpenFrequency(ActionEvent actionEvent) {
-        createAndShowStage(FREQUENCY_VIEW_PANEL,"Frecuencias estadísticas");
+        createAndShowStage(FREQUENCY_VIEW_PANEL, "Frecuencias estadísticas");
     }
+
     // MÉTODO PARA CERRAR SESIÓN
     @FXML
     public void itemLogout(ActionEvent actionEvent) {
@@ -243,7 +280,9 @@ public class ModelDataAppController {
 
             try {
                 ThemeManagerUtil.getInstance().applyToScene(loginScene);
-            } catch (Exception e) { throw new RuntimeException(e); }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
             Stage mainViewStage = (Stage) mainLayout.getScene().getWindow();
             Stage loginStage = new Stage();
@@ -253,7 +292,8 @@ public class ModelDataAppController {
             try {
                 Runnable reload = () -> {
                     try {
-                        FXMLLoader otroLoaderMas = new FXMLLoader(Objects.requireNonNull(getClass().getResource(LOGIN_VIEW)));
+                        FXMLLoader otroLoaderMas = new FXMLLoader(
+                                Objects.requireNonNull(getClass().getResource(LOGIN_VIEW)));
                         otroLoaderMas.setResources(LanguageManagerUtil.getInstance().getBundle());
                         Scene sceneHereOCualquierCosa = loginStage.getScene();
                         if (sceneHereOCualquierCosa != null) {
@@ -263,12 +303,16 @@ public class ModelDataAppController {
                                 ThemeManagerUtil.getInstance().applyToScene(sceneHereOCualquierCosa);
                             });
                         }
-                    } catch (Exception ignored) {}
+                    } catch (Exception ignored) {
+                    }
                 };
                 LanguageManagerUtil.getInstance().registerStage(loginStage, reload);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
             loginStage.show();
             mainViewStage.close();
-        } catch (RuntimeException | IOException e) { throw new RuntimeException(e); }
+        } catch (RuntimeException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

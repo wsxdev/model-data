@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IBirthInstruction {
     public List<BirthInstruction> getBirthInstruction();
+
+    public void saveOrUpdate(BirthInstruction birthInstruction);
 }

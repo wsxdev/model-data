@@ -19,9 +19,9 @@ public class BirthProvinceImpl implements IBirthProvince {
     public List<BirthProvince> getBirthProvinces() {
 
         String sql = """
-            SELECT id_nacimiento, anio, id_provincia, cantidad
-            FROM nacimientos_provincias
-            ORDER BY id_nacimiento""";
+                SELECT id_nacimiento, anio, id_provincia, cantidad
+                FROM nacimientos_provincias
+                ORDER BY id_nacimiento""";
         // CONEXIÓN A LA BASE DE DATOS
         DatabaseConfig config = new DatabaseConfig();
         DatabaseConnection connection = new DatabaseConnection(config);
@@ -30,9 +30,9 @@ public class BirthProvinceImpl implements IBirthProvince {
         List<BirthProvince> birthProvinces = new ArrayList<>();
         List<Province> provinces = provinceDao.getProvinces();
 
-        try(Connection connectionProvince = connection.getConnection();
-            Statement statement = connectionProvince.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql)){
+        try (Connection connectionProvince = connection.getConnection();
+                Statement statement = connectionProvince.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql)) {
 
             Map<String, Province> provincesMap = new HashMap<>();
             for (Province prov : provinces) {
@@ -59,5 +59,44 @@ public class BirthProvinceImpl implements IBirthProvince {
             throw new RuntimeException(e);
         }
         return birthProvinces;
+    }
+
+    @Override
+    public void saveOrUpdate(BirthProvince birthProvince) {
+        String queryCheck = "SELECT id_nacimiento FROM nacimientos_provincias WHERE anio = ? AND id_provincia = ?";
+        String queryUpdate = "UPDATE nacimientos_provincias SET cantidad = ? WHERE id_nacimiento = ?";
+        String queryInsert = "INSERT INTO nacimientos_provincias (anio, id_provincia, cantidad) VALUES (?, ?, ?)";
+
+        DatabaseConfig config = new DatabaseConfig();
+        DatabaseConnection connection = new DatabaseConnection(config);
+
+        try (Connection conn = connection.getConnection();
+                java.sql.PreparedStatement stmtCheck = conn.prepareStatement(queryCheck)) {
+
+            stmtCheck.setInt(1, birthProvince.getYear());
+            stmtCheck.setString(2, birthProvince.getProvince().getIdProvince());
+
+            try (ResultSet rs = stmtCheck.executeQuery()) {
+                if (rs.next()) {
+                    // Update
+                    int id = rs.getInt("id_nacimiento");
+                    try (java.sql.PreparedStatement stmtUpdate = conn.prepareStatement(queryUpdate)) {
+                        stmtUpdate.setInt(1, birthProvince.getQuantity());
+                        stmtUpdate.setInt(2, id);
+                        stmtUpdate.executeUpdate();
+                    }
+                } else {
+                    // Insert
+                    try (java.sql.PreparedStatement stmtInsert = conn.prepareStatement(queryInsert)) {
+                        stmtInsert.setInt(1, birthProvince.getYear());
+                        stmtInsert.setString(2, birthProvince.getProvince().getIdProvince());
+                        stmtInsert.setInt(3, birthProvince.getQuantity());
+                        stmtInsert.executeUpdate();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving/updating birth province: " + e.getMessage(), e);
+        }
     }
 }

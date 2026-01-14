@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Map;
 
 public class BirthInstructionImpl implements IBirthInstruction {
-    public List<BirthInstruction> getBirthInstruction (){
+    public List<BirthInstruction> getBirthInstruction() {
 
         String sql = """
-        SELECT id_nacimiento, anio, id_instruccion, cantidad
-        FROM nacimientos_instruccion
-        ORDER BY nacimientos_instruccion""";
+                SELECT id_nacimiento, anio, id_instruccion, cantidad
+                FROM nacimientos_instruccion
+                ORDER BY nacimientos_instruccion""";
 
         DatabaseConfig config = new DatabaseConfig();
         DatabaseConnection connection = new DatabaseConnection(config);
@@ -31,8 +31,8 @@ public class BirthInstructionImpl implements IBirthInstruction {
         List<Instruction> instructions = instructionDao.getInstructions();
 
         try (Connection connectionInstruction = connection.getConnection();
-             Statement statement = connectionInstruction.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)){
+                Statement statement = connectionInstruction.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql)) {
 
             Map<String, Instruction> instructionsMap = new HashMap<>();
             for (Instruction instr : instructions) {
@@ -58,5 +58,44 @@ public class BirthInstructionImpl implements IBirthInstruction {
             throw new RuntimeException(e);
         }
         return birthInstructions;
+    }
+
+    @Override
+    public void saveOrUpdate(BirthInstruction birthInstruction) {
+        String queryCheck = "SELECT id_nacimiento FROM nacimientos_instruccion WHERE anio = ? AND id_instruccion = ?";
+        String queryUpdate = "UPDATE nacimientos_instruccion SET cantidad = ? WHERE id_nacimiento = ?";
+        String queryInsert = "INSERT INTO nacimientos_instruccion (anio, id_instruccion, cantidad) VALUES (?, ?, ?)";
+
+        DatabaseConfig config = new DatabaseConfig();
+        DatabaseConnection connection = new DatabaseConnection(config);
+
+        try (Connection conn = connection.getConnection();
+                java.sql.PreparedStatement stmtCheck = conn.prepareStatement(queryCheck)) {
+
+            stmtCheck.setInt(1, birthInstruction.getYear());
+            stmtCheck.setString(2, birthInstruction.getInstruction().getIdInstruction());
+
+            try (ResultSet rs = stmtCheck.executeQuery()) {
+                if (rs.next()) {
+                    // Update
+                    int id = rs.getInt("id_nacimiento");
+                    try (java.sql.PreparedStatement stmtUpdate = conn.prepareStatement(queryUpdate)) {
+                        stmtUpdate.setInt(1, birthInstruction.getQuantity());
+                        stmtUpdate.setInt(2, id);
+                        stmtUpdate.executeUpdate();
+                    }
+                } else {
+                    // Insert
+                    try (java.sql.PreparedStatement stmtInsert = conn.prepareStatement(queryInsert)) {
+                        stmtInsert.setInt(1, birthInstruction.getYear());
+                        stmtInsert.setString(2, birthInstruction.getInstruction().getIdInstruction());
+                        stmtInsert.setInt(3, birthInstruction.getQuantity());
+                        stmtInsert.executeUpdate();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving/updating birth instruction: " + e.getMessage(), e);
+        }
     }
 }
