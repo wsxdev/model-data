@@ -2,7 +2,6 @@ package com.app.models.dao.implementations;
 
 import com.app.models.dao.interfaces.IBirthProvince;
 import com.app.models.dao.interfaces.IProvince;
-import com.app.models.database.DatabaseConfig;
 import com.app.models.database.DatabaseConnection;
 import com.app.models.entities.BirthProvince;
 import com.app.models.entities.Province;
@@ -23,8 +22,8 @@ public class BirthProvinceImpl implements IBirthProvince {
                 FROM nacimientos_provincias
                 ORDER BY id_nacimiento""";
         // CONEXIÓN A LA BASE DE DATOS
-        DatabaseConfig config = new DatabaseConfig();
-        DatabaseConnection connection = new DatabaseConnection(config);
+        // CONEXIÓN A LA BASE DE DATOS
+        DatabaseConnection connection = DatabaseConnection.getInstance();
 
         IProvince provinceDao = new ProvinceImpl();
         List<BirthProvince> birthProvinces = new ArrayList<>();
@@ -67,8 +66,7 @@ public class BirthProvinceImpl implements IBirthProvince {
         String queryUpdate = "UPDATE nacimientos_provincias SET cantidad = ? WHERE id_nacimiento = ?";
         String queryInsert = "INSERT INTO nacimientos_provincias (anio, id_provincia, cantidad) VALUES (?, ?, ?)";
 
-        DatabaseConfig config = new DatabaseConfig();
-        DatabaseConnection connection = new DatabaseConnection(config);
+        DatabaseConnection connection = DatabaseConnection.getInstance();
 
         try (Connection conn = connection.getConnection();
                 java.sql.PreparedStatement stmtCheck = conn.prepareStatement(queryCheck)) {

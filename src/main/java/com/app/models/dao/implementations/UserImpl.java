@@ -1,7 +1,6 @@
 package com.app.models.dao.implementations;
 
 import com.app.models.dao.interfaces.IUser;
-import com.app.models.database.DatabaseConfig;
 import com.app.models.database.DatabaseConnection;
 import com.app.models.entities.Role;
 import com.app.models.entities.User;
@@ -15,7 +14,7 @@ public class UserImpl implements IUser {
     private final DatabaseConnection databaseConnection;
 
     public UserImpl() {
-        this.databaseConnection = new DatabaseConnection(new DatabaseConfig());
+        this.databaseConnection = DatabaseConnection.getInstance();
     }
 
     @Override

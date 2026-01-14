@@ -1,7 +1,6 @@
 package com.app.models.dao.implementations;
 
 import com.app.models.dao.interfaces.IMother;
-import com.app.models.database.DatabaseConfig;
 import com.app.models.database.DatabaseConnection;
 import com.app.models.entities.Mother;
 
@@ -14,7 +13,7 @@ public class MotherImpl implements IMother {
     private final DatabaseConnection databaseConnection;
 
     public MotherImpl() {
-        this.databaseConnection = new DatabaseConnection(new DatabaseConfig());
+        this.databaseConnection = DatabaseConnection.getInstance();
     }
 
     @Override

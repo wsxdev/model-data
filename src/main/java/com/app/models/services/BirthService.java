@@ -327,4 +327,8 @@ public class BirthService {
     public com.app.models.entities.Mother findMotherByIdentification(String identification) {
         return motherDao.findByIdentification(identification);
     }
+
+    public List<com.app.models.entities.BirthRegistration> getAllBirthRegistrations() {
+        return birthRegistrationDao.findAll();
+    }
 }

@@ -7,4 +7,6 @@ public interface IBirthRegistration {
     BirthRegistration create(BirthRegistration birthRegistration);
 
     List<BirthRegistration> findByYear(int year);
+
+    List<BirthRegistration> findAll();
 }

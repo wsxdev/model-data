@@ -2,7 +2,6 @@ package com.app.models.dao.implementations;
 
 import com.app.models.dao.interfaces.IBirthInstruction;
 import com.app.models.dao.interfaces.IInstruction;
-import com.app.models.database.DatabaseConfig;
 import com.app.models.database.DatabaseConnection;
 import com.app.models.entities.BirthInstruction;
 import com.app.models.entities.Instruction;
@@ -23,8 +22,7 @@ public class BirthInstructionImpl implements IBirthInstruction {
                 FROM nacimientos_instruccion
                 ORDER BY nacimientos_instruccion""";
 
-        DatabaseConfig config = new DatabaseConfig();
-        DatabaseConnection connection = new DatabaseConnection(config);
+        DatabaseConnection connection = DatabaseConnection.getInstance();
 
         IInstruction instructionDao = new InstructionImpl();
         List<BirthInstruction> birthInstructions = new ArrayList<>();
@@ -66,8 +64,7 @@ public class BirthInstructionImpl implements IBirthInstruction {
         String queryUpdate = "UPDATE nacimientos_instruccion SET cantidad = ? WHERE id_nacimiento = ?";
         String queryInsert = "INSERT INTO nacimientos_instruccion (anio, id_instruccion, cantidad) VALUES (?, ?, ?)";
 
-        DatabaseConfig config = new DatabaseConfig();
-        DatabaseConnection connection = new DatabaseConnection(config);
+        DatabaseConnection connection = DatabaseConnection.getInstance();
 
         try (Connection conn = connection.getConnection();
                 java.sql.PreparedStatement stmtCheck = conn.prepareStatement(queryCheck)) {

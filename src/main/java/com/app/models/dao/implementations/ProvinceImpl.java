@@ -1,7 +1,6 @@
 package com.app.models.dao.implementations;
 
 import com.app.models.dao.interfaces.IProvince;
-import com.app.models.database.DatabaseConfig;
 import com.app.models.database.DatabaseConnection;
 import com.app.models.entities.Province;
 
@@ -12,19 +11,17 @@ import java.util.List;
 public class ProvinceImpl implements IProvince {
 
     public List<Province> getProvinces() {
-        String sql =
-        """
-        SELECT id_provincia, provincia
-        FROM provincias
-        ORDER BY provincias""";
+        String sql = """
+                SELECT id_provincia, provincia
+                FROM provincias
+                ORDER BY provincias""";
 
-        DatabaseConfig config = new DatabaseConfig();
-        DatabaseConnection connection = new DatabaseConnection(config);
+        DatabaseConnection connection = DatabaseConnection.getInstance();
         List<Province> provinces = new ArrayList<>();
 
         try (Connection connectionProvince = connection.getConnection();
-             Statement statement = connectionProvince.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
+                Statement statement = connectionProvince.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
                 String idProvince = resultSet.getString("id_provincia");

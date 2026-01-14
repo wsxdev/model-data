@@ -1,87 +1,123 @@
 package com.app.controllers.login;
 
-import com.app.utils.ThemeManagerUtil;
+import com.app.models.services.AuthService;
+import com.app.models.services.UserSession;
+import com.app.utils.DialogUtil;
 import com.app.utils.LanguageManagerUtil;
+import com.app.utils.ThemeManagerUtil;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.application.Platform;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class LoginController {
 
-    @FXML public Button btnIniciarSesion;
+    @FXML
+    private TextField txtUsername;
+    @FXML
+    private PasswordField txtPassword;
+    @FXML
+    public Button btnIniciarSesion;
 
-    // MÉTODO PARA ABRIR LA VENTANA PRINCIPAL DESPUÉS DE UN LOGIN VÁLIDO
+    private final AuthService authService;
+
+    public LoginController() {
+        this.authService = new AuthService();
+    }
+
     @FXML
     private void goToMainWindow(ActionEvent event) {
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            DialogUtil.showErrorDialog("Error", "Por favor ingrese usuario y contraseña.");
+            return;
+        }
+
+        if (authService.login(username, password)) {
+            loadMainWindow(event);
+        } else {
+            DialogUtil.showErrorDialog("Error", "Credenciales incorrectas.");
+        }
+    }
+
+    private void loadMainWindow(ActionEvent event) {
         try {
-            // PARA CARGAR LA VENTANA PRINCIPAL E INICIAR DESPUÉS DEL LOGIN VÁLIDO
-            FXMLLoader loaderVistaPrincipal = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
-            // PARA PROVEER EL RESOURCE BUNDLE Y QUE FUNCIONEN LOS %keys EN FXML
-            loaderVistaPrincipal.setResources(LanguageManagerUtil.getInstance().getBundle());
-            Scene vistaPrincipalScene = new Scene(loaderVistaPrincipal.load());
+            ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
+            loader.setResources(bundle);
+            Parent root = loader.load();
 
-            Stage vistaPrincipalStage = new Stage();
-            vistaPrincipalStage.setScene(vistaPrincipalScene);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("ModelData - " + UserSession.getInstance().getCurrentUser().getUsername());
+            stage.setMaximized(true);
+
+            // Setup Theme
             try {
-                ThemeManagerUtil.getInstance().registerStage(vistaPrincipalStage);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            // CREAR UN NUEVO STAGE Y CERRAR EL STAGE DE LOGIN
-            Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            vistaPrincipalStage.setTitle("ModelData");
-
-            // CONFIGURAR LA VENTANA PRINCIPAL
-            // svistaPrincipalStage.setFullScreen(true);
-            vistaPrincipalStage.setMaximized(true);
-
-            // LA LÍNEA DE ABAJO TIENE ALGO QUE FIUEBFUBAUIASBF - ACTIVAR CON PRECAUCIÓN :)
-            // vistaPrincipalStage.setResizable(false);
-
-            // AÑADIR ICONO A LA VENTANA SI NO TIENE ICONO ASIGNADO
-            try {
-                vistaPrincipalStage.getIcons().add(new javafx.scene.image.Image(
-                        Objects.requireNonNull(getClass().getResourceAsStream("/com/app/modeldata/images/logos/vistaprincipal/ModelDataLogoConBG.png"))
-                ));
+                ThemeManagerUtil.getInstance().registerStage(stage);
             } catch (Exception ignored) {
-                // SI NO SE PUEDE CARGAR EL ICONO, SE IGNORA EL ERROR
             }
 
-            // MOSTRAR LA VENTANA PRINCIPAL Y CERRAR LA DE LOGIN
-            vistaPrincipalStage.show();
-            // REGISTRAR STAGE PARA ACTUALIZACIONES DE IDIOMA
+            // Setup Icon
             try {
-                Runnable reload = () -> {
-                    try {
-                        FXMLLoader loaderHere = new FXMLLoader(getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
-                        loaderHere.setResources(LanguageManagerUtil.getInstance().getBundle());
-                        Scene sceneHere = vistaPrincipalStage.getScene();
-                        if (sceneHere != null) {
-                            Parent root = loaderHere.load();
-                            Platform.runLater(() -> {
-                                sceneHere.setRoot(root);
-                                try { ThemeManagerUtil.getInstance().applyToScene(sceneHere); } catch (Exception ignored) {}
-                            });
-                        }
-                    } catch (Exception ignored) {}
-                };
-                LanguageManagerUtil.getInstance().registerStage(vistaPrincipalStage, reload);
-            } catch (Exception ignored) {}
+                stage.getIcons().add(new javafx.scene.image.Image(
+                        Objects.requireNonNull(getClass().getResourceAsStream(
+                                "/com/app/modeldata/images/logos/vistaprincipal/ModelDataLogoConBG.png"))));
+            } catch (Exception ignored) {
+            }
+
+            // Close Login Stage
+            Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             loginStage.close();
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-}
+            stage.show();
 
+            // Register for language updates
+            registerLanguageUpdate(stage);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            DialogUtil.showErrorDialog("Error Crítico", "No se pudo cargar la ventana principal: " + e.getMessage());
+        }
+    }
+
+    private void registerLanguageUpdate(Stage stage) {
+        try {
+            Runnable reload = () -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(
+                            getClass().getResource("/com/app/modeldata/fxml/mainview/vista-principal.fxml"));
+                    loader.setResources(LanguageManagerUtil.getInstance().getBundle());
+                    Scene scene = stage.getScene();
+                    if (scene != null) {
+                        Parent root = loader.load();
+                        Platform.runLater(() -> {
+                            scene.setRoot(root);
+                            try {
+                                ThemeManagerUtil.getInstance().applyToScene(scene);
+                            } catch (Exception ignored) {
+                            }
+                        });
+                    }
+                } catch (Exception ignored) {
+                }
+            };
+            LanguageManagerUtil.getInstance().registerStage(stage, reload);
+        } catch (Exception ignored) {
+        }
+    }
 }

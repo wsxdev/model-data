@@ -28,9 +28,9 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </Text>
-         <TextField layoutX="48.0" layoutY="215.0" promptText="%login.user.prompt"/>
+         <TextField fx:id="txtUsername" layoutX="48.0" layoutY="215.0" promptText="%login.user.prompt"/>
          <Separator layoutX="55.0" layoutY="242.0" prefWidth="200.0" />
-         <PasswordField layoutX="48.0" layoutY="290.0" promptText="%login.password.prompt"/>
+         <PasswordField fx:id="txtPassword" layoutX="48.0" layoutY="290.0" promptText="%login.password.prompt"/>
          <Text layoutX="55.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%login.password">
             <font>
                <Font name="System Bold" size="14.0" />

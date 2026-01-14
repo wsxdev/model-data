@@ -1,7 +1,6 @@
 package com.app.models.dao.implementations;
 
 import com.app.models.dao.interfaces.IBirthRegistration;
-import com.app.models.database.DatabaseConfig;
 import com.app.models.database.DatabaseConnection;
 import com.app.models.entities.BirthRegistration;
 import com.app.models.entities.Instruction;
@@ -21,7 +20,7 @@ public class BirthRegistrationImpl implements IBirthRegistration {
     private final DatabaseConnection databaseConnection;
 
     public BirthRegistrationImpl() {
-        this.databaseConnection = new DatabaseConnection(new DatabaseConfig());
+        this.databaseConnection = DatabaseConnection.getInstance();
     }
 
     @Override
@@ -97,6 +96,49 @@ public class BirthRegistrationImpl implements IBirthRegistration {
             }
         } catch (Exception e) {
             throw new RuntimeException("Error finding births by year: " + e.getMessage(), e);
+        }
+        return list;
+    }
+
+    @Override
+    public List<BirthRegistration> findAll() {
+        List<BirthRegistration> list = new ArrayList<>();
+        String sql = """
+                SELECT n.id_nacimiento, n.fecha_nacimiento, n.anio, n.sexo, n.tipo_parto,
+                       m.id_madre, m.identificacion, m.nombres, m.edad, m.estado_civil,
+                       p.id_provincia, p.provincia,
+                       i.id_instruccion, i.instruccion
+                FROM nacimiento n
+                JOIN madre m ON n.id_madre = m.id_madre
+                JOIN provincias p ON n.id_provincia = p.id_provincia
+                JOIN instrucciones i ON n.id_instruccion = i.id_instruccion
+                ORDER BY n.id_nacimiento DESC
+                """;
+
+        try (Connection conn = databaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Mother m = new Mother(
+                        rs.getInt("id_madre"),
+                        rs.getString("identificacion"),
+                        rs.getString("nombres"),
+                        rs.getInt("edad"),
+                        rs.getString("estado_civil"));
+                Province p = new Province(rs.getString("id_provincia"), rs.getString("provincia"));
+                Instruction i = new Instruction(rs.getString("id_instruccion"), rs.getString("instruccion"));
+
+                BirthRegistration br = new BirthRegistration(
+                        rs.getInt("id_nacimiento"),
+                        m, p, i,
+                        rs.getDate("fecha_nacimiento"),
+                        rs.getString("sexo"),
+                        rs.getString("tipo_parto"));
+                list.add(br);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error finding all births: " + e.getMessage(), e);
         }
         return list;
     }
