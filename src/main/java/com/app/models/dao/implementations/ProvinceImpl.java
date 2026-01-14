@@ -14,7 +14,7 @@ public class ProvinceImpl implements IProvince {
         String sql = """
                 SELECT id_provincia, provincia
                 FROM provincias
-                ORDER BY provincias""";
+                ORDER BY provincia""";
 
         DatabaseConnection connection = DatabaseConnection.getInstance();
         List<Province> provinces = new ArrayList<>();

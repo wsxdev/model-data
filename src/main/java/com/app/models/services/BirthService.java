@@ -331,4 +331,12 @@ public class BirthService {
     public List<com.app.models.entities.BirthRegistration> getAllBirthRegistrations() {
         return birthRegistrationDao.findAll();
     }
+
+    public void updateBirthRegistration(com.app.models.entities.BirthRegistration registration) {
+        birthRegistrationDao.update(registration);
+    }
+
+    public void deleteBirthRegistration(int id) {
+        birthRegistrationDao.delete(id);
+    }
 }

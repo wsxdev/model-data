@@ -9,4 +9,8 @@ public interface IBirthRegistration {
     List<BirthRegistration> findByYear(int year);
 
     List<BirthRegistration> findAll();
+
+    void update(BirthRegistration birthRegistration);
+
+    void delete(int id);
 }

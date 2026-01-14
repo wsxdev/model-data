@@ -15,7 +15,7 @@ public class InstructionImpl implements IInstruction {
         String sql = """
                 SELECT id_instruccion, instruccion
                 FROM instrucciones
-                ORDER BY instrucciones""";
+                ORDER BY instruccion""";
 
         DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         List<Instruction> instructions = new ArrayList<>();

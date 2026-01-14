@@ -5,139 +5,168 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.layout.HBox?>
-<AnchorPane prefHeight="599.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.RegistroNacimientoController">
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.RegistroNacimientoController">
    <children>
-      <VBox alignment="CENTER" layoutX="250.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" spacing="20.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="50.0">
-         <children>
-            <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Registro de Nacimiento">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Text>
-            <VBox prefWidth="100.0" spacing="10.0">
+      <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <HBox spacing="30.0">
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
                <children>
-                  <Label text="Identificación de Madre" textFill="#1d6b8c">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtMotherId" promptText="Ingrese cédula o ID" />
-               </children>
-            </VBox>
-            <VBox prefWidth="100.0" spacing="10.0">
-               <children>
-                  <Label text="Nombres de la Madre" textFill="#1d6b8c">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtMotherNames" promptText="Nombres Completos" />
-               </children>
-            </VBox>
-            <HBox spacing="20.0">
-               <children>
-                  <VBox HBox.hgrow="ALWAYS" spacing="10.0">
+                  <!-- Form Section -->
+                  <VBox prefWidth="450.0" spacing="15.0">
                      <children>
-                        <Label text="Edad" textFill="#1d6b8c">
+                        <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestión de Nacimiento">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="28.0" />
                            </font>
+                        </Text>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Identificación de Madre" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <TextField fx:id="txtMotherId" promptText="Ingrese cédula o ID" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Nombres de la Madre" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <TextField fx:id="txtMotherNames" promptText="Nombres Completos" />
+                           </children>
+                        </VBox>
+                        
+                        <HBox spacing="15.0">
+                           <children>
+                              <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+                                 <children>
+                                    <Label text="Edad" textFill="#1d6b8c">
+                                       <font><Font name="System Bold" size="14.0" /></font>
+                                    </Label>
+                                    <TextField fx:id="txtMotherAge" promptText="Edad" />
+                                 </children>
+                              </VBox>
+                              <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+                                 <children>
+                                    <Label text="Estado Civil" textFill="#1d6b8c">
+                                       <font><Font name="System Bold" size="14.0" /></font>
+                                    </Label>
+                                    <ComboBox fx:id="cbCivilStatus" maxWidth="Infinity" promptText="Seleccione" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        
+                        <HBox spacing="15.0">
+                           <children>
+                              <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+                                 <children>
+                                    <Label text="Sexo del Bebé" textFill="#1d6b8c">
+                                       <font><Font name="System Bold" size="14.0" /></font>
+                                    </Label>
+                                    <ComboBox fx:id="cbSex" maxWidth="Infinity" promptText="Sexo" />
+                                 </children>
+                              </VBox>
+                              <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+                                 <children>
+                                    <Label text="Tipo de Parto" textFill="#1d6b8c">
+                                       <font><Font name="System Bold" size="14.0" /></font>
+                                    </Label>
+                                    <ComboBox fx:id="cbBirthType" maxWidth="Infinity" promptText="Tipo" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Provincia" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <ComboBox fx:id="cbProvince" maxWidth="Infinity" promptText="Seleccione Provincia" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Nivel de Instrucción" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <ComboBox fx:id="cbInstruction" maxWidth="Infinity" promptText="Seleccione Instrucción" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Fecha de Nacimiento" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <DatePicker fx:id="dpBirthDate" maxWidth="Infinity" />
+                           </children>
+                        </VBox>
+                        
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#onRegister" prefHeight="40.0" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #1d6b8c; -fx-text-fill: white;" text="Registrar">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Button>
+                              <Button fx:id="btnUpdate" disable="true" mnemonicParsing="false" onAction="#onUpdate" prefHeight="40.0" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Actualizar">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Button>
+                              <Button fx:id="btnDelete" disable="true" mnemonicParsing="false" onAction="#onDelete" prefHeight="40.0" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Eliminar">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        
+                        <Button mnemonicParsing="false" onAction="#clearForm" prefHeight="30.0" maxWidth="Infinity" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Limpiar Formulario" />
+                        
+                        <Label fx:id="statusLabel" alignment="CENTER" maxWidth="Infinity" minHeight="30.0">
+                           <font><Font size="14.0" /></font>
                         </Label>
-                        <TextField fx:id="txtMotherAge" promptText="Edad" />
                      </children>
                   </VBox>
-                  <VBox HBox.hgrow="ALWAYS" spacing="10.0">
+                  
+                  <!-- Table Section -->
+                  <VBox spacing="15.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Estado Civil" textFill="#1d6b8c">
+                        <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Registros Existentes">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
-                        </Label>
-                        <ComboBox fx:id="cbCivilStatus" promptText="Seleccione" maxWidth="Infinity" />
+                        </Text>
+                        <TableView fx:id="tvBirths" VBox.vgrow="ALWAYS" minHeight="400.0">
+                           <columns>
+                              <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
+                              <TableColumn fx:id="colMotherId" prefWidth="100.0" text="Madre ID" />
+                              <TableColumn fx:id="colProvince" prefWidth="120.0" text="Provincia" />
+                              <TableColumn fx:id="colDate" prefWidth="100.0" text="Fecha" />
+                              <TableColumn fx:id="colSex" prefWidth="80.0" text="Sexo" />
+                           </columns>
+                        </TableView>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            
-            <!-- NEW ROW for Sex and Birth Type -->
-            <HBox spacing="20.0">
-               <children>
-                  <VBox HBox.hgrow="ALWAYS" spacing="10.0">
-                     <children>
-                        <Label text="Sexo del Bebé" textFill="#1d6b8c">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="cbSex" promptText="Sexo" maxWidth="Infinity" />
-                     </children>
-                  </VBox>
-                  <VBox HBox.hgrow="ALWAYS" spacing="10.0">
-                     <children>
-                        <Label text="Tipo de Parto" textFill="#1d6b8c">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="cbBirthType" promptText="Tipo" maxWidth="Infinity" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox prefWidth="100.0" spacing="10.0">
-               <children>
-                  <Label text="Provincia" textFill="#1d6b8c">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cbProvince" prefWidth="500.0" promptText="Seleccione Provincia" />
-               </children>
-            </VBox>
-            <VBox prefWidth="100.0" spacing="10.0">
-               <children>
-                  <Label text="Nivel de Instrucción" textFill="#1d6b8c">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cbInstruction" prefWidth="500.0" promptText="Seleccione Instrucción" />
-               </children>
-            </VBox>
-            <VBox prefWidth="100.0" spacing="10.0">
-               <children>
-                  <Label text="Fecha de Nacimiento" textFill="#1d6b8c">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="dpBirthDate" prefWidth="500.0" />
-               </children>
-            </VBox>
-            <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#onRegister" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #1d6b8c; -fx-text-fill: white;" text="Registrar">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Label fx:id="statusLabel" alignment="CENTER" prefHeight="30.0" prefWidth="490.0" textAlignment="CENTER">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

@@ -13,6 +13,20 @@ public class DatabaseSetup {
                 );
                 """;
 
+        String sqlProvinces = """
+                CREATE TABLE IF NOT EXISTS provincias (
+                    id_provincia VARCHAR(10) PRIMARY KEY,
+                    provincia VARCHAR(100) NOT NULL
+                );
+                """;
+
+        String sqlInstructions = """
+                CREATE TABLE IF NOT EXISTS instrucciones (
+                    id_instruccion VARCHAR(10) PRIMARY KEY,
+                    instruccion VARCHAR(100) NOT NULL
+                );
+                """;
+
         String sqlBirth = """
                 CREATE TABLE IF NOT EXISTS nacimiento (
                     id_nacimiento SERIAL PRIMARY KEY,
@@ -21,6 +35,8 @@ public class DatabaseSetup {
                     id_instruccion VARCHAR(10) NOT NULL,
                     fecha_nacimiento DATE NOT NULL,
                     anio INT NOT NULL,
+                    sexo VARCHAR(20),
+                    tipo_parto VARCHAR(50),
                     FOREIGN KEY (id_madre) REFERENCES madre(id_madre),
                     FOREIGN KEY (id_provincia) REFERENCES provincias(id_provincia),
                     FOREIGN KEY (id_instruccion) REFERENCES instrucciones(id_instruccion)
@@ -32,11 +48,10 @@ public class DatabaseSetup {
         try (Connection conn = connection.getConnection();
                 Statement stmt = conn.createStatement()) {
 
+            stmt.execute(sqlProvinces);
+            stmt.execute(sqlInstructions);
             stmt.execute(sqlMother);
-            System.out.println("Table 'madre' verified.");
-
             stmt.execute(sqlBirth);
-            System.out.println("Table 'nacimiento' verified.");
 
             // SEED DATA
             checkAndCreateDefaultUser(conn);

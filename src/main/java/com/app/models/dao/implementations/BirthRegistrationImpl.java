@@ -142,4 +142,42 @@ public class BirthRegistrationImpl implements IBirthRegistration {
         }
         return list;
     }
+
+    @Override
+    public void update(BirthRegistration birthRegistration) {
+        String sql = """
+                UPDATE nacimiento
+                SET id_madre = ?, id_provincia = ?, id_instruccion = ?, fecha_nacimiento = ?, anio = ?, sexo = ?, tipo_parto = ?
+                WHERE id_nacimiento = ?
+                """;
+
+        try (Connection conn = databaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, birthRegistration.getMother().getIdMother());
+            stmt.setString(2, birthRegistration.getProvince().getIdProvince());
+            stmt.setString(3, birthRegistration.getInstruction().getIdInstruction());
+            stmt.setDate(4, birthRegistration.getBirthDate());
+            stmt.setInt(5, birthRegistration.getYear());
+            stmt.setString(6, birthRegistration.getSex());
+            stmt.setString(7, birthRegistration.getBirthType());
+            stmt.setInt(8, birthRegistration.getIdBirthRegistration());
+
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating birth registration: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        String sql = "DELETE FROM nacimiento WHERE id_nacimiento = ?";
+        try (Connection conn = databaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting birth registration: " + e.getMessage(), e);
+        }
+    }
 }
