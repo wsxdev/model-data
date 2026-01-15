@@ -219,6 +219,9 @@ public class ModeladoController {
     private void mostrarGrafica(ResultadoModeladoEDO resultado) {
         chartModelado.getData().clear();
 
+        // Configurar dinámicamente el eje X según el rango y el intervalo
+        configurarEjeXDinamico(resultado);
+
         // Serie 1: Datos reales (puntos azules)
         XYChart.Series<Number, Number> serieReal = new XYChart.Series<>();
         serieReal.setName("Datos Reales");
@@ -251,6 +254,63 @@ public class ModeladoController {
         // Identificadores de las series:
         // .chart-series-line.series0 {} // Datos reales
         // .chart-series-line.series1 {} // Datos modelados
+    }
+
+    /**
+     * Configura dinámicamente el eje X (años) según el rango y el intervalo
+     * seleccionado.
+     */
+    private void configurarEjeXDinamico(ResultadoModeladoEDO resultado) {
+        if (resultado.observados().isEmpty()) {
+            return;
+        }
+
+        // Obtener el rango de años de los datos observados
+        int minAnio = resultado.observados().stream()
+                .mapToInt(PuntoTemporal::anio)
+                .min()
+                .orElse(1990);
+        int maxAnio = resultado.observados().stream()
+                .mapToInt(PuntoTemporal::anio)
+                .max()
+                .orElse(2024);
+
+        // Calcular el rango total
+        int rangoAnios = maxAnio - minAnio;
+
+        // Calcular tickUnit apropiado basado en el rango y el intervalo
+        double tickUnit;
+        if (rangoAnios <= 10) {
+            // Rango pequeño: mostrar cada año o cada 2 años
+            tickUnit = rangoAnios <= 5 ? 1 : 2;
+        } else if (rangoAnios <= 20) {
+            // Rango mediano: intervalos de 2-5 años
+            tickUnit = 5;
+        } else if (rangoAnios <= 50) {
+            // Rango grande: intervalos de 5-10 años
+            tickUnit = 10;
+        } else {
+            // Rango muy grande: intervalos de 10-20 años
+            tickUnit = 20;
+        }
+
+        // Obtener el NumberAxis del eje X
+        NumberAxis xAxis = (NumberAxis) chartModelado.getXAxis();
+
+        // Configurar el eje X
+        xAxis.setAutoRanging(false);
+        xAxis.setLowerBound(minAnio);
+        xAxis.setUpperBound(maxAnio);
+        xAxis.setTickUnit(tickUnit);
+        xAxis.setMinorTickVisible(false);
+
+        // Forzar que solo muestre números enteros (sin decimales)
+        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
+            @Override
+            public String toString(Number object) {
+                return String.format("%d", object.intValue());
+            }
+        });
     }
 
     /**
