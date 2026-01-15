@@ -1,109 +1,92 @@
+/* ==========================================================================
+   COLOR DEFINITIONS - LIGHT MODE
+   ModelData Design System - Calypso Palette
+   ========================================================================== */
+
 .root {
+    /* ===== Calypso Color Palette ===== */
+    -calypso-50: #eefbfd;
+    -calypso-100: #d4f3f9;
+    -calypso-200: #aee6f3;
+    -calypso-300: #76d3ea;
+    -calypso-400: #37b7d9;
+    -calypso-500: #1b9abf;
+    -calypso-600: #197ca1;
+    -calypso-700: #1d6b8c;
+    /* PRIMARY COLOR */
+    -calypso-800: #1f536b;
+    -calypso-900: #1e455b;
+    -calypso-950: #0e2c3e;
 
-    /* =========================================================================== */
-    /*                        PALETA DE COLORES MODO CLARO                         */
-    /* =========================================================================== */
-    /* Color principal -fx-calypso-700 */
-    -fx-calypso-50:  #eefbfd;
-    -fx-calypso-100: #d4f3f9;
-    -fx-calypso-200: #aee6f3;
-    -fx-calypso-300: #76d3ea;
-    -fx-calypso-400: #37b7d9;
-    -fx-calypso-500: #1b9abf;
-    -fx-calypso-600: #197ca1;
-    -fx-calypso-700: #1d6b8c;
-    -fx-calypso-800: #1f536b;
-    -fx-calypso-900: #1e455b;
+    /* ===== Primary Colors ===== */
+    -primary-color: -calypso-700;
+    -primary-hover: -calypso-600;
+    -primary-pressed: -calypso-800;
+    -primary-disabled: -calypso-300;
+    -primary-light: -calypso-100;
 
-    /* =========================================================================== */
-    /*                              COLORES PRINCIPALES                            */
-    /* =========================================================================== */
-    /* Colores principales */
-    -fx-color-primary:        -fx-calypso-700;
-    -fx-color-primary-hover:  -fx-calypso-600;
-    -fx-color-primary-active: -fx-calypso-800;
-    -fx-color-accent:         -fx-calypso-400;
+    /* ===== Background Colors ===== */
+    -background-primary: #f8fafb;
+    -background-secondary: #ffffff;
+    -background-surface: #ffffff;
+    -background-card: #ffffff;
+    -background-hover: -calypso-50;
+    -background-selected: -calypso-100;
+    -background-disabled: #f3f4f6;
 
-    /* Colores de fondo y borde */
-    -fx-color-bg-app:         #F5F7FA;
-    -fx-color-bg-surface:     #FFFFFF;
-    -fx-color-bg-soft:        #F0F4F7;
-    -fx-color-boder-default:  #DADFE4;
+    /* ===== Text Colors ===== */
+    -text-primary: #1f2937;
+    -text-secondary: #6b7280;
+    -text-tertiary: #9ca3af;
+    -text-disabled: #d1d5db;
+    -text-on-primary: #ffffff;
+    -text-link: -calypso-700;
 
-    /* Colores de texto */
-    -fx-color-text-main:      #1F2A32;
-    -fx-color-text-secondary: #4B5A67;
-    -fx-color-text-muted:     #8F9CA8;
-    -fx-color-text-disabled:  #B7C2CA;
+    /* ===== Border Colors ===== */
+    -border-primary: #e5e7eb;
+    -border-secondary: #f3f4f6;
+    -border-hover: -calypso-400;
+    -border-focus: -calypso-700;
+    -border-error: #ef4444;
+    -border-success: #10b981;
 
-    /* Colores de estados */
-    -fx-color-success:        #27AE60;
-    -fx-color-warning:        #F2C037;
-    -fx-color-error:          #E74C3C;
-    -fx-color-info:           #3498DB;
+    /* ===== State Colors ===== */
+    -state-hover: rgba(29, 107, 140, 0.08);
+    -state-focus: rgba(29, 107, 140, 0.15);
+    -state-selected: rgba(29, 107, 140, 0.12);
+    -state-pressed: rgba(29, 107, 140, 0.20);
 
-    /* =========================================================================== */
-    /*                        COLORES DE TEXTO (MODO CLARO)                  */
-    /* =========================================================================== */
-    -fx-texto-primario:       -fx-color-text-main;
-    -fx-texto-secundario:     -fx-color-text-secondary;
-    -fx-texto-muted:          -fx-color-text-muted;
-    -fx-texto-deshabilitado:  -fx-color-text-disabled;
-    -fx-texto-enlace:         -fx-color-primary;
-    -fx-texto-enlace-hover:   -fx-color-primary-hover;
-    -fx-texto-en-primario:    #FFFFFF;
-    -fx-texto-en-general:     -fx-color-primary;
+    /* ===== Semantic Colors ===== */
+    -error-color: #ef4444;
+    -error-background: #fef2f2;
+    -warning-color: #f59e0b;
+    -warning-background: #fffbeb;
+    -success-color: #10b981;
+    -success-background: #f0fdf4;
+    -info-color: -calypso-700;
+    -info-background: -calypso-50;
 
-    /* =========================================================================== */
-    /*                      FONDOS Y SUPERFICIES (MODO CLARO)                      */
-    /* =========================================================================== */
-    /* Fondos */
-    -fx-fondo:                -fx-color-bg-app;
-    -fx-superficie:           -fx-color-bg-surface;
-    -fx-superficie-suave:     -fx-color-bg-soft;
-    -fx-panel-fondo:          -fx-superficie;
-    -fx-tarjeta-fondo:        -fx-superficie;
+    /* ===== Shadows ===== */
+    -shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    -shadow-md: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    -shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
 
-    /* Bordes */
-    -fx-borde:                -fx-color-boder-default;
-    -fx-border-color:         -fx-borde;
-    border-color:             -fx-borde;
+    /* ===== Component Specific ===== */
+    -input-background: #ffffff;
+    -input-border: -border-primary;
+    -input-placeholder: -text-tertiary;
 
-    /* =========================================================================== */
-    /*                 CONTROLES/INPUTS/SCROLL/ELEVACIÓN (MODO CLARO)              */
-    /* =========================================================================== */
-    /* Colores de controles */
-    -fx-control-bg:           -fx-superficie;
-    -fx-control-border:       -fx-borde;
-    -fx-control-disabled-bg:  #F3F5F7;
+    -table-header-background: -calypso-50;
+    -table-header-text: -text-primary;
+    -table-row-even: #ffffff;
+    -table-row-odd: -calypso-50;
+    -table-row-hover: -calypso-100;
+    -table-row-selected: -calypso-200;
 
-    /* Colores de inputs */
-    -fx-input-bg:             #FFFFFF;
-    -fx-input-borde:          -fx-borde;
-    -fx-input-text:           -fx-texto-primario;
-    -fx-input-placeholder:    -fx-texto-muted;
-    -fx-input-focus:          -fx-color-primary;
+    -tab-active-background: -calypso-100;
+    -tab-inactive-background: transparent;
+    -tab-border: -calypso-700;
 
-    /* Colores de scroll */
-    -fx-scroll-track:         #E9EEF2;
-    -fx-scroll-thumb:         #B9C4CE;
-    -fx-scroll-hover:         #97A4AF;
-
-    /* Colores de elevación */
-    -fx-elevacion-1:          rgba(16,24,32,0.04);
-    -fx-elevacion-2:          rgba(16,24,32,0.08);
-
-    /* =========================================================================== */
-    /*                    BOTONES Y ACCIONES (MODO CLARO)                          */
-    /* =========================================================================== */
-    /* Colores de botones */
-    -fx-boton-primario:           -fx-color-primary;
-    -fx-boton-primario-hover:     -fx-color-primary-hover;
-    -fx-boton-primario-pressed:   -fx-color-primary-active;
-    -fx-boton-primario-selected:  -fx-color-primary-active;
-    -fx-texto-boton-primario:     -fx-texto-en-primario;
-
-    -fx-boton-secundario:         -fx-color-primary;
-    -fx-boton-secundario-hover:   -fx-color-primary-hover;
-
+    -dialog-background: #ffffff;
+    -dialog-overlay: rgba(0, 0, 0, 0.4);
 }
