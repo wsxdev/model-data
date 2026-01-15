@@ -1,0 +1,61 @@
+/* Estilos opcionales para el módulo de Modelado */
+
+/* Estilo para el contenedor de la gráfica */
+.chart-container {
+    -fx-background-color: -color-bg-secondary;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+/* Estilos para las series de la gráfica */
+/* Serie 0: Datos reales - puntos azules */
+.chart-series-line.series0 {
+    -fx-stroke: #0066cc;
+    -fx-stroke-width: 0px;
+    /* Sin línea, solo puntos */
+}
+
+.chart-line-symbol.series0 {
+    -fx-background-color: #0066cc, white;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Serie 1: Datos modelados - línea roja continua */
+.chart-series-line.series1 {
+    -fx-stroke: #dc3545;
+    -fx-stroke-width: 2px;
+}
+
+.chart-line-symbol.series1 {
+    -fx-background-color: #dc3545, white;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 3px;
+    -fx-padding: 3px;
+}
+
+/* Estilos para las métricas */
+.metrics-grid {
+    -fx-padding: 15px;
+    -fx-background-color: -color-bg-secondary;
+    -fx-background-radius: 5px;
+}
+
+.metric-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.metric-value {
+    -fx-font-family: 'Courier New', monospace;
+    -fx-text-fill: -color-text-secondary;
+}
+
+/* Badge para tipo de crecimiento */
+.badge {
+    -fx-padding: 3px 8px;
+    -fx-background-radius: 3px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
