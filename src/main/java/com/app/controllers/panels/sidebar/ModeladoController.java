@@ -248,12 +248,45 @@ public class ModeladoController {
      * Serie 1 (modelada): línea roja continua
      */
     private void aplicarEstilosGrafica() {
-        // Los estilos se pueden aplicar mediante CSS en el archivo main.css
-        // o programáticamente aquí. Por simplicidad, dejamos que el CSS maneje esto.
+        // Ejecutar después de que se renderice la gráfica para asegurar que los nodos
+        // existan
+        javafx.application.Platform.runLater(() -> {
+            if (chartModelado.getData().size() >= 2) {
+                // Serie 0: Datos Reales (Azul)
+                XYChart.Series<Number, Number> seriesReal = chartModelado.getData().get(0);
+                if (seriesReal.getNode() != null) {
+                    seriesReal.getNode().setStyle("-fx-stroke: blue;");
+                }
+                for (XYChart.Data<Number, Number> data : seriesReal.getData()) {
+                    if (data.getNode() != null) {
+                        data.getNode().setStyle("-fx-background-color: blue, white;");
+                        // Instalar Tooltip
+                        Tooltip tooltip = new Tooltip(
+                                String.format("Año: %d\nNacimientos: %d",
+                                        data.getXValue().intValue(),
+                                        data.getYValue().intValue()));
+                        Tooltip.install(data.getNode(), tooltip);
+                    }
+                }
 
-        // Identificadores de las series:
-        // .chart-series-line.series0 {} // Datos reales
-        // .chart-series-line.series1 {} // Datos modelados
+                // Serie 1: Datos Modelados (Rojo)
+                XYChart.Series<Number, Number> seriesModel = chartModelado.getData().get(1);
+                if (seriesModel.getNode() != null) {
+                    seriesModel.getNode().setStyle("-fx-stroke: red;");
+                }
+                for (XYChart.Data<Number, Number> data : seriesModel.getData()) {
+                    if (data.getNode() != null) {
+                        data.getNode().setStyle("-fx-background-color: red, white;");
+                        // Instalar Tooltip
+                        Tooltip tooltip = new Tooltip(
+                                String.format("Año: %d\nModelado: %d",
+                                        data.getXValue().intValue(),
+                                        data.getYValue().intValue()));
+                        Tooltip.install(data.getNode(), tooltip);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -275,32 +308,20 @@ public class ModeladoController {
                 .max()
                 .orElse(2024);
 
-        // Calcular el rango total
-        int rangoAnios = maxAnio - minAnio;
+        // Configurar padding fraccional (0.5)
+        double lowerBound = minAnio - 0.5;
+        double upperBound = maxAnio + 0.5;
 
-        // Calcular tickUnit apropiado basado en el rango y el intervalo
-        double tickUnit;
-        if (rangoAnios <= 10) {
-            // Rango pequeño: mostrar cada año o cada 2 años
-            tickUnit = rangoAnios <= 5 ? 1 : 2;
-        } else if (rangoAnios <= 20) {
-            // Rango mediano: intervalos de 2-5 años
-            tickUnit = 5;
-        } else if (rangoAnios <= 50) {
-            // Rango grande: intervalos de 5-10 años
-            tickUnit = 10;
-        } else {
-            // Rango muy grande: intervalos de 10-20 años
-            tickUnit = 20;
-        }
+        // Forzar intervalo de 1 año para mostrar "año a año"
+        double tickUnit = 1;
 
         // Obtener el NumberAxis del eje X
         NumberAxis xAxis = (NumberAxis) chartModelado.getXAxis();
 
         // Configurar el eje X
         xAxis.setAutoRanging(false);
-        xAxis.setLowerBound(minAnio);
-        xAxis.setUpperBound(maxAnio);
+        xAxis.setLowerBound(lowerBound);
+        xAxis.setUpperBound(upperBound);
         xAxis.setTickUnit(tickUnit);
         xAxis.setMinorTickVisible(false);
 
@@ -308,9 +329,15 @@ public class ModeladoController {
         xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
             @Override
             public String toString(Number object) {
-                return String.format("%d", object.intValue());
+                // Solo mostrar si el valor está muy cerca de un entero
+                double val = object.doubleValue();
+                if (Math.abs(val - Math.round(val)) < 0.1) {
+                    return String.format("%d", (int) Math.round(val));
+                }
+                return "";
             }
         });
+
     }
 
     /**
