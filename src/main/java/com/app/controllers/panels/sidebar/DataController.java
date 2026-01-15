@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 public class DataController implements Initializable {
 
     @FXML
-    private TableView<Object> tableData;
+    private TableView tableData;
     @FXML
     private ComboBox<String> datosAnalizarComboBox;
     private ResourceBundle william;

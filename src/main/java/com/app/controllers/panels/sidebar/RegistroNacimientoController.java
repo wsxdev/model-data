@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.collections.transformation.FilteredList;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -47,6 +48,8 @@ public class RegistroNacimientoController {
     private Button btnDelete;
     @FXML
     private Label statusLabel;
+    @FXML
+    private TextField txtSearch;
 
     @FXML
     private TableView<BirthRegistration> tvBirths;
@@ -71,6 +74,7 @@ public class RegistroNacimientoController {
 
     private final BirthService birthService = new BirthService();
     private BirthRegistration selectedRegistration;
+    private FilteredList<BirthRegistration> filteredData;
 
     @FXML
     public void initialize() {
@@ -78,6 +82,7 @@ public class RegistroNacimientoController {
             setupComboBoxes();
             setupTable();
             loadRegistrations();
+            setupSearch();
         } catch (Exception e) {
             System.err.println("Error en inicialización: " + e.getMessage());
             e.printStackTrace();
@@ -158,7 +163,20 @@ public class RegistroNacimientoController {
 
     private void loadRegistrations() {
         List<BirthRegistration> list = birthService.getAllBirthRegistrations();
-        tvBirths.setItems(FXCollections.observableArrayList(list));
+        filteredData = new FilteredList<>(FXCollections.observableArrayList(list), p -> true);
+        tvBirths.setItems(filteredData);
+    }
+
+    private void setupSearch() {
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(birth -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return birth.getMother().getIdentification().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
     }
 
     private void fillForm(BirthRegistration br) {
