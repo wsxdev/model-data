@@ -124,13 +124,13 @@
                         <Label text="Sin datos analizados"/>
                     </placeholder>
                     <columns>
-                        <TableColumn fx:id="colCategoria" text="Categoría" minWidth="120.0" />
+                        <TableColumn fx:id="colCategoria" text="Categoría" minWidth="250.0" />
                         <TableColumn fx:id="colEcuacion" text="Ecuación" minWidth="300.0" />
                         <TableColumn fx:id="colParametroA" text="Condición inicial" minWidth="150.0" />
                         <TableColumn fx:id="colParametroB" text="Tasa de cambio" minWidth="150.0" />
-                        <TableColumn fx:id="colR2" text="R²" minWidth="60.0" />
-                        <TableColumn fx:id="colMAE" text="MAE" minWidth="60.0" />
-                        <TableColumn fx:id="colRMSE" text="RMSE" minWidth="60.0" />
+                        <TableColumn fx:id="colR2" text="R²" minWidth="100.0" />
+                        <TableColumn fx:id="colMAE" text="MAE" minWidth="100.0" />
+                        <TableColumn fx:id="colRMSE" text="RMSE" minWidth="100.0" />
                         <TableColumn fx:id="colInterpretacion" text="Interpretación" minWidth="250.0" />
                     </columns>
                 </TableView>
