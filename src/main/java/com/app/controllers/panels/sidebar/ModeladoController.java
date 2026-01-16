@@ -394,21 +394,20 @@ public class ModeladoController {
 
         int idx = 0;
         for (ResultadoModeladoEDO res : resultadosCalculados) {
-            String color = PALETA_COLORES[idx % PALETA_COLORES.length];
-            if (idx == 1 && resultadosCalculados.size() == 2)
-                color = "#d62728"; // Force Red for 2nd in 1v1
+            String colorObs = "#1f77b4"; // Blue
+            String colorMod = "#d62728"; // Red
 
             // 1. Observed (Points only)
             XYChart.Series<Number, Number> sObs = new XYChart.Series<>();
-            sObs.setName(res.categoria() + " (Obs)");
+            sObs.setName(res.categoria() + " (Datos registrados)");
             for (PuntoTemporal p : res.observados())
                 sObs.getData().add(new XYChart.Data<>(p.anio(), p.nacimientos()));
             chartModelado.getData().add(sObs);
-            estilizarObservado(sObs, color);
+            estilizarObservado(sObs, colorObs);
 
             // 2. Modeled (Smooth Curve)
             XYChart.Series<Number, Number> sMod = new XYChart.Series<>();
-            sMod.setName(res.categoria() + " (Mod)");
+            sMod.setName(res.categoria() + " (Modelado)");
             // Use high-res curve if available, else standard
             List<PuntoTemporal> points = (res.modeladosCurve() != null && !res.modeladosCurve().isEmpty())
                     ? res.modeladosCurve()
@@ -416,10 +415,33 @@ public class ModeladoController {
             for (PuntoTemporal p : points)
                 sMod.getData().add(new XYChart.Data<>(p.anio(), p.nacimientos()));
             chartModelado.getData().add(sMod);
-            estilizarModelado(sMod, color);
+            estilizarModelado(sMod, colorMod);
 
             idx++;
         }
+
+        corregirColoresLeyenda();
+    }
+
+    private void corregirColoresLeyenda() {
+        Platform.runLater(() -> {
+            javafx.scene.Node legend = chartModelado.lookup(".chart-legend");
+            if (legend != null && legend instanceof javafx.scene.layout.Pane) {
+                int i = 0;
+                for (javafx.scene.Node item : ((javafx.scene.layout.Pane) legend).getChildren()) {
+                    if (item instanceof Label) {
+                        Label label = (Label) item;
+                        javafx.scene.Node symbol = label.getGraphic();
+                        if (symbol != null) {
+                            // Par = Obs (Azul), Impar = Mod (Rojo)
+                            String color = (i % 2 == 0) ? "#1f77b4" : "#d62728";
+                            symbol.setStyle("-fx-background-color: " + color + ", white;");
+                        }
+                        i++;
+                    }
+                }
+            }
+        });
     }
 
     private void estilizarObservado(XYChart.Series<Number, Number> s, String c) {
