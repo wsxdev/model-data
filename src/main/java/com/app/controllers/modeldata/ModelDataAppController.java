@@ -9,15 +9,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -59,6 +64,9 @@ public class ModelDataAppController {
     private ToggleButton btnGraficos;
     @FXML
     private ToggleButton btnConfiguracion;
+
+    // Referencia al controlador de la vista activa
+    private Object activeController;
 
     // Botones del menubar
     @FXML
@@ -145,6 +153,7 @@ public class ModelDataAppController {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             loader.setResources(LanguageManagerUtil.getInstance().getBundle());
             AnchorPane viewPanel = loader.load();
+            this.activeController = loader.getController(); // CAPTURAR CONTROLADOR ACTIVO
             contentPane.getChildren().setAll(viewPanel);
             AnchorPane.setTopAnchor(viewPanel, 0.0);
             AnchorPane.setBottomAnchor(viewPanel, 0.0);
@@ -314,5 +323,98 @@ public class ModelDataAppController {
         } catch (RuntimeException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // --- ACCIONES DEL MENÚ ARCHIVO ---
+
+    @FXML
+    public void itemImport(ActionEvent actionEvent) {
+        // Implementación real de importación podría ir aquí si se requiere para
+        // nacimientos
+        // Por ahora mantenemos el diálogo informativo ya que el foco es Modelado
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Importar Datos");
+        File selectedFile = fileChooser.showOpenDialog(sideBar.getScene().getWindow());
+        if (selectedFile != null) {
+            com.app.utils.DialogUtil.showInformationDialog("Importación",
+                    "Función de importación de microdatos en desarrollo.");
+        }
+    }
+
+    @FXML
+    public void itemExport(ActionEvent actionEvent) {
+        java.util.ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
+
+        if (!(activeController instanceof com.app.controllers.panels.sidebar.ModeladoController modeladoCtrl)) {
+            com.app.utils.DialogUtil.showWarningDialog("export.warning.activeview", "export.warning.activeview");
+            return;
+        }
+
+        List<com.app.models.modeling.ResultadoModeladoEDO> results = modeladoCtrl.getResultadosCalculados();
+        if (results == null || results.isEmpty()) {
+            com.app.utils.DialogUtil.showWarningDialog("export.warning.noresults", "export.warning.noresults");
+            return;
+        }
+
+        // Selección de formato
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("PDF", "PDF", "CSV");
+        try {
+            dialog.setTitle(bundle.getString("export.dialog.title"));
+            dialog.setHeaderText(bundle.getString("export.dialog.header"));
+            dialog.setContentText(bundle.getString("export.dialog.content"));
+        } catch (Exception ignored) {
+            dialog.setTitle("Export Format");
+            dialog.setHeaderText("Select export format");
+            dialog.setContentText("Format:");
+        }
+
+        dialog.showAndWait().ifPresent(format -> {
+            FileChooser fileChooser = new FileChooser();
+            try {
+                fileChooser.setTitle(bundle.getString("export.filechooser.title") + " (" + format + ")");
+            } catch (Exception ignored) {
+                fileChooser.setTitle("Save Report (" + format + ")");
+            }
+            fileChooser.setInitialFileName("reporte_modelado." + format.toLowerCase());
+            fileChooser.getExtensionFilters()
+                    .add(new FileChooser.ExtensionFilter(format + " Files", "*." + format.toLowerCase()));
+
+            File file = fileChooser.showSaveDialog(sideBar.getScene().getWindow());
+            if (file != null) {
+                try {
+                    if ("CSV".equals(format)) {
+                        com.app.utils.ExportUtil.exportModelingToCsv(file, results);
+                    } else {
+                        com.app.utils.ExportUtil.exportModelingToPdf(file, results, modeladoCtrl.getPanelResultados());
+                    }
+                    com.app.utils.DialogUtil.showInformationDialog("export.success.title", "export.success.message");
+                    com.app.utils.ExportUtil.openFileLocation(file);
+                } catch (Exception e) {
+                    String errorMsg;
+                    try {
+                        errorMsg = String.format(bundle.getString("export.error.message"), e.getMessage());
+                    } catch (Exception ex) {
+                        errorMsg = "Error saving file: " + e.getMessage();
+                    }
+                    com.app.utils.DialogUtil.showErrorDialog("export.error.title", errorMsg);
+                }
+            }
+        });
+    }
+
+    @FXML
+    public void itemSave(ActionEvent actionEvent) {
+        itemExport(actionEvent);
+    }
+
+    @FXML
+    public void itemSaveAs(ActionEvent actionEvent) {
+        itemExport(actionEvent);
+    }
+
+    @FXML
+    public void itemExit(ActionEvent actionEvent) {
+        Platform.exit();
+        System.exit(0);
     }
 }

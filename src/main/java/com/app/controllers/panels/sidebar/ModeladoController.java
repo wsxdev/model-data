@@ -572,4 +572,12 @@ public class ModeladoController {
         checkComboCategoriaMulti.getCheckModel().clearChecks();
         lblAnalisisTexto.setText("");
     }
+
+    public List<ResultadoModeladoEDO> getResultadosCalculados() {
+        return resultadosCalculados;
+    }
+
+    public VBox getPanelResultados() {
+        return panelResultados;
+    }
 }

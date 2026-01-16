@@ -228,11 +228,12 @@
                         </padding>
                         <MenuBar fx:id="menuBar" prefHeight="28.0" style="-fx-background-color: #197CA1; -fx-background-radius: 15;">
                                 <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="%menu.file">
-                                    <MenuItem mnemonicParsing="false" text="%menu.file.item.import" />
-                                    <MenuItem mnemonicParsing="false" text="%menu.file.item.export" />
-                                    <MenuItem mnemonicParsing="false" text="%menu.file.item.save" />
-                                    <MenuItem mnemonicParsing="false" text="%menu.file.item.saveas" />
-                                    <MenuItem mnemonicParsing="false" text="%menu.logout" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemImport" text="%menu.file.item.import" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemExport" text="%menu.file.item.export" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemSave" text="%menu.file.item.save" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemSaveAs" text="%menu.file.item.saveas" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemLogout" text="%menu.logout" />
+                                    <MenuItem mnemonicParsing="false" onAction="#itemExit" text="%menu.file.item.exit" />
                                 </Menu>
                                 <Menu mnemonicParsing="false" text="%menu.edit">
                                     <MenuItem mnemonicParsing="false" text="%menu.edit.item.undo" />

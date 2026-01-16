@@ -4,6 +4,8 @@ module com.app.modeldata {
     requires javafx.web;
     requires transitive javafx.graphics;
     requires javafx.base;
+    requires javafx.swing;
+    requires com.github.librepdf.openpdf;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -23,7 +25,9 @@ module com.app.modeldata {
     opens com.app.modeldata to javafx.fxml;
     opens com.app.controllers.modeldata to javafx.fxml;
     opens com.app.controllers.login to javafx.fxml;
+
     exports com.app.modeldata;
+
     opens com.app.controllers.panels.sidebar to javafx.fxml;
     opens com.app.controllers.panels.menubar.itemsanalizer to javafx.fxml;
     opens com.app.controllers.panels.menubar.itemshelp to javafx.fxml;
