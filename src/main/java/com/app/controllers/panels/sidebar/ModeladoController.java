@@ -475,14 +475,34 @@ public class ModeladoController {
 
     private void configurarEjes(ResultadoModeladoEDO r) {
         NumberAxis x = (NumberAxis) chartModelado.getXAxis();
-        if (!r.observados().isEmpty()) {
-            double min = r.observados().stream().mapToDouble(PuntoTemporal::anio).min().orElse(2000);
-            double max = r.observados().stream().mapToDouble(PuntoTemporal::anio).max().orElse(2020);
-            x.setAutoRanging(false);
-            x.setLowerBound(min - 1);
-            x.setUpperBound(max + 1);
-            x.setTickUnit(2);
-        }
+        NumberAxis y = (NumberAxis) chartModelado.getYAxis();
+
+        // Configurar rango exacto seleccionado por el usuario con márgenes
+        int inicio = comboAnioInicial.getValue();
+        int fin = comboAnioFinal.getValue();
+
+        x.setAutoRanging(false);
+        x.setLowerBound(inicio - 1); // Espacio al inicio
+        x.setUpperBound(fin + 1); // Espacio al final
+        x.setTickUnit(1);
+
+        // Formato X: Entero puro (1999)
+        StringConverter<Number> noGrouping = new StringConverter<Number>() {
+            @Override
+            public String toString(Number object) {
+                return String.format(java.util.Locale.US, "%.0f", object.doubleValue());
+            }
+
+            @Override
+            public Number fromString(String string) {
+                return Double.valueOf(string);
+            }
+        };
+
+        x.setTickLabelFormatter(noGrouping);
+
+        // Formato Y: Entero sin separadores (2500)
+        y.setTickLabelFormatter(noGrouping);
     }
 
     private String interpretarTendencia(ResultadoModeladoEDO r) {
