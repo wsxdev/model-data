@@ -16,6 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import org.controlsfx.control.CheckComboBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.panels.sidebar.ModeladoController">
     <ScrollPane fitToWidth="true" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -27,20 +28,38 @@
         <!-- Título del Módulo -->
         <Text text="%modelado.titulo" styleClass="page-title" />
 
-        <!-- Sección A: Selección de Segmentación -->
+        <!-- Sección A: Selección de Segmentación y Comparación -->
         <VBox spacing="15.0" styleClass="card">
             <Text text="%modelado.seccion.segmentacion" styleClass="section-title" />
             
             <!-- Tipo de segmentación -->
             <HBox spacing="10.0" alignment="CENTER_LEFT">
-                <Label text="%modelado.label.tipoSegmentacion" minWidth="120.0" />
-                <ComboBox fx:id="comboTipoSegmentacion" minWidth="200.0" />
+                <Label text="%modelado.label.tipoSegmentacion" minWidth="150.0" />
+                <ComboBox fx:id="comboTipoSegmentacion" minWidth="250.0" />
+            </HBox>
+
+            <!-- Modo de Comparación -->
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label text="%modelado.label.modoComparacion" minWidth="150.0" />
+                <ComboBox fx:id="comboModoComparacion" minWidth="250.0" />
             </HBox>
             
-            <!-- Categoría específica -->
+            <!-- Categoría Principal -->
             <HBox spacing="10.0" alignment="CENTER_LEFT">
-                <Label text="%modelado.label.categoria" minWidth="120.0" />
-                <ComboBox fx:id="comboCategoria" minWidth="200.0" />
+                <Label text="%modelado.label.categoria" minWidth="150.0" />
+                <ComboBox fx:id="comboCategoria" minWidth="250.0" />
+            </HBox>
+
+            <!-- Categoría Secundaria (Para 1 vs 1) -->
+            <HBox fx:id="boxCategoria2" spacing="10.0" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label text="%modelado.label.categoria2" minWidth="150.0" />
+                <ComboBox fx:id="comboCategoria2" minWidth="250.0" />
+            </HBox>
+
+            <!-- Categorías Múltiples (Para 1 vs N) -->
+            <HBox fx:id="boxCategoriaMulti" spacing="10.0" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label text="%modelado.label.categoriasMulti" minWidth="150.0" />
+                <CheckComboBox fx:id="checkComboCategoriaMulti" minWidth="250.0" maxWidth="300.0"/>
             </HBox>
         </VBox>
 
@@ -69,7 +88,8 @@
 
         <!-- Sección C: Ejecución -->
         <HBox spacing="15.0" alignment="CENTER">
-            <Button fx:id="btnAplicarModelado" text="%modelado.button.aplicarModeladoEDO" onAction="#onAplicarModelado" styleClass="primary-button" />
+            <Button fx:id="btnModelar" text="%modelado.button.modelar" onAction="#onModelar" styleClass="primary-button" />
+            <Button fx:id="btnGraficar" text="%modelado.button.graficar" onAction="#onGraficar" styleClass="action-button" disable="true"/>
             <Button fx:id="btnLimpiar" text="%modelado.button.limpiar" onAction="#onLimpiar" styleClass="secondary-button" />
         </HBox>
 
@@ -81,7 +101,7 @@
             <VBox spacing="10.0">
                 <Text text="%modelado.label.grafica" styleClass="subtitle" />
                 <StackPane fx:id="contenedorGrafica" minHeight="400.0" styleClass="chart-container">
-                    <LineChart fx:id="chartModelado" animated="false" legendVisible="false">
+                    <LineChart fx:id="chartModelado" animated="false" legendVisible="true">
                         <xAxis>
                             <NumberAxis label="%modelado.chart.xaxis" side="BOTTOM" />
                         </xAxis>
@@ -90,21 +110,10 @@
                         </yAxis>
                     </LineChart>
                 </StackPane>
-                <!-- Leyenda manual -->
-                <HBox spacing="15.0" alignment="CENTER">
-                    <HBox spacing="5.0" alignment="CENTER_LEFT">
-                        <Circle radius="5.0" fill="blue" stroke="blue" />
-                        <Label text="%modelado.leyenda.datosReales" />
-                    </HBox>
-                    <HBox spacing="5.0" alignment="CENTER_LEFT">
-                        <Circle radius="5.0" fill="red" stroke="red" />
-                        <Label text="%modelado.leyenda.datosModelados" />
-                    </HBox>
-                </HBox>
             </VBox>
             
-            <!-- Subsección: Métricas del Modelo -->
-            <VBox spacing="10.0">
+            <!-- Subsección: Métricas del Modelo (Solo visible para modo Individual o Principal) -->
+            <VBox fx:id="boxMetricas" spacing="10.0">
                 <Text text="%modelado.label.metricas" styleClass="subtitle" />
                 <GridPane hgap="15.0" vgap="10.0" styleClass="metrics-grid">
                     <!-- Ecuación -->
