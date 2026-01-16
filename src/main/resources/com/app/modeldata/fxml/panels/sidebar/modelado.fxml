@@ -118,26 +118,22 @@
             <VBox fx:id="boxMetricas" spacing="10.0" VBox.vgrow="ALWAYS">
                 <Text text="%modelado.label.analisis" styleClass="subtitle" />
                 
-                <ScrollPane fitToWidth="false" fitToHeight="true" VBox.vgrow="ALWAYS">
-                    <content>
-                        <TableView fx:id="tblAnalisis" prefHeight="200.0">
+                <TableView fx:id="tblAnalisis" prefHeight="200.0">
 
-                            <placeholder>
-                                <Label text="Sin datos analizados"/>
-                            </placeholder>
-                            <columns>
-                                <TableColumn fx:id="colCategoria" text="Categoría" minWidth="120.0" />
-                                <TableColumn fx:id="colEcuacion" text="Ecuación" minWidth="180.0" />
-                                <TableColumn fx:id="colParametroA" text="Condición inicial" minWidth="100.0" />
-                                <TableColumn fx:id="colParametroB" text="Tasa de cambio" minWidth="100.0" />
-                                <TableColumn fx:id="colR2" text="R²" minWidth="60.0" />
-                                <TableColumn fx:id="colMAE" text="MAE" minWidth="60.0" />
-                                <TableColumn fx:id="colRMSE" text="RMSE" minWidth="60.0" />
-                                <TableColumn fx:id="colInterpretacion" text="Interpretación" minWidth="150.0" />
-                            </columns>
-                        </TableView>
-                    </content>
-                </ScrollPane>
+                    <placeholder>
+                        <Label text="Sin datos analizados"/>
+                    </placeholder>
+                    <columns>
+                        <TableColumn fx:id="colCategoria" text="Categoría" minWidth="120.0" />
+                        <TableColumn fx:id="colEcuacion" text="Ecuación" minWidth="300.0" />
+                        <TableColumn fx:id="colParametroA" text="Condición inicial" minWidth="150.0" />
+                        <TableColumn fx:id="colParametroB" text="Tasa de cambio" minWidth="150.0" />
+                        <TableColumn fx:id="colR2" text="R²" minWidth="60.0" />
+                        <TableColumn fx:id="colMAE" text="MAE" minWidth="60.0" />
+                        <TableColumn fx:id="colRMSE" text="RMSE" minWidth="60.0" />
+                        <TableColumn fx:id="colInterpretacion" text="Interpretación" minWidth="250.0" />
+                    </columns>
+                </TableView>
                 
                 <!-- Análisis Textual Automático -->
                 <Label fx:id="lblAnalisisTexto" wrapText="true" styleClass="analysis-text" 
