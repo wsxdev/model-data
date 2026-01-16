@@ -1,14 +1,19 @@
 package com.app.controllers.panels.sidebar;
 
 import com.app.models.modeling.*;
+import com.app.models.modeling.TipoSegmentacion;
 import com.app.models.services.ModelingService;
 import com.app.models.services.BirthService;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.chart.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import org.controlsfx.control.CheckComboBox;
 import javafx.util.StringConverter;
 
@@ -20,12 +25,10 @@ import java.util.stream.IntStream;
 
 /**
  * Controlador para el módulo de Modelado Matemático EDO.
- * Permite seleccionar datos, ejecutar modelado y visualizar resultados con
- * gráfica integrada.
+ * Refactorizado para validaciones estrictas y visualización científica.
  */
 public class ModeladoController {
 
-    // Enums para modos de comparación
     public enum ModoComparacion {
         INDIVIDUAL("modelado.compare.mode.individual"),
         COMPARACION_1_VS_1("modelado.compare.mode.1vs1"),
@@ -43,25 +46,27 @@ public class ModeladoController {
         }
     }
 
-    // Controles de segmentación
+    // --- FXML Controls ---
     @FXML
     private ComboBox<TipoSegmentacion> comboTipoSegmentacion;
     @FXML
     private ComboBox<ModoComparacion> comboModoComparacion;
+    @FXML
+    private Label lblInfoComparacion; // Ayuda contextual nueva
 
     @FXML
-    private ComboBox<String> comboCategoria;
+    private ComboBox<String> comboCategoria; // Base
     @FXML
     private HBox boxCategoria2;
     @FXML
-    private ComboBox<String> comboCategoria2;
+    private ComboBox<String> comboCategoria2; // Comparación
 
     @FXML
     private HBox boxCategoriaMulti;
     @FXML
-    private CheckComboBox<String> checkComboCategoriaMulti;
+    private CheckComboBox<String> checkComboCategoriaMulti; // Multi
 
-    // Controles de rango temporal
+    // Rango Temporal
     @FXML
     private ComboBox<Integer> comboAnioInicial;
     @FXML
@@ -69,7 +74,7 @@ public class ModeladoController {
     @FXML
     private Spinner<Integer> spinnerIntervalo;
 
-    // Botones
+    // Actions
     @FXML
     private Button btnModelar;
     @FXML
@@ -77,37 +82,56 @@ public class ModeladoController {
     @FXML
     private Button btnLimpiar;
 
-    // Panel de resultados
+    // Resultados
     @FXML
     private VBox panelResultados;
     @FXML
-    private VBox boxMetricas;
-
-    // Gráfica
+    private VBox boxMetricas; // Contenedor de tabla
+    @FXML
+    private StackPane contenedorGrafica;
     @FXML
     private LineChart<Number, Number> chartModelado;
 
-    // Métricas
+    // Tabla y Análisis
     @FXML
-    private Label lblEcuacion;
+    private TableView<ResultadoModeladoEDO> tblAnalisis;
     @FXML
-    private Label lblParametroA;
+    private TableColumn<ResultadoModeladoEDO, String> colCategoria;
     @FXML
-    private Label lblParametroB;
+    private TableColumn<ResultadoModeladoEDO, String> colEcuacion;
     @FXML
-    private Label lblTipoCrecimiento;
+    private TableColumn<ResultadoModeladoEDO, String> colParametroA;
     @FXML
-    private Label lblR2;
+    private TableColumn<ResultadoModeladoEDO, String> colParametroB;
     @FXML
-    private Label lblMAE;
+    private TableColumn<ResultadoModeladoEDO, String> colR2;
     @FXML
-    private Label lblRMSE;
+    private TableColumn<ResultadoModeladoEDO, String> colMAE;
+    @FXML
+    private TableColumn<ResultadoModeladoEDO, String> colRMSE;
+    @FXML
+    private TableColumn<ResultadoModeladoEDO, String> colInterpretacion;
+    @FXML
+    private Label lblAnalisisTexto;
 
+    // Servicios y Datos
     private ModelingService modelingService;
     private BirthService birthService;
+    private ObservableList<ResultadoModeladoEDO> resultadosCalculados = FXCollections.observableArrayList();
 
-    // Almacenamiento de resultados
-    private List<ResultadoModeladoEDO> resultadosCalculados = new ArrayList<>();
+    // Paleta Científica (ColorBrewer Set1/Dark2 adaptada)
+    private final String[] PALETA_COLORES = {
+            "#1f77b4", // Azul (Base)
+            "#d62728", // Rojo
+            "#2ca02c", // Verde
+            "#9467bd", // Púrpura
+            "#ff7f0e", // Naranja
+            "#8c564b", // Marrón
+            "#e377c2", // Rosa
+            "#7f7f7f", // Gris
+            "#bcbd22", // Lima
+            "#17becf" // Turquesa
+    };
 
     @FXML
     public void initialize() {
@@ -115,151 +139,171 @@ public class ModeladoController {
         birthService = new BirthService();
 
         configurarControles();
+        configurarTabla();
         configurarListeners();
     }
 
-    /**
-     * Configura los valores iniciales de los controles.
-     */
     private void configurarControles() {
-        // Cargar tipos de segmentación
-        comboTipoSegmentacion.getItems().addAll(
-                TipoSegmentacion.PROVINCIA,
-                TipoSegmentacion.INSTRUCCION);
-
-        comboTipoSegmentacion.setConverter(new StringConverter<TipoSegmentacion>() {
+        comboTipoSegmentacion.getItems().addAll(TipoSegmentacion.PROVINCIA, TipoSegmentacion.INSTRUCCION);
+        comboTipoSegmentacion.setConverter(new StringConverter<>() {
             @Override
-            public String toString(TipoSegmentacion tipo) {
-                return tipo != null ? tipo.getDisplayName() : "";
+            public String toString(TipoSegmentacion t) {
+                return t != null ? t.getDisplayName() : "";
             }
 
             @Override
-            public TipoSegmentacion fromString(String string) {
+            public TipoSegmentacion fromString(String s) {
                 return null;
             }
         });
 
-        // Configurar Modos de Comparación
         comboModoComparacion.getItems().addAll(ModoComparacion.values());
-
-        // Converter para i18n de modos
-        comboModoComparacion.setConverter(new StringConverter<ModoComparacion>() {
+        comboModoComparacion.setConverter(new StringConverter<>() {
             @Override
-            public String toString(ModoComparacion modo) {
-                if (modo == null)
+            public String toString(ModoComparacion m) {
+                if (m == null)
                     return "";
                 try {
-                    return java.util.ResourceBundle.getBundle("i18n/messages").getString(modo.getKey());
+                    return ResourceBundle.getBundle("i18n/messages").getString(m.getKey());
                 } catch (Exception e) {
-                    return modo.name();
+                    return m.name();
                 }
             }
 
             @Override
-            public ModoComparacion fromString(String string) {
+            public ModoComparacion fromString(String s) {
                 return null;
             }
         });
-
         comboModoComparacion.setValue(ModoComparacion.INDIVIDUAL);
 
-        // Cargar años (1990-2024)
+        // Años 1990-2024
         List<Integer> years = IntStream.rangeClosed(1990, 2024).boxed().collect(Collectors.toList());
         comboAnioInicial.getItems().addAll(years);
         comboAnioFinal.getItems().addAll(years);
         comboAnioInicial.setValue(2000);
         comboAnioFinal.setValue(2020);
-
-        // Intervalo
         spinnerIntervalo.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1));
     }
 
-    /**
-     * Configura los listeners para eventos de los controles.
-     */
+    private void configurarTabla() {
+        colCategoria.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().categoria()));
+        colEcuacion.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEcuacionFormateada()));
+        colParametroA.setCellValueFactory(
+                data -> new SimpleStringProperty(String.format("%.4e", data.getValue().parametroA())));
+        colParametroB.setCellValueFactory(
+                data -> new SimpleStringProperty(String.format("%.6f", data.getValue().parametroB())));
+        colR2.setCellValueFactory(data -> new SimpleStringProperty(String.format("%.4f", data.getValue().r2())));
+        colMAE.setCellValueFactory(data -> new SimpleStringProperty(String.format("%.2f", data.getValue().mae())));
+        colRMSE.setCellValueFactory(data -> new SimpleStringProperty(String.format("%.2f", data.getValue().rmse())));
+        colInterpretacion.setCellValueFactory(data -> new SimpleStringProperty(interpretarTendencia(data.getValue())));
+
+        tblAnalisis.setItems(resultadosCalculados);
+    }
+
     private void configurarListeners() {
         comboTipoSegmentacion.setOnAction(e -> {
-            cargarCategorias();
+            cargarCategoriasBase();
             actualizarEstadoUI();
         });
-
-        comboModoComparacion.setOnAction(e -> atualizarEstadoUI());
-
+        comboModoComparacion.setOnAction(e -> actualizarEstadoUI());
+        // Validation 1.1: Al cambiar base, sacarla de la lista de comparación
+        comboCategoria.setOnAction(e -> filtrarListasComparacion());
         comboAnioFinal.setOnAction(e -> validarRangoTemporal());
     }
 
-    /**
-     * Actualiza la visibilidad y estado de los controles según selección.
-     */
+    private void cargarCategoriasBase() {
+        comboCategoria.getItems().clear();
+        TipoSegmentacion tipo = comboTipoSegmentacion.getValue();
+        if (tipo == null)
+            return;
+
+        List<String> items = obtenerItemsPorTipo(tipo);
+        comboCategoria.getItems().addAll(items);
+    }
+
+    private List<String> obtenerItemsPorTipo(TipoSegmentacion tipo) {
+        if (tipo == TipoSegmentacion.PROVINCIA) {
+            return birthService.getAllProvinces().stream().map(p -> p.getNameProvince()).collect(Collectors.toList());
+        } else {
+            return birthService.getAllInstructions().stream().map(i -> i.getNameInstruction())
+                    .collect(Collectors.toList());
+        }
+    }
+
+    // Validation 1.1 & 1.2 strict implementation
+    private void filtrarListasComparacion() {
+        String base = comboCategoria.getValue();
+        TipoSegmentacion tipo = comboTipoSegmentacion.getValue();
+        if (tipo == null)
+            return;
+
+        List<String> todos = obtenerItemsPorTipo(tipo);
+        List<String> filtrados = new ArrayList<>(todos);
+        if (base != null)
+            filtrados.remove(base); // REGLA DE ORO: Base fuera
+
+        // Update Combo 2
+        String curr2 = comboCategoria2.getValue();
+        comboCategoria2.getItems().setAll(filtrados);
+        if (base != null && base.equals(curr2))
+            comboCategoria2.setValue(null);
+
+        // Update Multi
+        List<String> checked = new ArrayList<>(checkComboCategoriaMulti.getCheckModel().getCheckedItems());
+        checkComboCategoriaMulti.getItems().setAll(filtrados);
+        // Restore checks only if valid
+        for (String s : checked) {
+            if (!s.equals(base))
+                checkComboCategoriaMulti.getCheckModel().check(s);
+        }
+    }
+
     private void actualizarEstadoUI() {
         TipoSegmentacion tipo = comboTipoSegmentacion.getValue();
         ModoComparacion modo = comboModoComparacion.getValue();
-
         if (tipo == null || modo == null)
             return;
 
-        // Regla: Instrucción solo permite Individual o 1 vs 1 (max 2)
-        if (tipo == TipoSegmentacion.INSTRUCCION) {
-            if (modo == ModoComparacion.COMPARACION_1_VS_N || modo == ModoComparacion.COMPARACION_1_VS_TODOS) {
-                // Reset a individual si selecciona uno inválido
-                comboModoComparacion.setValue(ModoComparacion.INDIVIDUAL);
-                mostrarAlerta("Información",
-                        "Para Nivel de Instrucción, solo se permite comparación entre dos niveles.");
-                return;
-            }
+        // Validation 1.3: Instruccion restricted
+        if (tipo == TipoSegmentacion.INSTRUCCION
+                && (modo == ModoComparacion.COMPARACION_1_VS_N || modo == ModoComparacion.COMPARACION_1_VS_TODOS)) {
+            comboModoComparacion.setValue(ModoComparacion.INDIVIDUAL);
+            mostrarAlerta("Información",
+                    "Por consistencia metodológica, Nivel de Instrucción solo permite comparación individual o par (1 vs 1).");
+            return;
         }
 
-        // Visibilidad de selectores secundarios
         boolean showCat2 = (modo == ModoComparacion.COMPARACION_1_VS_1);
         boolean showMulti = (modo == ModoComparacion.COMPARACION_1_VS_N);
 
         boxCategoria2.setVisible(showCat2);
         boxCategoria2.setManaged(showCat2);
-
         boxCategoriaMulti.setVisible(showMulti);
         boxCategoriaMulti.setManaged(showMulti);
-    }
 
-    // Typo fix in listener
-    private void atualizarEstadoUI() {
-        actualizarEstadoUI();
-    }
-
-    private void cargarCategorias() {
-        comboCategoria.getItems().clear();
-        comboCategoria2.getItems().clear();
-        checkComboCategoriaMulti.getItems().clear();
-
-        TipoSegmentacion tipo = comboTipoSegmentacion.getValue();
-        if (tipo == null)
-            return;
-
-        try {
-            List<String> items = new ArrayList<>();
-            if (tipo == TipoSegmentacion.PROVINCIA) {
-                items = birthService.getAllProvinces().stream().map(p -> p.getNameProvince())
-                        .collect(Collectors.toList());
-            } else if (tipo == TipoSegmentacion.INSTRUCCION) {
-                items = birthService.getAllInstructions().stream().map(i -> i.getNameInstruction())
-                        .collect(Collectors.toList());
+        // Help Context Label with ID check
+        if (lblInfoComparacion != null) {
+            lblInfoComparacion.setVisible(true);
+            lblInfoComparacion.setManaged(true);
+            String base = comboCategoria.getValue() != null ? comboCategoria.getValue() : "[Base]";
+            switch (modo) {
+                case INDIVIDUAL:
+                    lblInfoComparacion.setText("Análisis de tendencia individual para " + base);
+                    break;
+                case COMPARACION_1_VS_1:
+                    lblInfoComparacion.setText("Comparación directa entre " + base + " y otra entidad.");
+                    break;
+                case COMPARACION_1_VS_N:
+                    lblInfoComparacion.setText("Comparación de " + base + " frente a un grupo seleccionado.");
+                    break;
+                case COMPARACION_1_VS_TODOS:
+                    lblInfoComparacion.setText("Comparación global de " + base + " frente a TODO el resto.");
+                    break;
             }
-
-            comboCategoria.getItems().addAll(items);
-            comboCategoria2.getItems().addAll(items);
-            checkComboCategoriaMulti.getItems().addAll(items);
-
-        } catch (Exception ex) {
-            mostrarAlerta("Error", "Error al cargar categorías: " + ex.getMessage());
         }
-    }
 
-    private void validarRangoTemporal() {
-        Integer inicio = comboAnioInicial.getValue();
-        Integer fin = comboAnioFinal.getValue();
-        if (inicio != null && fin != null && fin < inicio) {
-            mostrarAlerta("Error", "El año final debe ser mayor o igual al año inicial");
-            comboAnioFinal.setValue(inicio);
-        }
+        filtrarListasComparacion(); // Re-apply filter on mode switch
     }
 
     @FXML
@@ -271,228 +315,206 @@ public class ModeladoController {
             resultadosCalculados.clear();
             TipoSegmentacion tipo = comboTipoSegmentacion.getValue();
             ModoComparacion modo = comboModoComparacion.getValue();
-            int anioInicio = comboAnioInicial.getValue();
-            int anioFin = comboAnioFinal.getValue();
-            int intervalo = spinnerIntervalo.getValue();
+            int aIni = comboAnioInicial.getValue();
+            int aFin = comboAnioFinal.getValue();
+            int interval = spinnerIntervalo.getValue();
 
-            // Lista de categorías a procesar
-            List<String> categoriasAProcesar = new ArrayList<>();
+            // Collect targets
+            List<String> targets = new ArrayList<>();
+            String base = comboCategoria.getValue();
+            targets.add(base);
 
-            // 1. Categoría Base (siempre)
-            String catBase = comboCategoria.getValue();
-            categoriasAProcesar.add(catBase);
-
-            // 2. Categorías adicionales según modo
-            switch (modo) {
-                case COMPARACION_1_VS_1:
-                    String cat2 = comboCategoria2.getValue();
-                    if (cat2 != null && !cat2.equals(catBase)) {
-                        categoriasAProcesar.add(cat2);
-                    }
-                    break;
-                case COMPARACION_1_VS_N:
-                    List<String> selected = checkComboCategoriaMulti.getCheckModel().getCheckedItems();
-                    for (String s : selected) {
-                        if (!s.equals(catBase) && !categoriasAProcesar.contains(s)) {
-                            categoriasAProcesar.add(s);
-                        }
-                    }
-                    break;
-                case COMPARACION_1_VS_TODOS:
-                    // Agregar todas las disponibles excepto la base (ya agregada)
-                    for (String item : comboCategoria.getItems()) {
-                        if (!item.equals(catBase)) {
-                            categoriasAProcesar.add(item);
-                        }
-                    }
-                    break;
-                default:
-                    break;
+            if (modo == ModoComparacion.COMPARACION_1_VS_1) {
+                targets.add(comboCategoria2.getValue());
+            } else if (modo == ModoComparacion.COMPARACION_1_VS_N) {
+                targets.addAll(checkComboCategoriaMulti.getCheckModel().getCheckedItems());
+            } else if (modo == ModoComparacion.COMPARACION_1_VS_TODOS) {
+                List<String> all = obtenerItemsPorTipo(tipo);
+                all.remove(base);
+                targets.addAll(all);
             }
 
-            // Ejecutar modelos
-            for (String cat : categoriasAProcesar) {
-                ResultadoModeladoEDO resultado = modelingService.ejecutarModeladoEDO(tipo, cat, anioInicio, anioFin,
-                        intervalo);
-                if (resultado != null) {
-                    resultadosCalculados.add(resultado);
-                }
+            // Execute Models
+            for (String t : targets) {
+                if (t == null)
+                    continue;
+                ResultadoModeladoEDO res = modelingService.ejecutarModeladoEDO(tipo, t, aIni, aFin, interval);
+                if (res != null)
+                    resultadosCalculados.add(res);
             }
 
-            // Habilitar botón graficar
-            btnGraficar.setDisable(resultadosCalculados.isEmpty());
-
-            // Mostrar métricas del PRIMER elemento (Base) para feedback inmediato
+            // Enable Graph
             if (!resultadosCalculados.isEmpty()) {
-                mostrarMetricas(resultadosCalculados.get(0));
                 panelResultados.setVisible(true);
                 panelResultados.setManaged(true);
-                // Ocultar métricas si es comparación masiva para no confundir, o dejarlas solo
-                // para el base
-                boxMetricas.setVisible(true); // Siempre mostrar base
-                // Limpiar gráfica previa para indicar que hay nuevos datos listos
-                chartModelado.getData().clear();
+                boxMetricas.setVisible(true);
+                btnGraficar.setDisable(false);
+                chartModelado.getData().clear(); // Reset graph on new model run
+
+                // Generate Text Analysis
+                generarAnalisisTexto();
+            } else {
+                mostrarAlerta("Atención", "No se generaron modelos válidos con los datos actuales.");
             }
 
-            mostrarAlerta("Éxito", "Modelado completado. Se generaron " + resultadosCalculados.size()
-                    + " modelos. Presione 'Graficar' para visualizar.");
-
         } catch (Exception e) {
-            mostrarAlerta("Error", "Error durante el modelado: " + e.getMessage());
+            mostrarAlerta("Error Crítico", e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void generarAnalisisTexto() {
+        if (resultadosCalculados.isEmpty())
+            return;
+        ResultadoModeladoEDO base = resultadosCalculados.get(0);
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Análisis: ").append(base.categoria()).append(" presenta ");
+        sb.append(interpretarTendencia(base).toLowerCase()).append(". ");
+
+        if (resultadosCalculados.size() > 1) {
+            double avgB = resultadosCalculados.stream().mapToDouble(ResultadoModeladoEDO::parametroB).average()
+                    .orElse(0);
+            if (base.parametroB() > avgB) {
+                sb.append("Su tasa de crecimiento es SUPERIOR al promedio del grupo comparado.");
+            } else {
+                sb.append("Su tasa de crecimiento es INFERIOR al promedio del grupo comparado.");
+            }
+        }
+
+        lblAnalisisTexto.setText(sb.toString());
     }
 
     @FXML
     private void onGraficar() {
         if (resultadosCalculados.isEmpty())
             return;
-
         chartModelado.getData().clear();
+        configurarEjes(resultadosCalculados.get(0));
 
-        // Configurar Eje X basado en el primer resultado (asumiendo mismo rango para
-        // todos)
-        configurarEjeXDinamico(resultadosCalculados.get(0));
+        int idx = 0;
+        for (ResultadoModeladoEDO res : resultadosCalculados) {
+            String color = PALETA_COLORES[idx % PALETA_COLORES.length];
+            if (idx == 1 && resultadosCalculados.size() == 2)
+                color = "#d62728"; // Force Red for 2nd in 1v1
 
-        // Paleta de colores para múltiples series
-        String[] colors = { "blue", "green", "orange", "purple", "brown", "magenta", "teal", "navy" };
+            // 1. Observed (Points only)
+            XYChart.Series<Number, Number> sObs = new XYChart.Series<>();
+            sObs.setName(res.categoria() + " (Obs)");
+            for (PuntoTemporal p : res.observados())
+                sObs.getData().add(new XYChart.Data<>(p.anio(), p.nacimientos()));
+            chartModelado.getData().add(sObs);
+            estilizarObservado(sObs, color);
 
-        int colorIndex = 0;
+            // 2. Modeled (Smooth Curve)
+            XYChart.Series<Number, Number> sMod = new XYChart.Series<>();
+            sMod.setName(res.categoria() + " (Mod)");
+            // Use high-res curve if available, else standard
+            List<PuntoTemporal> points = (res.modeladosCurve() != null && !res.modeladosCurve().isEmpty())
+                    ? res.modeladosCurve()
+                    : res.modelados();
+            for (PuntoTemporal p : points)
+                sMod.getData().add(new XYChart.Data<>(p.anio(), p.nacimientos()));
+            chartModelado.getData().add(sMod);
+            estilizarModelado(sMod, color);
 
-        for (ResultadoModeladoEDO resultado : resultadosCalculados) {
-            String baseColor = (colorIndex == 0) ? "blue"
-                    : (resultado == resultadosCalculados.get(0) ? "blue" : colors[colorIndex % colors.length]);
-            if (colorIndex == 1 && resultadosCalculados.size() == 2)
-                baseColor = "red"; // Forzar rojo para 2da en 1v1
-
-            // Serie Reales (Puntos)
-            XYChart.Series<Number, Number> serieReal = new XYChart.Series<>();
-            serieReal.setName(resultado.categoria() + " (Obs)");
-            for (PuntoTemporal p : resultado.observados()) {
-                serieReal.getData().add(new XYChart.Data<>(p.anio(), p.nacimientos()));
-            }
-
-            // Serie Modelo (Línea)
-            XYChart.Series<Number, Number> serieModelo = new XYChart.Series<>();
-            serieModelo.setName(resultado.categoria() + " (Mod)");
-            for (PuntoTemporal p : resultado.modelados()) {
-                serieModelo.getData().add(new XYChart.Data<>(p.anio(), p.nacimientos()));
-            }
-
-            chartModelado.getData().addAll(serieReal, serieModelo);
-
-            // Estilizar
-            estilizarSerie(serieReal, serieModelo, baseColor);
-
-            colorIndex++;
+            idx++;
         }
     }
 
-    private void estilizarSerie(XYChart.Series<Number, Number> real, XYChart.Series<Number, Number> model,
-            String color) {
+    private void estilizarObservado(XYChart.Series<Number, Number> s, String c) {
         Platform.runLater(() -> {
-            // Estilo Real: Puntos visibles, sin línea
-            if (real.getNode() != null) {
-                real.getNode().setStyle("-fx-stroke: transparent;");
-            }
-            for (XYChart.Data<Number, Number> data : real.getData()) {
-                if (data.getNode() != null) {
-                    data.getNode().setStyle(
-                            "-fx-background-color: " + color + "; -fx-background-radius: 5px; -fx-padding: 3px;");
-                    Tooltip.install(data.getNode(),
-                            new Tooltip(real.getName() + "\n" + data.getXValue() + ": " + data.getYValue()));
-                }
-            }
+            // Linea visible, punteada para diferenciar del modelo
+            if (s.getNode() != null)
+                s.getNode().setStyle("-fx-stroke: " + c + "; -fx-stroke-width: 1px; -fx-stroke-dash-array: 5 5;");
 
-            // Estilo Modelo: Línea visible, sin puntos (o puntos pequeños)
-            if (model.getNode() != null) {
-                model.getNode()
-                        .setStyle("-fx-stroke: " + color + "; -fx-stroke-width: 2px; -fx-stroke-type: centered;");
-            }
-            for (XYChart.Data<Number, Number> data : model.getData()) {
-                if (data.getNode() != null) {
-                    data.getNode().setStyle("-fx-background-color: transparent, transparent;"); // Ocultar puntos del
-                                                                                                // modelo
-                    Tooltip.install(data.getNode(),
-                            new Tooltip(model.getName() + "\n" + data.getXValue() + ": " + data.getYValue()));
+            // Puntos visibles y del mismo color
+            for (XYChart.Data<Number, Number> d : s.getData()) {
+                if (d.getNode() != null) {
+                    d.getNode()
+                            .setStyle("-fx-background-color: " + c
+                                    + ", white; -fx-background-insets: 0, 2; -fx-background-radius: 5px; -fx-padding: 3px;");
+                    Tooltip.install(d.getNode(), new Tooltip(s.getName() + ": " + d.getYValue()));
                 }
             }
         });
     }
 
+    private void estilizarModelado(XYChart.Series<Number, Number> s, String c) {
+        Platform.runLater(() -> {
+            if (s.getNode() != null)
+                s.getNode().setStyle("-fx-stroke: " + c + "; -fx-stroke-width: 2px;");
+            for (XYChart.Data<Number, Number> d : s.getData()) {
+                if (d.getNode() != null)
+                    d.getNode().setStyle("-fx-background-color: transparent; -fx-padding: 0;");
+            }
+        });
+    }
+
+    private void configurarEjes(ResultadoModeladoEDO r) {
+        NumberAxis x = (NumberAxis) chartModelado.getXAxis();
+        if (!r.observados().isEmpty()) {
+            double min = r.observados().stream().mapToDouble(PuntoTemporal::anio).min().orElse(2000);
+            double max = r.observados().stream().mapToDouble(PuntoTemporal::anio).max().orElse(2020);
+            x.setAutoRanging(false);
+            x.setLowerBound(min - 1);
+            x.setUpperBound(max + 1);
+            x.setTickUnit(2);
+        }
+    }
+
+    private String interpretarTendencia(ResultadoModeladoEDO r) {
+        if (r.r2() < 0.6)
+            return "Ajuste Débil";
+        if (r.parametroB() > 0.02)
+            return "Crecimiento Exponencial";
+        if (r.parametroB() > 0)
+            return "Crecimiento Leve";
+        if (r.parametroB() > -0.02)
+            return "Estancamiento";
+        return "Declive Significativo";
+    }
+
     private boolean validarInputs() {
-        if (comboTipoSegmentacion.getValue() == null) {
-            mostrarAlerta("Validación", "Seleccione un tipo de segmentación");
-            return false;
-        }
         if (comboCategoria.getValue() == null) {
-            mostrarAlerta("Validación", "Seleccione una categoría base");
+            mostrarAlerta("Error", "Seleccione Categoría Base");
             return false;
         }
-        // Validaciones extra para modos
-        if (comboModoComparacion.getValue() == ModoComparacion.COMPARACION_1_VS_1
-                && comboCategoria2.getValue() == null) {
-            mostrarAlerta("Validación", "Seleccione la segunda categoría para comparar.");
+        ModoComparacion m = comboModoComparacion.getValue();
+        if (m == ModoComparacion.COMPARACION_1_VS_1 && comboCategoria2.getValue() == null) {
+            mostrarAlerta("Error", "Seleccione Segunda Categoría");
             return false;
         }
-        if (comboAnioInicial.getValue() == null || comboAnioFinal.getValue() == null) {
-            mostrarAlerta("Validación", "Seleccione el rango temporal");
+        if (m == ModoComparacion.COMPARACION_1_VS_N
+                && checkComboCategoriaMulti.getCheckModel().getCheckedItems().isEmpty()) {
+            mostrarAlerta("Error", "Seleccione al menos una para comparar");
             return false;
         }
         return true;
     }
 
-    private void configurarEjeXDinamico(ResultadoModeladoEDO resultado) {
-        if (resultado.observados().isEmpty())
-            return;
-        int minAnio = resultado.observados().stream().mapToInt(PuntoTemporal::anio).min().orElse(1990);
-        int maxAnio = resultado.observados().stream().mapToInt(PuntoTemporal::anio).max().orElse(2024);
-        NumberAxis xAxis = (NumberAxis) chartModelado.getXAxis();
-        xAxis.setAutoRanging(false);
-        xAxis.setLowerBound(minAnio - 0.5);
-        xAxis.setUpperBound(maxAnio + 0.5);
-        xAxis.setTickUnit(1);
-        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
-            @Override
-            public String toString(Number object) {
-                double val = object.doubleValue();
-                return (Math.abs(val - Math.round(val)) < 0.1) ? String.format("%d", (int) Math.round(val)) : "";
-            }
-        });
+    private void validarRangoTemporal() {
+        if (comboAnioFinal.getValue() < comboAnioInicial.getValue()) {
+            comboAnioFinal.setValue(comboAnioInicial.getValue());
+            mostrarAlerta("Info", "Año final ajustado.");
+        }
     }
 
-    private void mostrarMetricas(ResultadoModeladoEDO resultado) {
-        lblEcuacion.setText(resultado.getEcuacionFormateada());
-        lblParametroA.setText(String.format("%.6e", resultado.parametroA()));
-        lblParametroB.setText(String.format("%.6f", resultado.parametroB()));
-        String tipoCrecimiento = resultado.parametroB() > 0 ? "Crecimiento" : "Decrecimiento";
-        lblTipoCrecimiento.setText(tipoCrecimiento);
-        lblTipoCrecimiento.setStyle(resultado.parametroB() > 0
-                ? "-fx-background-color: #28a745; -fx-text-fill: white; -fx-padding: 3 8; -fx-background-radius: 3;"
-                : "-fx-background-color: #dc3545; -fx-text-fill: white; -fx-padding: 3 8; -fx-background-radius: 3;");
-        lblR2.setText(String.format("%.4f", resultado.r2()));
-        lblMAE.setText(String.format("%.2f", resultado.mae()));
-        lblRMSE.setText(String.format("%.2f", resultado.rmse()));
+    private void mostrarAlerta(String t, String m) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle(t);
+        a.setContentText(m);
+        a.showAndWait();
     }
 
     @FXML
     private void onLimpiar() {
-        comboTipoSegmentacion.setValue(null);
-        comboCategoria.getItems().clear();
-        comboCategoria2.getItems().clear();
-        checkComboCategoriaMulti.getItems().clear();
         resultadosCalculados.clear();
-        panelResultados.setVisible(false);
-        panelResultados.setManaged(false);
         chartModelado.getData().clear();
-        btnGraficar.setDisable(true);
-    }
-
-    private void mostrarAlerta(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+        panelResultados.setVisible(false);
+        comboCategoria.setValue(null);
+        comboCategoria2.setValue(null);
+        checkComboCategoriaMulti.getCheckModel().clearChecks();
+        lblAnalisisTexto.setText("");
     }
 }

@@ -65,8 +65,11 @@ public class ModelingService {
         double A = parametros[0];
         double B = parametros[1];
 
-        // Generar serie modelada N(t) = A * e^(B*t)
+        // Generar serie modelada N(t) = A * e^(B*t) (Puntos discretos coincidientes)
         List<PuntoTemporal> datosModelados = generarSerieModelada(datosObservados, A, B);
+
+        // Generar serie modelada suave para graficación (Intervalos de 0.1 años)
+        List<PuntoTemporal> modeladosCurve = generarSerieModeladaSuave(anioInicio, anioFin, A, B);
 
         // Calcular métricas de ajuste
         double r2 = calcularR2(datosValidos, datosModelados);
@@ -82,7 +85,8 @@ public class ModelingService {
                 mae,
                 rmse,
                 datosObservados,
-                datosModelados);
+                datosModelados,
+                modeladosCurve);
     }
 
     /**
@@ -208,6 +212,19 @@ public class ModelingService {
             modelados.add(new PuntoTemporal(punto.anio(), nModelado));
         }
         return modelados;
+    }
+
+    /**
+     * Genera una serie modelada con alta resolución (paso 0.1) para curvas suaves.
+     */
+    private List<PuntoTemporal> generarSerieModeladaSuave(int anioInicio, int anioFin, double A, double B) {
+        List<PuntoTemporal> curve = new ArrayList<>();
+        // Generar puntos cada 0.1 años
+        for (double t = anioInicio; t <= anioFin; t += 0.1) {
+            double nModelado = A * Math.exp(B * t);
+            curve.add(new PuntoTemporal(t, nModelado));
+        }
+        return curve;
     }
 
     /**

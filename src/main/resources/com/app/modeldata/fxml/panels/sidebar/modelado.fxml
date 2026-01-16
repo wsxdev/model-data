@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -112,37 +114,33 @@
                 </StackPane>
             </VBox>
             
-            <!-- Subsección: Métricas del Modelo (Solo visible para modo Individual o Principal) -->
-            <VBox fx:id="boxMetricas" spacing="10.0">
-                <Text text="%modelado.label.metricas" styleClass="subtitle" />
-                <GridPane hgap="15.0" vgap="10.0" styleClass="metrics-grid">
-                    <!-- Ecuación -->
-                    <Label text="%modelado.label.ecuacion" styleClass="metric-label" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                    <Label fx:id="lblEcuacion" styleClass="metric-value" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                    
-                    <!-- Parámetro A -->
-                    <Label text="%modelado.label.parametroA" styleClass="metric-label" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                    <Label fx:id="lblParametroA" styleClass="metric-value" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-                    
-                    <!-- Parámetro B -->
-                    <Label text="%modelado.label.parametroB" styleClass="metric-label" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                    <HBox spacing="10.0" alignment="CENTER_LEFT" GridPane.rowIndex="2" GridPane.columnIndex="1">
-                        <Label fx:id="lblParametroB" styleClass="metric-value" />
-                        <Label fx:id="lblTipoCrecimiento" styleClass="badge" />
-                    </HBox>
-                    
-                    <!-- R² -->
-                    <Label text="R²" styleClass="metric-label" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                    <Label fx:id="lblR2" styleClass="metric-value" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                    
-                    <!-- MAE -->
-                    <Label text="MAE" styleClass="metric-label" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-                    <Label fx:id="lblMAE" styleClass="metric-value" GridPane.rowIndex="4" GridPane.columnIndex="1" />
-                    
-                    <!-- RMSE -->
-                    <Label text="RMSE" styleClass="metric-label" GridPane.rowIndex="5" GridPane.columnIndex="0" />
-                    <Label fx:id="lblRMSE" styleClass="metric-value" GridPane.rowIndex="5" GridPane.columnIndex="1" />
-                </GridPane>
+            <!-- Subsección: Análisis Comparativo (Tabla + Texto) -->
+            <VBox fx:id="boxMetricas" spacing="10.0" VBox.vgrow="ALWAYS">
+                <Text text="%modelado.label.analisis" styleClass="subtitle" />
+                
+                <TableView fx:id="tblAnalisis" prefHeight="200.0">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                    <placeholder>
+                        <Label text="Sin datos analizados"/>
+                    </placeholder>
+                    <columns>
+                        <TableColumn fx:id="colCategoria" text="Categoría" />
+                        <TableColumn fx:id="colEcuacion" text="Ecuación" minWidth="150.0" />
+                        <TableColumn fx:id="colParametroA" text="A (Inicial)" />
+                        <TableColumn fx:id="colParametroB" text="B (Tasa)" />
+                        <TableColumn fx:id="colR2" text="R²" />
+                        <TableColumn fx:id="colMAE" text="MAE" />
+                        <TableColumn fx:id="colRMSE" text="RMSE" />
+                        <TableColumn fx:id="colInterpretacion" text="Interpretación" />
+                    </columns>
+                </TableView>
+                
+                <!-- Análisis Textual Automático -->
+                <Label fx:id="lblAnalisisTexto" wrapText="true" styleClass="analysis-text" 
+                       style="-fx-font-style: italic; -fx-text-fill: #333; -fx-padding: 10; -fx-background-color: #f4f4f4; -fx-background-radius: 5;" 
+                       text="Seleccione un modelo para ver el análisis." />
             </VBox>
         </VBox>
     </VBox>

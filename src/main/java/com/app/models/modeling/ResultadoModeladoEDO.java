@@ -15,7 +15,9 @@ public record ResultadoModeladoEDO(
         double mae, // Error absoluto medio
         double rmse, // Raíz del error cuadrático medio
         List<PuntoTemporal> observados, // Datos históricos reales
-        List<PuntoTemporal> modelados // Serie modelada N(t) = A*e^(B*t)
+        List<PuntoTemporal> modelados, // Serie modelada N(t) = A*e^(B*t) (Puntos discretos coincidientes con
+                                       // observados)
+        List<PuntoTemporal> modeladosCurve // Serie modelada suave para graficación (alta resolución)
 ) {
 
     /**
