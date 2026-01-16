@@ -486,8 +486,29 @@ public class ModeladoController {
         x.setUpperBound(fin + 1); // Espacio al final
         x.setTickUnit(1);
 
-        // Formato X: Entero puro (1999)
-        StringConverter<Number> noGrouping = new StringConverter<Number>() {
+        // Formato X: Entero puro (1999), ocultando los extremos de margen de forma
+        // robusta
+        x.setTickLabelFormatter(new StringConverter<Number>() {
+            @Override
+            public String toString(Number object) {
+                double val = object.doubleValue();
+                long year = Math.round(val);
+
+                // Si el año redondeado está fuera del rango [inicio, fin], es margen -> ocultar
+                if (year < inicio || year > fin) {
+                    return "";
+                }
+                return String.format(java.util.Locale.US, "%d", year);
+            }
+
+            @Override
+            public Number fromString(String string) {
+                return string.isEmpty() ? 0 : Double.valueOf(string);
+            }
+        });
+
+        // Formato Y: Entero sin separadores (2500)
+        y.setTickLabelFormatter(new StringConverter<Number>() {
             @Override
             public String toString(Number object) {
                 return String.format(java.util.Locale.US, "%.0f", object.doubleValue());
@@ -497,24 +518,16 @@ public class ModeladoController {
             public Number fromString(String string) {
                 return Double.valueOf(string);
             }
-        };
-
-        x.setTickLabelFormatter(noGrouping);
-
-        // Formato Y: Entero sin separadores (2500)
-        y.setTickLabelFormatter(noGrouping);
+        });
     }
 
     private String interpretarTendencia(ResultadoModeladoEDO r) {
-        if (r.r2() < 0.6)
-            return "Ajuste Débil";
-        if (r.parametroB() > 0.02)
-            return "Crecimiento Exponencial";
         if (r.parametroB() > 0)
-            return "Crecimiento Leve";
-        if (r.parametroB() > -0.02)
+            return "Crecimiento";
+        else if (r.parametroB() < 0)
+            return "Decrecimiento";
+        else
             return "Estancamiento";
-        return "Declive Significativo";
     }
 
     private boolean validarInputs() {
