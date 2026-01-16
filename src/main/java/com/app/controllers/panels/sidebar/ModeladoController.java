@@ -164,7 +164,7 @@ public class ModeladoController {
                 if (m == null)
                     return "";
                 try {
-                    return ResourceBundle.getBundle("i18n/messages").getString(m.getKey());
+                    return com.app.utils.LanguageManagerUtil.getInstance().getBundle().getString(m.getKey());
                 } catch (Exception e) {
                     return m.name();
                 }

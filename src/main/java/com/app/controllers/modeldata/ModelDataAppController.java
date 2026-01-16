@@ -61,18 +61,10 @@ public class ModelDataAppController {
     @FXML
     private ToggleButton btnModelado;
     @FXML
-    private ToggleButton btnGraficos;
-    @FXML
     private ToggleButton btnConfiguracion;
 
     // Referencia al controlador de la vista activa
     private Object activeController;
-
-    // Botones del menubar
-    @FXML
-    private Button btnMenuItemAcercaDe;
-    @FXML
-    private Button btnMenuItemFrequency;
 
     // RUTAS DE ESTILOS CSS
     private static final String COLORS_LIGHT_CSS = "/com/app/modeldata/css/colors-light.css";
@@ -86,7 +78,6 @@ public class ModelDataAppController {
     private static final String REGISTRO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/registro-nacimiento.fxml";
     private static final String CONSOLIDACION_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/consolidacion.fxml";
     private static final String MODELADO_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/modelado.fxml";
-    private static final String GRAFICOS_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/descriptive.fxml";
     private static final String CONFIGURACION_VIEW_PANEL = "/com/app/modeldata/fxml/panels/sidebar/setting.fxml";
     private static final String ACERCA_DE_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemshelp/acerca-de.fxml";
     private static final String FREQUENCY_VIEW_PANEL = "/com/app/modeldata/fxml/panels/menubar/itemsanalizer/frequency-analyzer.fxml";
@@ -105,7 +96,6 @@ public class ModelDataAppController {
             "btnRegistro", REGISTRO_VIEW_PANEL,
             "btnConsolidacion", CONSOLIDACION_VIEW_PANEL,
             "btnModelado", MODELADO_VIEW_PANEL,
-            "btnGraficos", GRAFICOS_VIEW_PANEL,
             "btnConfiguracion", CONFIGURACION_VIEW_PANEL);
 
     // INICIALIZADOR DEL CONTROLADOR
@@ -126,7 +116,6 @@ public class ModelDataAppController {
         btnConsolidacion.setToggleGroup(sidebarGroup);
         btnDatos.setToggleGroup(sidebarGroup);
         btnModelado.setToggleGroup(sidebarGroup);
-        btnGraficos.setToggleGroup(sidebarGroup);
         btnConfiguracion.setToggleGroup(sidebarGroup);
 
         sidebarGroup.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
