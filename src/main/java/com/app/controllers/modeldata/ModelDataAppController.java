@@ -60,8 +60,7 @@ public class ModelDataAppController {
     private ToggleButton btnDatos;
     @FXML
     private ToggleButton btnModelado;
-    @FXML
-    private ToggleButton btnGraficos;
+
     @FXML
     private ToggleButton btnConfiguracion;
 
@@ -73,11 +72,6 @@ public class ModelDataAppController {
     private Button btnMenuItemAcercaDe;
     @FXML
     private Button btnMenuItemFrequency;
-
-    // RUTAS DE ESTILOS CSS
-    private static final String COLORS_LIGHT_CSS = "/com/app/modeldata/css/colors-light.css";
-    private static final String COLORS_DARK_CSS = "/com/app/modeldata/css/colors-dark.css";
-    private static final String MAIN_CSS = "/com/app/modeldata/css/main.css";
 
     // RUTAS DE LAS VISTAS FXML
     private static final String LOGIN_VIEW = "/com/app/modeldata/fxml/login/login-vista.fxml";
@@ -105,7 +99,7 @@ public class ModelDataAppController {
             "btnRegistro", REGISTRO_VIEW_PANEL,
             "btnConsolidacion", CONSOLIDACION_VIEW_PANEL,
             "btnModelado", MODELADO_VIEW_PANEL,
-            "btnGraficos", GRAFICOS_VIEW_PANEL,
+
             "btnConfiguracion", CONFIGURACION_VIEW_PANEL);
 
     // INICIALIZADOR DEL CONTROLADOR
@@ -126,7 +120,7 @@ public class ModelDataAppController {
         btnConsolidacion.setToggleGroup(sidebarGroup);
         btnDatos.setToggleGroup(sidebarGroup);
         btnModelado.setToggleGroup(sidebarGroup);
-        btnGraficos.setToggleGroup(sidebarGroup);
+
         btnConfiguracion.setToggleGroup(sidebarGroup);
 
         sidebarGroup.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {

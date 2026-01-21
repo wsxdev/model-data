@@ -73,7 +73,7 @@
             <ComboBox fx:id="cmbLanguages" prefHeight="30.0" prefWidth="150.0" />
         </HBox>
         <HBox prefWidth="200.0">
-            <Label text="Archivos y aplicaciones">
+            <Label text="%settings.files.title">
                 <font>
                     <Font name="System Bold" size="18.0" />
                 </font>
@@ -94,7 +94,7 @@
                 <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../images/icons/download-icon.png" />
                 </ImageView>
-                <TextField prefHeight="35.0" prefWidth="229.0" promptText="Descargas" style="-fx-background-color: #ededed;" />
+                <TextField prefHeight="35.0" prefWidth="229.0" promptText="%settings.files.prompt.downloads" style="-fx-background-color: #ededed;" />
             </HBox>
                 <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" text="%button.browse" />
         </HBox>

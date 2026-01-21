@@ -121,24 +121,23 @@
                 <TableView fx:id="tblAnalisis" prefHeight="200.0">
 
                     <placeholder>
-                        <Label text="Sin datos analizados"/>
+                        <Label text="%modelado.table.placeholder"/>
                     </placeholder>
                     <columns>
-                        <TableColumn fx:id="colCategoria" text="Categoría" minWidth="250.0" />
-                        <TableColumn fx:id="colEcuacion" text="Ecuación" minWidth="300.0" />
-                        <TableColumn fx:id="colParametroA" text="Condición inicial" minWidth="150.0" />
-                        <TableColumn fx:id="colParametroB" text="Tasa de cambio" minWidth="150.0" />
-                        <TableColumn fx:id="colR2" text="R²" minWidth="100.0" />
-                        <TableColumn fx:id="colMAE" text="MAE" minWidth="100.0" />
-                        <TableColumn fx:id="colRMSE" text="RMSE" minWidth="100.0" />
-                        <TableColumn fx:id="colInterpretacion" text="Interpretación" minWidth="250.0" />
+                        <TableColumn fx:id="colCategoria" text="%modelado.column.categoria" minWidth="250.0" />
+                        <TableColumn fx:id="colEcuacion" text="%modelado.column.ecuacion" minWidth="300.0" />
+                        <TableColumn fx:id="colParametroA" text="%modelado.column.paramA" minWidth="150.0" />
+                        <TableColumn fx:id="colParametroB" text="%modelado.column.paramB" minWidth="150.0" />
+                        <TableColumn fx:id="colR2" text="%modelado.column.r2" minWidth="100.0" />
+                        <TableColumn fx:id="colMAE" text="%modelado.column.mae" minWidth="100.0" />
+                        <TableColumn fx:id="colRMSE" text="%modelado.column.rmse" minWidth="100.0" />
+                        <TableColumn fx:id="colInterpretacion" text="%modelado.column.interpretacion" minWidth="250.0" />
                     </columns>
                 </TableView>
                 
                 <!-- Análisis Textual Automático -->
-                <Label fx:id="lblAnalisisTexto" wrapText="true" styleClass="analysis-text" 
-                       style="-fx-font-style: italic; -fx-text-fill: #333; -fx-padding: 10; -fx-background-color: #f4f4f4; -fx-background-radius: 5;" 
-                       text="Seleccione un modelo para ver el análisis." />
+                <Label fx:id="lblAnalisisTexto" wrapText="true" styleClass="analysis-label" 
+                       text="%modelado.label.analisis.placeholder" />
             </VBox>
         </VBox>
     </VBox>

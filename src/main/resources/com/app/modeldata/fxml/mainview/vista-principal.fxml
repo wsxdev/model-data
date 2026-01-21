@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.modeldata.ModelDataAppController">
+<BorderPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.controllers.modeldata.ModelDataAppController">
     <!-- ESTILO PARA EL SIDEBAR -->
     <!-- <stylesheets>
         <URL value="@../../css/main.css" />
@@ -37,12 +24,12 @@
                         <Image url="@../../images/logos/login/ModelDataLogoBordeSaliente.png" />
                     </ImageView>
                     <!-- TITLE - MODELDATA -->
-                    <Text fill="white" layoutX="82.0" layoutY="36.0" text="MODEL">
+                    <Text fill="white" layoutX="82.0" layoutY="36.0" text="%app.name.model">
                         <font>
                             <Font name="System Bold" size="24" />
                         </font>
                     </Text>
-                    <Text fill="white" layoutX="82.0" layoutY="58.0" text="DATA">
+                    <Text fill="white" layoutX="82.0" layoutY="58.0" text="%app.name.data">
                         <font>
                             <Font name="System Bold" size="24" />
                         </font>
@@ -54,7 +41,7 @@
                 <!-- VBOX PARA BOTONES DEL SIDEBAR -->
                 <VBox alignment="CENTER_LEFT" prefHeight="270.0" prefWidth="260.0" style="-fx-padding:20 0 0 0;">
                     <!-- BOTÓN INICIO -->
-                    <ToggleButton fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.inicio" textFill="WHITE">
+                    <ToggleButton fx:id="btnInicio" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="sidebar-toggle" text="%sidebar.inicio">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/home-icon.png" />
@@ -65,7 +52,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN REGISTRO -->
-                    <ToggleButton fx:id="btnRegistro" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="REGISTRO" textFill="WHITE">
+                    <ToggleButton fx:id="btnRegistro" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="sidebar-toggle" text="%sidebar.registro">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/user-icon.png" />
@@ -76,7 +63,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN CONSOLIDACIÓN -->
-                    <ToggleButton fx:id="btnConsolidacion" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="CONSOLIDACIÓN" textFill="WHITE">
+                    <ToggleButton fx:id="btnConsolidacion" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="sidebar-toggle" text="%sidebar.consolidacion">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/synchronization-icon.png" />
@@ -87,7 +74,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN DATOS -->
-                    <ToggleButton fx:id="btnDatos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.datos" textFill="WHITE">
+                    <ToggleButton fx:id="btnDatos" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="sidebar-toggle" text="%sidebar.datos">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/data-icon.png" />
@@ -98,7 +85,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN MODELADO -->
-                    <ToggleButton fx:id="btnModelado" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.modelado" textFill="WHITE">
+                    <ToggleButton fx:id="btnModelado" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="sidebar-toggle" text="%sidebar.modelado">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/model-icon.png" />
@@ -109,7 +96,7 @@
                         </font>
                     </ToggleButton>
                     <!-- BOTÓN CONFIGURACIÓN -->
-                    <ToggleButton fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="toggle-button-sidebar" text="%sidebar.configuracion" textFill="WHITE">
+                    <ToggleButton fx:id="btnConfiguracion" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="sidebar-toggle" text="%sidebar.configuracion">
                         <graphic>
                             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../images/icons/setting-icon.png" />
@@ -123,7 +110,7 @@
             </AnchorPane>
             <AnchorPane minHeight="90.0" VBox.vgrow="ALWAYS">
                 <Pane minHeight="90.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                    <Text fill="WHITE" layoutX="50.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO" wrappingWidth="102.072265625">
+                    <Text fill="WHITE" layoutX="50.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%sidebar.label.usuario" wrappingWidth="102.072265625">
                         <font>
                             <Font size="20.0" />
                         </font>
@@ -159,7 +146,7 @@
             <top>
                 <VBox>
                     <!-- HBOX PARA EL TOOLBAR -->
-                    <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="50" spacing="15" style="-fx-background-color: #F2F2F2;">
+                    <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="50" spacing="15" styleClass="top-bar">
                         <!-- BOTÓN BURGER / FLECHA -->
                         <StackPane fx:id="menuButton" onMouseClicked="#toggleMenu">
                             <HBox.margin>
@@ -170,10 +157,10 @@
                                 <Image url="@../../images/icons/burger-button-colo-blue-icon.png" />
                             </ImageView>
                             <!-- SVG flecha -->
-                            <SVGPath fx:id="arrowIcon" content="M18 12 L6 4 L6 20 Z" fill="#197CA1" scaleX="0.8" scaleY="0.8" visible="false" />
+                            <SVGPath fx:id="arrowIcon" content="M18 12 L6 4 L6 20 Z" styleClass="primary-icon" scaleX="0.8" scaleY="0.8" visible="false" />
                         </StackPane>
                         <!-- TÍTULO DE LA TOOLBAR -->
-                        <Text fill="#197CA1" text="%toolbar.title.inicio">
+                        <Text styleClass="primary-text" text="%toolbar.title.inicio">
                             <font>
                                 <Font name="System Bold" size="25.0" />
                             </font>
@@ -182,7 +169,7 @@
                         <Pane minWidth="-Infinity" prefHeight="50.0" prefWidth="150.0" HBox.hgrow="ALWAYS" />
                         <!-- PANEL PARA LA BARRA DE BÚSQUEDA -->
                         <Pane prefHeight="50.0" prefWidth="314.0">
-                            <HBox alignment="CENTER_LEFT" layoutX="7.0" layoutY="9.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="300.0" spacing="5" style="-fx-background-color: #D9D9D9; -fx-padding: 5; -fx-background-radius: 50;">
+                            <HBox alignment="CENTER_LEFT" layoutX="7.0" layoutY="9.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="300.0" spacing="5" styleClass="search-box">
                                 <ImageView fitHeight="18" fitWidth="18">
                                     <Image url="@../../images/icons/search-icon.png" />
                                 </ImageView>
@@ -210,12 +197,12 @@
                         </Pane>
                     </HBox>
                     <!-- MENU BAR -->
-                    <HBox prefWidth="940.0" style="-fx-background-color: #197CA1; -fx-background-radius: 15;">
+                    <HBox prefWidth="940.0" styleClass="menu-bar-background">
                         <padding>
                             <Insets right="20.0" />
                         </padding>
-                        <MenuBar fx:id="menuBar" prefHeight="28.0" style="-fx-background-color: #197CA1; -fx-background-radius: 15;">
-                                <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="%menu.file">
+                        <MenuBar fx:id="menuBar" prefHeight="28.0">
+                                <Menu mnemonicParsing="false" text="%menu.file">
                                     <MenuItem mnemonicParsing="false" onAction="#itemImport" text="%menu.file.item.import" />
                                     <MenuItem mnemonicParsing="false" onAction="#itemExport" text="%menu.file.item.export" />
                                     <MenuItem mnemonicParsing="false" onAction="#itemSave" text="%menu.file.item.save" />

@@ -1,24 +1,31 @@
 package com.app.models.modeling;
 
+import com.app.utils.LanguageManagerUtil;
+import java.util.ResourceBundle;
+
 /**
  * Enum para los tipos de segmentación disponibles en el modelado.
  */
 public enum TipoSegmentacion {
-    PROVINCIA("Provincia"),
-    INSTRUCCION("Nivel de Instrucción");
+    PROVINCIA("segmentacion.provincia"),
+    INSTRUCCION("segmentacion.instruccion");
 
-    private final String displayName;
+    private final String key;
 
-    TipoSegmentacion(String displayName) {
-        this.displayName = displayName;
+    TipoSegmentacion(String key) {
+        this.key = key;
     }
 
     public String getDisplayName() {
-        return displayName;
+        try {
+            return LanguageManagerUtil.getInstance().getBundle().getString(key);
+        } catch (Exception e) {
+            return key;
+        }
     }
 
     @Override
     public String toString() {
-        return displayName;
+        return getDisplayName();
     }
 }

@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import com.app.utils.LanguageManagerUtil;
+import java.text.MessageFormat;
 
 /**
  * Controlador para el módulo de Modelado Matemático EDO.
@@ -164,7 +166,7 @@ public class ModeladoController {
                 if (m == null)
                     return "";
                 try {
-                    return ResourceBundle.getBundle("i18n/messages").getString(m.getKey());
+                    return LanguageManagerUtil.getInstance().getBundle().getString(m.getKey());
                 } catch (Exception e) {
                     return m.name();
                 }
@@ -260,6 +262,7 @@ public class ModeladoController {
     }
 
     private void actualizarEstadoUI() {
+        ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
         TipoSegmentacion tipo = comboTipoSegmentacion.getValue();
         ModoComparacion modo = comboModoComparacion.getValue();
         if (tipo == null || modo == null)
@@ -269,8 +272,8 @@ public class ModeladoController {
         if (tipo == TipoSegmentacion.INSTRUCCION
                 && (modo == ModoComparacion.COMPARACION_1_VS_N || modo == ModoComparacion.COMPARACION_1_VS_TODOS)) {
             comboModoComparacion.setValue(ModoComparacion.INDIVIDUAL);
-            mostrarAlerta("Información",
-                    "Por consistencia metodológica, Nivel de Instrucción solo permite comparación individual o par (1 vs 1).");
+            mostrarAlerta(bundle.getString("modelado.alert.info"),
+                    bundle.getString("modelado.alert.instructionRestricted"));
             return;
         }
 
@@ -289,16 +292,20 @@ public class ModeladoController {
             String base = comboCategoria.getValue() != null ? comboCategoria.getValue() : "[Base]";
             switch (modo) {
                 case INDIVIDUAL:
-                    lblInfoComparacion.setText("Análisis de tendencia individual para " + base);
+                    lblInfoComparacion
+                            .setText(MessageFormat.format(bundle.getString("modelado.label.info.individual"), base));
                     break;
                 case COMPARACION_1_VS_1:
-                    lblInfoComparacion.setText("Comparación directa entre " + base + " y otra entidad.");
+                    lblInfoComparacion
+                            .setText(MessageFormat.format(bundle.getString("modelado.label.info.1vs1"), base));
                     break;
                 case COMPARACION_1_VS_N:
-                    lblInfoComparacion.setText("Comparación de " + base + " frente a un grupo seleccionado.");
+                    lblInfoComparacion
+                            .setText(MessageFormat.format(bundle.getString("modelado.label.info.1vsn"), base));
                     break;
                 case COMPARACION_1_VS_TODOS:
-                    lblInfoComparacion.setText("Comparación global de " + base + " frente a TODO el resto.");
+                    lblInfoComparacion
+                            .setText(MessageFormat.format(bundle.getString("modelado.label.info.1vsall"), base));
                     break;
             }
         }
@@ -311,6 +318,7 @@ public class ModeladoController {
         if (!validarInputs())
             return;
 
+        ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
         try {
             resultadosCalculados.clear();
             TipoSegmentacion tipo = comboTipoSegmentacion.getValue();
@@ -354,7 +362,7 @@ public class ModeladoController {
                 // Generate Text Analysis
                 generarAnalisisTexto();
             } else {
-                mostrarAlerta("Atención", "No se generaron modelos válidos con los datos actuales.");
+                mostrarAlerta(bundle.getString("modelado.alert.info"), bundle.getString("modelado.alert.noModels"));
             }
 
         } catch (Exception e) {
@@ -366,19 +374,21 @@ public class ModeladoController {
     private void generarAnalisisTexto() {
         if (resultadosCalculados.isEmpty())
             return;
+        ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
         ResultadoModeladoEDO base = resultadosCalculados.get(0);
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Análisis: ").append(base.categoria()).append(" presenta ");
+        sb.append(bundle.getString("modelado.label.analisis")).append(": ").append(base.categoria()).append(" ");
+        sb.append(bundle.getString("modelado.analysis.presenta")).append(" ");
         sb.append(interpretarTendencia(base).toLowerCase()).append(". ");
 
         if (resultadosCalculados.size() > 1) {
             double avgB = resultadosCalculados.stream().mapToDouble(ResultadoModeladoEDO::parametroB).average()
                     .orElse(0);
             if (base.parametroB() > avgB) {
-                sb.append("Su tasa de crecimiento es SUPERIOR al promedio del grupo comparado.");
+                sb.append(bundle.getString("modelado.analysis.growthAvgS"));
             } else {
-                sb.append("Su tasa de crecimiento es INFERIOR al promedio del grupo comparado.");
+                sb.append(bundle.getString("modelado.analysis.growthAvgI"));
             }
         }
 
@@ -389,25 +399,28 @@ public class ModeladoController {
     private void onGraficar() {
         if (resultadosCalculados.isEmpty())
             return;
+        ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
         chartModelado.getData().clear();
         configurarEjes(resultadosCalculados.get(0));
 
         int idx = 0;
         for (ResultadoModeladoEDO res : resultadosCalculados) {
-            String colorObs = "#1f77b4"; // Blue
-            String colorMod = "#d62728"; // Red
+            // Pick a color from the palette, wrap around if needed
+            String color = PALETA_COLORES[idx % PALETA_COLORES.length];
 
             // 1. Observed (Points only)
             XYChart.Series<Number, Number> sObs = new XYChart.Series<>();
-            sObs.setName(res.categoria() + " (Datos registrados)");
+            sObs.setName(res.categoria() + " " + MessageFormat.format(bundle.getString("modelado.chart.observed"),
+                    bundle.getString("sidebar.datos")));
             for (PuntoTemporal p : res.observados())
                 sObs.getData().add(new XYChart.Data<>(p.anio(), p.nacimientos()));
             chartModelado.getData().add(sObs);
-            estilizarObservado(sObs, colorObs);
+            estilizarObservado(sObs, color);
 
             // 2. Modeled (Smooth Curve)
             XYChart.Series<Number, Number> sMod = new XYChart.Series<>();
-            sMod.setName(res.categoria() + " (Modelado)");
+            sMod.setName(res.categoria() + " " + MessageFormat.format(bundle.getString("modelado.chart.modeled"),
+                    bundle.getString("sidebar.modelado")));
             // Use high-res curve if available, else standard
             List<PuntoTemporal> points = (res.modeladosCurve() != null && !res.modeladosCurve().isEmpty())
                     ? res.modeladosCurve()
@@ -415,7 +428,7 @@ public class ModeladoController {
             for (PuntoTemporal p : points)
                 sMod.getData().add(new XYChart.Data<>(p.anio(), p.nacimientos()));
             chartModelado.getData().add(sMod);
-            estilizarModelado(sMod, colorMod);
+            estilizarModelado(sMod, color);
 
             idx++;
         }
@@ -433,8 +446,9 @@ public class ModeladoController {
                         Label label = (Label) item;
                         javafx.scene.Node symbol = label.getGraphic();
                         if (symbol != null) {
-                            // Par = Obs (Azul), Impar = Mod (Rojo)
-                            String color = (i % 2 == 0) ? "#1f77b4" : "#d62728";
+                            // Par = Obs, Impar = Mod. Ambos mismos color de la categoría
+                            int catIdx = i / 2;
+                            String color = PALETA_COLORES[catIdx % PALETA_COLORES.length];
                             symbol.setStyle("-fx-background-color: " + color + ", white;");
                         }
                         i++;
@@ -522,12 +536,13 @@ public class ModeladoController {
     }
 
     private String interpretarTendencia(ResultadoModeladoEDO r) {
+        ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
         if (r.parametroB() > 0)
-            return "Crecimiento";
+            return bundle.getString("modelado.tendencia.crecimiento");
         else if (r.parametroB() < 0)
-            return "Decrecimiento";
+            return bundle.getString("modelado.tendencia.decrecimiento");
         else
-            return "Estancamiento";
+            return bundle.getString("modelado.tendencia.estancamiento");
     }
 
     private boolean validarInputs() {

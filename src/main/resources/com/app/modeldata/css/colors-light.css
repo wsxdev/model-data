@@ -67,9 +67,10 @@
     -info-background: -calypso-50;
 
     /* ===== Shadows ===== */
-    -shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    -shadow-md: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-    -shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    /* ===== Shadows (Colors) ===== */
+    -shadow-color-sm: rgba(0, 0, 0, 0.05);
+    -shadow-color-md: rgba(0, 0, 0, 0.1);
+    -shadow-color-lg: rgba(0, 0, 0, 0.2);
 
     /* ===== Component Specific ===== */
     -input-background: #ffffff;

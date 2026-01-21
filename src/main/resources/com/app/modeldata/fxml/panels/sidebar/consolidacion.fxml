@@ -15,34 +15,34 @@
    <children>
       <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="500.0" spacing="30.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="100.0">
          <children>
-            <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Consolidación de Datos">
+            <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%consolidacion.title">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Text>
-            <Label text="Este proceso agrupará los registros individuales y actualizará las tablas estadísticas para el año seleccionado." textAlignment="CENTER" textFill="#555555" wrapText="true">
+            <Label text="%consolidacion.description" textAlignment="CENTER" textFill="#555555" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label text="Seleccione el Año a Consolidar" textFill="#1d6b8c">
+                  <Label text="%consolidacion.label.year" textFill="#1d6b8c">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cbYear" prefWidth="300.0" promptText="Año" />
+                  <ComboBox fx:id="cbYear" prefWidth="300.0" promptText="%consolidacion.prompt.year" />
                </children>
             </VBox>
             <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Button fx:id="btnConsolidate" mnemonicParsing="false" onAction="#onConsolidate" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #1d6b8c; -fx-text-fill: white;" text="Ejecutar Consolidación">
+                  <Button fx:id="btnConsolidate" mnemonicParsing="false" onAction="#onConsolidate" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #1d6b8c; -fx-text-fill: white;" text="%consolidacion.button.consolidate">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnDeleteConsolidation" mnemonicParsing="false" onAction="#onDeleteConsolidation" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Eliminar Consolidación">
+                  <Button fx:id="btnDeleteConsolidation" mnemonicParsing="false" onAction="#onDeleteConsolidation" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="%consolidacion.button.delete">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

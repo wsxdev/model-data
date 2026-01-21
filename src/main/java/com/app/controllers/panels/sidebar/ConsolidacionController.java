@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import com.app.utils.LanguageManagerUtil;
+import java.util.ResourceBundle;
+import java.text.MessageFormat;
 
 public class ConsolidacionController {
 
@@ -46,8 +49,10 @@ public class ConsolidacionController {
     @FXML
     public void onConsolidate() {
         Integer year = cbYear.getValue();
+        ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
+
         if (year == null) {
-            statusLabel.setText("Seleccione un año.");
+            statusLabel.setText(bundle.getString("consolidacion.status.selectYear"));
             statusLabel.setStyle("-fx-text-fill: red;");
             return;
         }
@@ -56,11 +61,9 @@ public class ConsolidacionController {
         if (year <= 2024) {
             javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
                     javafx.scene.control.Alert.AlertType.WARNING);
-            alert.setTitle("Advertencia de Consolidación");
-            alert.setHeaderText("Año Histórico Detectado (" + year + ")");
-            alert.setContentText("Está intentando consolidar un año que ya ha finalizado. " +
-                    "Esto sobrescribirá los datos estadísticos existentes para este año. " +
-                    "¿Desea continuar bajo su responsabilidad?");
+            alert.setTitle(bundle.getString("consolidacion.alert.title"));
+            alert.setHeaderText(MessageFormat.format(bundle.getString("consolidacion.alert.header"), year));
+            alert.setContentText(bundle.getString("consolidacion.alert.content"));
 
             java.util.Optional<javafx.scene.control.ButtonType> result = alert.showAndWait();
             if (!result.isPresent() || result.get() != javafx.scene.control.ButtonType.OK) {
@@ -68,8 +71,8 @@ public class ConsolidacionController {
             }
         }
 
-        statusLabel.setText("Consolidando datos para el año " + year + "...");
-        statusLabel.setStyle("-fx-text-fill: black;");
+        statusLabel.setText(MessageFormat.format(bundle.getString("consolidacion.status.running"), year));
+        statusLabel.setStyle("-fx-text-fill: -color-text-primary;");
         btnConsolidate.setDisable(true);
         progressIndicator.setVisible(true);
 
@@ -88,11 +91,12 @@ public class ConsolidacionController {
                 btnConsolidate.setDisable(false);
                 progressIndicator.setVisible(false);
                 if (ex != null) {
-                    statusLabel.setText("Error en consolidación: " + ex.getMessage());
+                    statusLabel.setText(
+                            MessageFormat.format(bundle.getString("consolidacion.status.error"), ex.getMessage()));
                     statusLabel.setStyle("-fx-text-fill: red;");
                     ex.printStackTrace();
                 } else {
-                    statusLabel.setText("Consolidación completada exitosamente.");
+                    statusLabel.setText(bundle.getString("consolidacion.status.success"));
                     statusLabel.setStyle("-fx-text-fill: green;");
                 }
             });
@@ -103,24 +107,24 @@ public class ConsolidacionController {
     @FXML
     public void onDeleteConsolidation() {
         Integer year = cbYear.getValue();
+        ResourceBundle bundle = LanguageManagerUtil.getInstance().getBundle();
+
         if (year == null) {
-            statusLabel.setText("Seleccione un año.");
+            statusLabel.setText(bundle.getString("consolidacion.status.selectYear"));
             statusLabel.setStyle("-fx-text-fill: red;");
             return;
         }
 
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
                 javafx.scene.control.Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Eliminar Consolidación");
-        alert.setHeaderText("¿Está seguro?");
-        alert.setContentText(
-                "Se eliminarán permanentemente los datos agregados (provincias e instrucciones) para el año " + year
-                        + ".");
+        alert.setTitle(bundle.getString("consolidacion.delete.alert.title"));
+        alert.setHeaderText(bundle.getString("consolidacion.delete.alert.header"));
+        alert.setContentText(MessageFormat.format(bundle.getString("consolidacion.delete.alert.content"), year));
 
         java.util.Optional<javafx.scene.control.ButtonType> res = alert.showAndWait();
         if (res.isPresent() && res.get() == javafx.scene.control.ButtonType.OK) {
-            statusLabel.setText("Eliminando consolidación para " + year + "...");
-            statusLabel.setStyle("-fx-text-fill: black;");
+            statusLabel.setText(MessageFormat.format(bundle.getString("consolidacion.delete.status.running"), year));
+            statusLabel.setStyle("-fx-text-fill: -color-text-primary;");
             btnDeleteConsolidation.setDisable(true);
             progressIndicator.setVisible(true);
 
@@ -131,10 +135,12 @@ public class ConsolidacionController {
                     btnDeleteConsolidation.setDisable(false);
                     progressIndicator.setVisible(false);
                     if (ex != null) {
-                        statusLabel.setText("Error al eliminar: " + ex.getMessage());
+                        statusLabel.setText(
+                                MessageFormat.format(bundle.getString("consolidacion.status.error"), ex.getMessage()));
                         statusLabel.setStyle("-fx-text-fill: red;");
                     } else {
-                        statusLabel.setText("Consolidación del año " + year + " eliminada.");
+                        statusLabel.setText(
+                                MessageFormat.format(bundle.getString("consolidacion.delete.status.success"), year));
                         statusLabel.setStyle("-fx-text-fill: blue;");
                     }
                 });

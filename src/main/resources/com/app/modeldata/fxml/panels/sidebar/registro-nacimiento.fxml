@@ -31,7 +31,7 @@
                         <Insets right="15.0" />
                      </padding>
                      <children>
-                        <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestión de Nacimiento">
+                        <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%registro.title">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>
@@ -39,19 +39,19 @@
                         
                         <VBox spacing="5.0">
                            <children>
-                              <Label text="Identificación de Madre" textFill="#1d6b8c">
+                              <Label text="%registro.label.motherId" textFill="#1d6b8c">
                                  <font><Font name="System Bold" size="14.0" /></font>
                               </Label>
-                              <TextField fx:id="txtMotherId" promptText="Ingrese cédula o ID" />
+                              <TextField fx:id="txtMotherId" promptText="%registro.prompt.motherId" />
                            </children>
                         </VBox>
                         
                         <VBox spacing="5.0">
                            <children>
-                              <Label text="Nombres de la Madre" textFill="#1d6b8c">
+                              <Label text="%registro.label.motherNames" textFill="#1d6b8c">
                                  <font><Font name="System Bold" size="14.0" /></font>
                               </Label>
-                              <TextField fx:id="txtMotherNames" promptText="Nombres Completos" />
+                              <TextField fx:id="txtMotherNames" promptText="%registro.prompt.motherNames" />
                            </children>
                         </VBox>
                         
@@ -59,126 +59,126 @@
                            <children>
                               <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Edad" textFill="#1d6b8c">
+                                    <Label text="%registro.label.age" textFill="#1d6b8c">
                                        <font><Font name="System Bold" size="14.0" /></font>
                                     </Label>
-                                    <TextField fx:id="txtMotherAge" promptText="Edad" />
+                                    <TextField fx:id="txtMotherAge" promptText="%registro.prompt.age" />
                                  </children>
                               </VBox>
                               <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Estado Civil" textFill="#1d6b8c">
+                                    <Label text="%registro.label.civilStatus" textFill="#1d6b8c">
                                        <font><Font name="System Bold" size="14.0" /></font>
                                     </Label>
-                                    <ComboBox fx:id="cbCivilStatus" maxWidth="Infinity" promptText="Seleccione" />
+                                    <ComboBox fx:id="cbCivilStatus" maxWidth="Infinity" promptText="%registro.prompt.select" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
                         
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label text="Tipo de Parto" textFill="#1d6b8c">
-                           <font><Font name="System Bold" size="14.0" /></font>
-                        </Label>
-                        <ComboBox fx:id="cbBirthType" maxWidth="Infinity" promptText="Seleccione Tipo de Parto" />
-                     </children>
-                  </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="%registro.label.birthType" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <ComboBox fx:id="cbBirthType" maxWidth="Infinity" promptText="%registro.prompt.birthType" />
+                           </children>
+                        </VBox>
 
-                  <!-- Dynamic Sex Container -->
-                  <VBox fx:id="vboxSexContainer" spacing="10.0">
-                     <children>
-                        <!-- ComboBoxes will be added here dynamically -->
-                     </children>
-                  </VBox>
+                        <!-- Dynamic Sex Container -->
+                        <VBox fx:id="vboxSexContainer" spacing="10.0">
+                           <children>
+                              <!-- ComboBoxes will be added here dynamically -->
+                           </children>
+                        </VBox>
                         
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label text="Provincia" textFill="#1d6b8c">
-                           <font><Font name="System Bold" size="14.0" /></font>
-                        </Label>
-                        <ComboBox fx:id="cbProvince" maxWidth="Infinity" promptText="Seleccione Provincia" />
-                     </children>
-                  </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="%registro.label.province" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <ComboBox fx:id="cbProvince" maxWidth="Infinity" promptText="%registro.prompt.province" />
+                           </children>
+                        </VBox>
                         
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label text="Nivel de Instrucción" textFill="#1d6b8c">
-                           <font><Font name="System Bold" size="14.0" /></font>
-                        </Label>
-                        <ComboBox fx:id="cbInstruction" maxWidth="Infinity" promptText="Seleccione Instrucción" />
-                     </children>
-                  </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="%registro.label.instruction" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <ComboBox fx:id="cbInstruction" maxWidth="Infinity" promptText="%registro.prompt.instruction" />
+                           </children>
+                        </VBox>
                         
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label text="Fecha de Nacimiento" textFill="#1d6b8c">
-                           <font><Font name="System Bold" size="14.0" /></font>
-                        </Label>
-                        <DatePicker fx:id="dpBirthDate" maxWidth="Infinity" />
-                     </children>
-                  </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="%registro.label.birthDate" textFill="#1d6b8c">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Label>
+                              <DatePicker fx:id="dpBirthDate" maxWidth="Infinity" />
+                           </children>
+                        </VBox>
                         
-                  <HBox spacing="10.0">
-                     <children>
-                        <Button fx:id="btnRegister" maxWidth="Infinity" mnemonicParsing="false" onAction="#onRegister" prefHeight="40.0" style="-fx-background-color: #1d6b8c; -fx-text-fill: white;" text="Registrar" HBox.hgrow="ALWAYS">
-                           <font><Font name="System Bold" size="14.0" /></font>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button fx:id="btnRegister" maxWidth="Infinity" mnemonicParsing="false" onAction="#onRegister" prefHeight="40.0" style="-fx-background-color: #1d6b8c; -fx-text-fill: white;" text="%registro.button.register" HBox.hgrow="ALWAYS">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Button>
+                              <Button fx:id="btnUpdate" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#onUpdate" prefHeight="40.0" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="%registro.button.update" HBox.hgrow="ALWAYS">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Button>
+                              <Button fx:id="btnDelete" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#onDelete" prefHeight="40.0" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="%registro.button.delete" HBox.hgrow="ALWAYS">
+                                 <font><Font name="System Bold" size="14.0" /></font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        
+                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#clearForm" prefHeight="35.0" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="%registro.button.clear">
+                           <font><Font name="System Bold" size="13.0" /></font>
                         </Button>
-                        <Button fx:id="btnUpdate" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#onUpdate" prefHeight="40.0" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Actualizar" HBox.hgrow="ALWAYS">
-                           <font><Font name="System Bold" size="14.0" /></font>
-                        </Button>
-                        <Button fx:id="btnDelete" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#onDelete" prefHeight="40.0" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Eliminar" HBox.hgrow="ALWAYS">
-                           <font><Font name="System Bold" size="14.0" /></font>
-                        </Button>
+                        
+                        <Label fx:id="statusLabel" alignment="CENTER" maxWidth="Infinity" minHeight="30.0" wrapText="true">
+                           <font><Font size="13.0" />
+                           </font>
+                        </Label>
                      </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </HBox>
-                  
-                  <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#clearForm" prefHeight="35.0" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Limpiar Formulario">
-                     <font><Font name="System Bold" size="13.0" /></font>
-                  </Button>
-                  
-                  <Label fx:id="statusLabel" alignment="CENTER" maxWidth="Infinity" minHeight="30.0" wrapText="true">
-                     <font><Font size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-         </content>
-      </ScrollPane>
-      
-      <!-- Table Section (Fixed height/Internal Scroll) -->
-      <VBox spacing="15.0" HBox.hgrow="ALWAYS">
-         <children>
-            <HBox alignment="CENTER_LEFT" spacing="20.0">
+                  </VBox>
+               </content>
+            </ScrollPane>
+            
+            <!-- Table Section (Fixed height/Internal Scroll) -->
+            <VBox spacing="15.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="Registros Existentes">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Text>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="300.0" promptText="Buscar por Cédula de la Madre..." style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-padding: 0 15 0 15;" />
-               </children>
-            </HBox>
-            <TableView fx:id="tvBirths" prefHeight="581.0" prefWidth="581.0">
-               <columns>
-                  <TableColumn fx:id="colMotherId" text="Cédula Madre" />
-                  <TableColumn fx:id="colMotherName" text="Nombres" />
-                  <TableColumn fx:id="colMotherAge" text="Edad" />
-                  <TableColumn fx:id="colMotherCivilStatus" text="Estado Civil" />
-                  <TableColumn fx:id="colMotherInstruction" text="Instrucción" />
-                  <TableColumn fx:id="colProvince" text="Provincia" />
-                  <TableColumn fx:id="colDate" text="Fecha" />
-                  <TableColumn fx:id="colSex" text="Sexo" />
-                  <TableColumn fx:id="colBirthType" text="Tipo Parto" />
-               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
+                  <HBox alignment="CENTER_LEFT" spacing="20.0">
+                     <children>
+                        <Text fill="#1d6b8c" strokeType="OUTSIDE" strokeWidth="0.0" text="%registro.table.title">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="300.0" promptText="%registro.prompt.search" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-padding: 0 15 0 15;" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tvBirths" prefHeight="581.0" prefWidth="581.0">
+                     <columns>
+                        <TableColumn fx:id="colMotherId" text="%registro.column.motherId" />
+                        <TableColumn fx:id="colMotherName" text="%registro.column.names" />
+                        <TableColumn fx:id="colMotherAge" text="%registro.column.age" />
+                        <TableColumn fx:id="colMotherCivilStatus" text="%registro.column.civilStatus" />
+                        <TableColumn fx:id="colMotherInstruction" text="%registro.column.instruction" />
+                        <TableColumn fx:id="colProvince" text="%registro.column.province" />
+                        <TableColumn fx:id="colDate" text="%registro.column.date" />
+                        <TableColumn fx:id="colSex" text="%registro.column.sex" />
+                        <TableColumn fx:id="colBirthType" text="%registro.column.birthType" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
                </children>
             </VBox>
          </children>
